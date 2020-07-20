@@ -1,0 +1,19 @@
+#headBox {
+    text-align: center;
+}
+#name {
+    font-size: 100px;
+}
+.feature {
+    text-align: center;
+    padding-top: 10px;
+    margin-bottom: 50px;
+}
+
+#descOfMe {
+    padding-top: 65px;
+}
+
+.jumbotron {
+    padding: 20px;
+}

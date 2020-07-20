@@ -1,0 +1,28 @@
+.course {
+    margin-bottom: 200px;
+}
+
+#picOfMe{
+  text-align: center;
+}
+#titleC {
+    font-size: 80px;
+}
+
+.dropdown-classes {
+    position: relative;
+    display: inline-block;
+  }
+  
+.structure-drop {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 240px;
+    padding: 12px 16px;
+    z-index: 1;
+  }
+  
+.dropdown-classes:hover .structure-drop {
+    display: block;
+  }

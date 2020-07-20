@@ -1,0 +1,15 @@
+.projects {
+    margin-bottom: 200px;
+}
+#titleP {
+    font-size: 80px;
+}
+
+img {
+    max-width: 350px;
+    padding: 10px;
+}
+
+.row {
+    padding-bottom: 20px;
+}
