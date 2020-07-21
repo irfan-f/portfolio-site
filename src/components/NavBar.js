@@ -4,7 +4,7 @@ const NavBar = ({navs, drops}) => {
   return (
     <div className="navigation-bar sticky-top">
         <nav className="navbar navbar-expand-lg navbar-light" style={{background: "#77A6A6"}}>
-            <a className="navbar-brand" href="#">Irfan Filipovic</a>
+            <a className="navbar-brand" href="#homeAnchor">Irfan Filipovic</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
@@ -23,7 +23,7 @@ const NavBar = ({navs, drops}) => {
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                     {drops.map(({ label, name, link, ...rest}) => (
-                        <a className="dropdown-item" key={name} href={link}>{label}</a>
+                        <a className="dropdown-item" key={name}>{label}</a>
                     ))}
                 </div>
                 </li>

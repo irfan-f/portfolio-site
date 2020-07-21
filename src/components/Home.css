@@ -6,14 +6,13 @@
 }
 .feature {
     text-align: center;
-    padding-top: 10px;
-    margin-bottom: 50px;
 }
 
-#descOfMe {
-    padding-top: 65px;
+#homeIcon {
+    border: 5px solid black;
+    padding: 0px;
 }
-
-.jumbotron {
-    padding: 20px;
+#iconrow {
+    padding: 10px;
+    margin-bottom: 20px;
 }

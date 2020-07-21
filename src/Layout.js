@@ -8,17 +8,17 @@ import Projects from './components/Projects';
 import './Layout.css'
 
 const navs = [
-  {name: '0', label: 'Home', link: "."},
-  {name: '1', label: 'About', link: "."},
-  {name: '2', label: 'Course Work', link: "."},
-  {name: '3', label: 'Projects', link: "."}
+  {name: '0', label: 'Home', link: "#homeAnchor"},
+  {name: '1', label: 'About', link: "#aboutAnchor"},
+  {name: '2', label: 'Course Work', link: "#courseAnchor"},
+  {name: '3', label: 'Projects', link: "#projectAnchor"}
 ]
 
 const drops = [
-  {name: '0', label: 'JavaScript', link: "."},
-  {name: '1', label: 'React', link: "."},
-  {name: '2', label: 'Redux', link: "."},
-  {name: '3', label: 'Bootstrap', link: "."},
+  {name: '0', label: 'JavaScript'},
+  {name: '1', label: 'React'},
+  {name: '2', label: 'Redux'},
+  {name: '3', label: 'Bootstrap'},
 ]
 
 function Layout() {
@@ -27,10 +27,18 @@ function Layout() {
       <div className="layout-container">
         <NavBar navs={navs} drops={drops}/>
         <div className="container">
-          <Home></Home>
-          <About></About>
-          <CourseWork></CourseWork>
-          <Projects></Projects>
+          <div className="layoutHome">
+            <Home></Home>
+          </div>
+          <div className="layout">
+            <About></About>
+          </div>
+          <div className="layout">
+            <CourseWork></CourseWork>
+          </div>
+          <div className="layout">
+            <Projects></Projects>
+          </div>
         </div>
         <Footer></Footer>
       </div>

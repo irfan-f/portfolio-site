@@ -4,7 +4,7 @@ import "./Projects.css"
 const Projects = () => {
   return (
     <React.Fragment>
-        <div className="projects">
+        <div className="projects" id="projectAnchor">
             <div className="row">
                 <div className="col" id="aboutMe">
                     <h1 id="titleP"><em>Projects</em></h1>

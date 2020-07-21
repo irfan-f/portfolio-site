@@ -4,7 +4,7 @@ import "./CourseWork.css"
 const CourseWork = () => {
   return (
     <React.Fragment>
-        <div className="course">
+        <div className="course" id="courseAnchor">
             <div className="row">
                 <div className="col" id="aboutMe">
                     <h1 id="titleC"><em>Course Work</em></h1>
