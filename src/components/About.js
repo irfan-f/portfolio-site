@@ -6,14 +6,14 @@ const About = () => {
   return (
     <React.Fragment>
         <div className="about" id="aboutAnchor">
-            <div className="row">
-                <div className="col" id="aboutMe">
-                    <h1 id="titleA"><em>About Me</em></h1>
+        <div className="row">
+                <div className="col" id="picOfMe">
+                    <img alt="500x500" src={photo}></img>
                 </div>
             </div>
             <div className="row">
-                <div className="col" id="picOfMe">
-                    <img alt="500x500" src={photo}></img>
+                <div className="col" id="aboutMe">
+                    <h1 id="titleA"><em>About Me</em></h1>
                 </div>
             </div>
             <div className="row">
