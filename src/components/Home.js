@@ -4,7 +4,7 @@ import "./Home.css"
 const Home = () => {
   return (
     <React.Fragment>
-        <div className="feature" id="homeAnchor">
+        <div className="feature" id="home">
             <div className="row">
                 <div className="col" id="descOfMe">
                     <h2 id="name">Irfan Filipovic</h2>

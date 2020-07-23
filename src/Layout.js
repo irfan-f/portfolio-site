@@ -8,10 +8,10 @@ import Projects from './components/Projects';
 import './Layout.css'
 
 const navs = [
-  {name: '0', label: 'Home', link: "#homeAnchor"},
-  {name: '1', label: 'About', link: "#aboutAnchor"},
-  {name: '2', label: 'Course Work', link: "#courseAnchor"},
-  {name: '3', label: 'Projects', link: "#projectAnchor"}
+  {name: '0', label: 'Home', link: "#home"},
+  {name: '1', label: 'About', link: "#about"},
+  {name: '2', label: 'Projects', link: "#projects"},
+  {name: '3', label: 'Course Work', link: "#courses"}
 ]
 
 const drops = [
@@ -34,10 +34,10 @@ function Layout() {
             <About></About>
           </div>
           <div className="layout">
-            <CourseWork></CourseWork>
+            <Projects></Projects>
           </div>
           <div className="layout">
-            <Projects></Projects>
+            <CourseWork></CourseWork>
           </div>
         </div>
         <Footer></Footer>

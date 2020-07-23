@@ -5,7 +5,7 @@ import photo from "../photos/IMG_1444.jpeg"
 const About = () => {
   return (
     <React.Fragment>
-        <div className="about" id="aboutAnchor">
+        <div className="about" id="about">
         <div className="row">
                 <div className="col" id="picOfMe">
                     <img alt="500x500" src={photo}></img>

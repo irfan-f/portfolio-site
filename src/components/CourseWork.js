@@ -5,24 +5,23 @@ class CourseWork extends React.Component {
     constructor() {
         super()
         this.state = { 
-            row1: false,
-            row2: false
+            active1: true,
+            active2: false
         }
-        this.expand1 = this.expand1.bind(this)
-        this.expand2 = this.expand2.bind(this)
+        this.disable = this.disable.bind(this)
     }
 
-    expand1(e) {
-        this.setState({row1: !this.state.row1})
-    }
-    expand2(e) {
-        this.setState({row2: !this.state.row2})
+    disable(e) {
+        this.setState({
+            active1: !this.state.active1,
+            active2: !this.state.active2
+        })
     }
 
     render() {
         return (
             <React.Fragment>
-                <div className="course" id="courseAnchor">
+                <div className="course" id="courses">
                     <div className="row">
                         <div className="col" id="aboutMe">
                             <h1 id="titleC"><em>Course Work</em></h1>
@@ -35,35 +34,35 @@ class CourseWork extends React.Component {
                     </div>
                     <hr noshade="true" id="breakFoot"></hr>
                     <div className="row">
-                        <div className="col-8">
-                            <div className="list-group clearfix" id="myList" role="tablist">
-                                <span className="list-group-item list-group-item-action active left" data-toggle="list" href="#home" role="tab">Home</span>
-                                <span className="list-group-item list-group-item-action left" data-toggle="list" href="#introCS" role="tab">Intro to Computer Science</span>
-                                <span className="list-group-item list-group-item-action left" data-toggle="list" href="#dataStructures" role="tab">Intermediate Data Structures</span>
-                                <span className="list-group-item list-group-item-action left" data-toggle="list" href="#compOrganization" role="tab">Computer Organization</span>
-                                <span className="list-group-item list-group-item-action left" data-toggle="list" href="#intermedAlgorithms" role="tab">Intermediate Algorithms</span>
-                                <span className="list-group-item list-group-item-action left" data-toggle="list" href="#princLanguages" role="tab">Principles of Programming Languages</span>
-                                <span className="list-group-item list-group-item-action left" data-toggle="list" href="#introEngineering" role="tab">Intro to Software Engineering</span>
-                                <span className="list-group-item list-group-item-action right" data-toggle="list" href="#os" role="tab">Operating Systems</span>
-                                <span className="list-group-item list-group-item-action right" data-toggle="list" href="#compArch" role="tab">Computer Architecture</span>
-                                <span className="list-group-item list-group-item-action right" data-toggle="list" href="#introAI" role="tab">Intro to Artificial Intelligence</span>
-                                <span className="list-group-item list-group-item-action right" data-toggle="list" href="#ML" role="tab">Machine Learning</span>
-                                <span className="list-group-item list-group-item-action right" data-toggle="list" href="#softwareMethod" role="tab">Software Methodologies</span>
-                                <span className="list-group-item list-group-item-action right" data-toggle="list" href="#game" role="tab">Game Programming</span>
-                                <span className="list-group-item list-group-item-action right" data-toggle="list" href="#math" role="tab">Mathematics</span>
+                        <div className="col-3">
+                            <div 
+                                className="list-group" 
+                                id="myList1" 
+                                role="tablist"
+                                onClick={(e) => (document.querySelector("#myList2 > span.list-group-item.list-group-item-action.active") ? document.querySelector("#myList2 > span.list-group-item.list-group-item-action.active").classList.remove("active") : "")}
+                            >
+                                <span className="list-group-item text-responsive list-group-item-action active" data-toggle="list" href="#hometab" role="tab">Home</span>
+                                <span className="list-group-item text-responsive list-group-item-action" data-toggle="list" href="#introCS" role="tab">Intro to Computer Science</span>
+                                <span className="list-group-item text-responsive list-group-item-action" data-toggle="list" href="#dataStructures" role="tab">Intermediate Data Structures</span>
+                                <span className="list-group-item text-responsive list-group-item-action" data-toggle="list" href="#intermedAlgorithms" role="tab">Intermediate Algorithms</span>
+                                <span className="list-group-item text-responsive list-group-item-action" data-toggle="list" href="#compOrganization" role="tab">Computer Organization</span>
+                                <span className="list-group-item text-responsive list-group-item-action" data-toggle="list" href="#softwareMethod" role="tab">Software Methodologies</span>
+                                <span className="list-group-item text-responsive list-group-item-action" data-toggle="list" href="#princLanguages" role="tab">Principles of Programming</span>
+                                
                             </div>
                         </div>
-                        <div className="col-4">
+                        <div className="col-6">
                             <div className="tab-content">
-                                <div className="tab-pane active" id="home" role="tabpanel">
-                                    <h5>Home</h5>
+                                <div className="tab-pane active" id="hometab" role="tabpanel">
+                                    <h4>Home</h4>
                                     <ul style={{listStyle: "None"}}>
                                         <li>All courses were taken at the University of Oregon</li>
                                         <li>Select a course title to view the material covered</li>
+                                        <li>Assignments and projects for several courses are available on my GitHub</li>
                                     </ul>
                                 </div>
                                 <div className="tab-pane" id="introCS" role="tabpanel">
-                                    <h5>Intro to Computer Science</h5>
+                                    <h4>Intro to Computer Science</h4>
                                     <ul>
                                     <li>Algorithmic problem solving</li>
                                     <li>OOP and design</li>
@@ -71,7 +70,7 @@ class CourseWork extends React.Component {
                                     </ul>
                                 </div>
                                 <div className="tab-pane" id="dataStructures" role="tabpanel">
-                                    <h5>Intermediate Data Structures</h5>
+                                    <h4>Intermediate Data Structures</h4>
                                     <ul>
                                         <li>Structure operations</li>
                                         <li>Operation analysis</li>
@@ -90,7 +89,7 @@ class CourseWork extends React.Component {
                                     </ul>
                                 </div>
                                 <div className="tab-pane" id="compOrganization" role="tabpanel">
-                                    <h5>Computer Organization</h5>
+                                    <h4>Computer Organization</h4>
                                     <ul>
                                         <li>Bitwise operations</li>
                                         <li>Machine-Level code</li>
@@ -100,7 +99,7 @@ class CourseWork extends React.Component {
                                     </ul>
                                 </div>
                                 <div className="tab-pane" id="intermedAlgorithms" role="tabpanel">
-                                    <h5>Intermediate Algorithms</h5>
+                                    <h4>Intermediate Algorithms</h4>
                                     <ul>
                                         <li>Graph searching</li>
                                         <li>Topological sort</li>
@@ -110,7 +109,7 @@ class CourseWork extends React.Component {
                                     </ul>
                                 </div>
                                 <div className="tab-pane" id="princLanguages" role="tabpanel">
-                                    <h5>Principles of Programming Languages</h5>
+                                    <h4>Principles of Programming Languages</h4>
                                     <ul>
                                         <li>Grammar, language, and parse trees</li>
                                         <li>Intro to Lambda Calculus</li>
@@ -121,10 +120,13 @@ class CourseWork extends React.Component {
                                     </ul>
                                 </div>
                                 <div className="tab-pane" id="introEngineering" role="tabpanel">
-                                    <h5>Intro to Software Engineering</h5>
+                                    <h4>Intro to Software Engineering</h4>
                                     <ul>
                                         <li>Git and Linux basics</li>
                                         <li>Docker and Flask</li>
+                                        <li>REST APIs</li>
+                                        <li>Session management and security</li>
+                                        <li>Authentication, forms, and login</li>
                                         <li>
                                             Intro to databases
                                             <ul>
@@ -132,13 +134,10 @@ class CourseWork extends React.Component {
                                                 <li>MongoDB</li>
                                             </ul>
                                         </li>
-                                        <li>REST APIs</li>
-                                        <li>Session management and security</li>
-                                        <li>Authentication, forms, and login</li>
                                     </ul>
                                 </div>
                                 <div className="tab-pane" id="os" role="tabpanel">
-                                    <h5>Operating Systems</h5>
+                                    <h4>Operating Systems</h4>
                                     <ul>
                                         <li>Operating system structure</li>
                                         <li>Linux system calls</li>
@@ -155,7 +154,7 @@ class CourseWork extends React.Component {
                                     </ul>
                                 </div>
                                 <div className="tab-pane" id="compArch" role="tabpanel">
-                                    <h5>Computer Architecture</h5>
+                                    <h4>Computer Architecture</h4>
                                     <ul>
                                         <li>RISC and CISC design</li>
                                         <li>Storage hierarchies (Memory and Cache)</li>
@@ -165,7 +164,7 @@ class CourseWork extends React.Component {
                                     </ul>
                                 </div>
                                 <div className="tab-pane" id="introAI" role="tabpanel">
-                                    <h5>Intro to Artificial Intelligence</h5>
+                                    <h4>Intro to Artificial Intelligence</h4>
                                     <ul>
                                         <li>Uninformed and informed search</li>
                                         <li>Constraint satisfaction problems</li>
@@ -177,7 +176,7 @@ class CourseWork extends React.Component {
                                     </ul>
                                 </div>
                                 <div className="tab-pane" id="ML" role="tabpanel">
-                                    <h5>Machine Learning</h5>
+                                    <h4>Machine Learning</h4>
                                     <ul>
                                         <li>Decision trees</li>
                                         <li>Inductive learning</li>
@@ -192,7 +191,7 @@ class CourseWork extends React.Component {
                                     </ul>
                                 </div>
                                 <div className="tab-pane" id="softwareMethod" role="tabpanel">
-                                    <h5>Software Methodologies</h5>
+                                    <h4>Software Methodologies</h4>
                                     <ul>
                                         <li>Software project management and lifecycle</li>
                                         <li>Software architecture</li>
@@ -204,7 +203,7 @@ class CourseWork extends React.Component {
                                     </ul>
                                 </div>
                                 <div className="tab-pane" id="game" role="tabpanel">
-                                    <h5>Game Programming</h5>
+                                    <h4>Game Programming</h4>
                                     <ul>
                                         <li>Unity</li>
                                         <li>Linear Algebra (Games)</li>
@@ -226,7 +225,7 @@ class CourseWork extends React.Component {
                                     </ul>
                                 </div>
                                 <div className="tab-pane" id="math" role="tabpanel">
-                                    <h5>Mathematics</h5>
+                                    <h4>Mathematics</h4>
                                     <ul>
                                         <li>Discrete mathematics</li>
                                         <li>Calculus</li>
@@ -236,7 +235,24 @@ class CourseWork extends React.Component {
                                 </div>
                             </div>
                         </div>
-                    </div>               
+                        <div className="col-3">
+                            <div 
+                                className="list-group right" 
+                                id="myList2" 
+                                role="tablist"
+                                onClick={(e) => (document.querySelector("#myList1 > span.list-group-item.list-group-item-action.active") ? document.querySelector("#myList1 > span.list-group-item.list-group-item-action.active").classList.remove("active") : "")}
+                            >
+                                <span className="list-group-item text-responsive list-group-item-action" data-toggle="list" href="#os" role="tab">Operating Systems</span>
+                                <span className="list-group-item text-responsive list-group-item-action" data-toggle="list" href="#compArch" role="tab">Computer Architecture</span>
+                                <span className="list-group-item text-responsive list-group-item-action" data-toggle="list" href="#introAI" role="tab">Intro to Artificial Intelligence</span>
+                                <span className="list-group-item text-responsive list-group-item-action" data-toggle="list" href="#ML" role="tab">Machine Learning</span>
+                                <span className="list-group-item text-responsive list-group-item-action" data-toggle="list" href="#introEngineering" role="tab">Intro to Software Engineering</span>
+                                <span className="list-group-item text-responsive list-group-item-action" data-toggle="list" href="#game" role="tab">Game Programming</span>
+                                <span className="list-group-item text-responsive list-group-item-action" data-toggle="list" href="#math" role="tab">Mathematics</span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr noshade="true" id="breakFoot"></hr>
                 </div>
             </React.Fragment>
         );
