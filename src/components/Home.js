@@ -12,9 +12,27 @@ const Home = () => {
                     <h3 id="name">I am, <b>Irfan Filipovic</b></h3>
                     <em id="degree">B.S Computer and Information Science</em>
                 <p>
-                I’m a recent graduate from the University of Oregon, looking for a collaborative and dedicated team to be a part of. 
-                I have experience learning programming languages in short time frames to complete projects, and thus have experience in several popular languages.
-                Always looking to improve my development practices and expand my knowledge of libraries has led me to begin a project 
+                    I’m a recent graduate from the University of Oregon, looking to be part of a collaborative and dedicated team. 
+                </p>
+                <p>
+                    Programming experience encompassing:
+                        Python,
+                        Java,
+                        JavaScript,
+                        HTML,
+                        CSS,
+                        C, C++, and C#.
+                        <br></br>
+                        Beginner experience in:
+                            Unity,
+                            Swift,
+                            NoSQL,
+                            MongoDB.
+                        
+                </p>
+                <p>
+                    Having gained experience in several popular programming experiences
+                    Always looking to improve my development practices and expand my knowledge of libraries has led me to begin a project 
                 </p>
                 </div>
                 <div className="col" id="picOfMe">

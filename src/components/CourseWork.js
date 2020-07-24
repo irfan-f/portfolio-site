@@ -245,7 +245,7 @@ class CourseWork extends React.Component {
                             >
                                 <span className="list-group-item text-responsive list-group-item-action" data-toggle="list" href="#os" role="tab">Operating Systems</span>
                                 <span className="list-group-item text-responsive list-group-item-action" data-toggle="list" href="#compArch" role="tab">Computer Architecture</span>
-                                <span className="list-group-item text-responsive list-group-item-action" data-toggle="list" href="#introAI" role="tab">Intro to Artificial Intelligence</span>
+                                <span className="list-group-item text-responsive list-group-item-action" data-toggle="list" href="#introAI" role="tab">Intro Artificial Intelligence</span>
                                 <span className="list-group-item text-responsive list-group-item-action" data-toggle="list" href="#ML" role="tab">Machine Learning</span>
                                 <span className="list-group-item text-responsive list-group-item-action" data-toggle="list" href="#introEngineering" role="tab">Intro to Software Engineering</span>
                                 <span className="list-group-item text-responsive list-group-item-action" data-toggle="list" href="#game" role="tab">Game Programming</span>

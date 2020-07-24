@@ -1,8 +1,11 @@
-#picOfMe{
-  text-align: center;
-}
 #titleC {
     font-size: 60px;
+}
+
+#courses img {
+  background-color: #FCE181;
+  border-bottom-right-radius: 15px;
+  border-top-left-radius: 15px;
 }
 
 .list-group {

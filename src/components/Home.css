@@ -31,8 +31,13 @@
     padding-top: 20px;
     font-size: 16px;
     text-align: justify;
+    padding-left: 20px;
 }
 
 #picOfMe img {
     max-width: 570px;
+}
+
+#home button {
+    border: none;
 }
