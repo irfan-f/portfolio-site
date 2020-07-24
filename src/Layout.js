@@ -26,7 +26,6 @@ function Layout() {
     <React.Fragment>
       <div className="layout-container">
         <NavBar navs={navs} drops={drops}/>
-        <div className="container">
           <div className="layoutHome">
             <Home></Home>
           </div>
@@ -39,7 +38,6 @@ function Layout() {
           <div className="layout">
             <CourseWork></CourseWork>
           </div>
-        </div>
         <Footer></Footer>
       </div>
     </React.Fragment>

@@ -2,5 +2,39 @@
   text-align: center;
 }
 .text-responsive {
-  font-size: calc(1.12vw);
+  overflow: hidden;
+}
+@media (min-width: 200px) {
+  .text-responsive {
+    font-size: 2vw;
+  }
+}
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  @media (max-width: 767px) { 
+    .text-responsive {
+      font-size: calc(1.8vw);
+    }
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .text-responsive {
+    font-size: 1.5vw;
+  }
+}
+
+ /* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+  .text-responsive {
+    font-size: 1.3vw;
+  }
+ }
+
+ /* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+  .text-responsive {
+    font-size: calc(1.12vw);
+  }
 }

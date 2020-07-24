@@ -2,44 +2,37 @@
   text-align: center;
 }
 #titleC {
-    font-size: 80px;
+    font-size: 60px;
 }
 
 .list-group {
   text-align: center;
   width: 100%;
-  word-wrap: break-word;
+  height: fit-content;
 }
 .list-group-item {
   max-width: 255px;
-}
-.list-group.right {
-  margin-left: 12px;
+  color: #9FEDD7;
+  background-color: #026670;
+  border-color: #026670;
+  font-weight: 600;
 }
 
 .list-group-item.active {
-  background-color: #77A6A6;
-  border-color: #77A6A6;
+  background-color: #9FEDD7;
+  border-color: #9FEDD7;
+  color: #026670;
+  font-weight: 600;
+}
+
+.list-group-item:hover {
+  background-color: #edece5;
+  border-color: #ffe600;
+  border-width: 4px;
+  color: #026670;
 }
 
 h4 {
   text-align: center;
-  padding-bottom: 10px;
-}
-
-ul {
-  padding-left: 25%;
-}
-
-ul ul {
-  padding-left: 25px;
-}
-
-#hometab ul {
-  padding-left: 0%;
-  text-align: center;
-}
-
-#hometab li {
   padding-bottom: 10px;
 }

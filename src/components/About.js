@@ -5,7 +5,7 @@ import photo from "../photos/IMG_1444.jpeg"
 const About = () => {
   return (
     <React.Fragment>
-        <div className="about" id="about">
+        {/* <div className="about" id="about">
         <div className="row">
                 <div className="col" id="picOfMe">
                     <img alt="500x500" src={photo}></img>
@@ -19,13 +19,13 @@ const About = () => {
             <div className="row">
                 <div className="col" id="aboutOfMe">
                 <p>
-                    Recent Computer Science graduate from the University of Oregon, with experience in data structures, algorithms, statistical methods, and machine learning.
-                    At PayClearly, I built a headless payment portal automator with JavaScript and Puppeteer and exceeded expectations for market research goals.
-                    My background in computer science combined with my  experience at PayClearly has strengthened my ability to communicate effectively, quickly adapt to new technologies, and efficiently manage multiple responsibilities.
+                I’m a recent graduate from the University of Oregon, looking for a collaborative and dedicated team to be a part of. 
+                I have experience learning programming languages in short time frames to complete projects, and thus have experience in several popular languages.
+                Always looking to improve my development practices and expand my knowledge of libraries has led me to begin a project 
                 </p>
                 </div>
             </div>
-        </div>
+        </div> */}
     </React.Fragment>
   );
 };

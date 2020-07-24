@@ -6,8 +6,8 @@
   }
 
 .layout {
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: 150px;
+  margin-bottom: 0px;
 }
 
 #projects {
@@ -16,13 +16,13 @@
 }
 
 #courses {
-  margin-top: -65px;
-  padding-top: 65px;
+  margin-top: -40px;
+  padding-top: 40px;
+  margin-bottom: 60px;
 }
 
 #home {
-  margin-top: -65px;
-  padding-top: 65px;
+  padding-top: 70px;
 }
 
 #about {
