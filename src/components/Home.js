@@ -13,26 +13,15 @@ const Home = () => {
                     <em id="degree">B.S Computer and Information Science</em>
                 <p>
                     I’m a recent graduate from the University of Oregon, looking to be part of a collaborative and dedicated team. 
+                    With the goal of expanding my knowledge of development, contributing efficient and desired code through my hardwork and dedication.
                 </p>
                 <p>
-                    Programming experience encompassing:
-                        Python,
-                        Java,
-                        JavaScript,
-                        HTML,
-                        CSS,
-                        C, C++, and C#.
-                        <br></br>
-                        Beginner experience in:
-                            Unity,
-                            Swift,
-                            NoSQL,
-                            MongoDB.
-                        
+                    Developed programming experience in the following languages: Python, Java, JavaScript, HTML, CSS, C, C++, and C#. 
+                    With beginner experience in: Unity, Swift, NoSQL, and MongoDB.
+                    Also familiar with Docker, Firebase, Git, and several software development strategies.
                 </p>
                 <p>
-                    Having gained experience in several popular programming experiences
-                    Always looking to improve my development practices and expand my knowledge of libraries has led me to begin a project 
+                    Currently I am starting a project on the Unreal Engine 4 to develop a rogue-like game.
                 </p>
                 </div>
                 <div className="col" id="picOfMe">
