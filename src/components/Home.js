@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <React.Fragment>
         <div className="container-fluid feature" id="home">
-            <div className="row">
+            <div className="row" id="about">
                 <div className="col">
                     <h2>HELLO!</h2>
                     <h3 id="name">I am, <b>Irfan Filipovic</b></h3>

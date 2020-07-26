@@ -23,13 +23,13 @@ class CourseWork extends React.Component {
         return (
             <React.Fragment>
                 <div className="container course" id="courses">
-                    <div className="row" id="picOfMe">
-                        <div className="col">
+                    <div className="row">
+                        <div className="col" id="picUO">
                             <img alt="courseWork" src={picture}></img>
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col" id="aboutMe">
+                        <div className="col" id="courseT">
                             <h1 id="titleC"><em>Course Work</em></h1>
                         </div>
                     </div>

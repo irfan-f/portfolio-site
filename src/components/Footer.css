@@ -8,10 +8,14 @@
     border-bottom: black 1px solid;
   }
 
+#foot a {
+  color: black;
+}
+
 #foot button {
     background-color: white; /* Green */
     border: #FCE181 1px solid;
-    color: inherit;
+    color: black;
     padding: 0px;
     text-align: center;
     display: inline-block;
@@ -23,5 +27,5 @@
 
   #foot button:hover {
       background-color: #FCE181;
-      color: inherit;
+      color: black;
   }

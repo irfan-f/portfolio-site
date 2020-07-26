@@ -2,7 +2,6 @@ import React from 'react';
 import NavBar from "./components/NavBar"
 import Home from "./components/Home"
 import Footer from "./components/Footer"
-import About from "./components/About"
 import CourseWork from './components/CourseWork';
 import Projects from './components/Projects';
 import './Layout.css'
@@ -28,9 +27,6 @@ function Layout() {
         <NavBar navs={navs} drops={drops}/>
           <div className="layoutHome">
             <Home></Home>
-          </div>
-          <div className="layout">
-            <About></About>
           </div>
           <div className="layout">
             <Projects></Projects>

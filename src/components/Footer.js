@@ -10,10 +10,12 @@ const Footer = () => {
                 <strong>Irfan Filipovic</strong>
               </div>
               <div className="col col-lg-auto">
-                <button type="button" href="https://github.com/irfan-f"><strong>&middot; GitHub &middot;</strong></button>
+                <button type="button"><a href="https://github.com/irfan-f" target = "_blank" 
+rel = "noopener noreferrer"><strong>&middot; GitHub &middot;</strong></a></button>
               </div>
               <div className="col col-lg-auto">
-                <button type="button" href="https://www.linkedin.com/in/irfan-filipovic/"><strong>&middot; Linkedin &middot;</strong></button>
+                <button type="button"><a href="https://www.linkedin.com/in/irfan-filipovic/" target = "_blank" 
+rel = "noopener noreferrer"><strong>&middot; Linkedin &middot;</strong></a></button>
               </div>
               <div className="col col-lg-auto">
                 <strong>irfan.filipovic23@gmail.com</strong>
