@@ -20,10 +20,12 @@
   background-color: #026670;
   border-color: #026670;
   font-weight: 600;
+  border-width: 4px;
 }
 
 .list-group-item.active {
   background-color: #9FEDD7;
+  border-width: 4px;
   border-color: #9FEDD7;
   color: #026670;
   font-weight: 600;
@@ -34,6 +36,7 @@
   border-color: #ffe600;
   border-width: 4px;
   color: #026670;
+  cursor: pointer;
 }
 
 h4 {

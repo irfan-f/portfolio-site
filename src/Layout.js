@@ -8,23 +8,15 @@ import './Layout.css'
 
 const navs = [
   {name: '0', label: 'Home', link: "#home"},
-  {name: '1', label: 'About', link: "#about"},
-  {name: '2', label: 'Projects', link: "#projects"},
-  {name: '3', label: 'Course Work', link: "#courses"}
-]
-
-const drops = [
-  {name: '0', label: 'JavaScript'},
-  {name: '1', label: 'React'},
-  {name: '2', label: 'Redux'},
-  {name: '3', label: 'Bootstrap'},
+  {name: '1', label: 'Projects', link: "#projects"},
+  {name: '2', label: 'Course Work', link: "#courses"}
 ]
 
 function Layout() {
   return (
     <React.Fragment>
       <div className="layout-container">
-        <NavBar navs={navs} drops={drops}/>
+        <NavBar navs={navs}/>
           <div className="layoutHome">
             <Home></Home>
           </div>

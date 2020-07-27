@@ -36,6 +36,7 @@
 
 #picOfMe img {
     max-width: 570px;
+    width: 50vw;
 }
 
 #home button {

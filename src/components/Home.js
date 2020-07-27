@@ -7,7 +7,10 @@ const Home = () => {
     <React.Fragment>
         <div className="container-fluid feature" id="home">
             <div className="row" id="about">
-                <div className="col">
+                <div className="col order-lg-12" id="picOfMe">
+                    <img alt="500x500" src={photo}></img>
+                </div>
+                <div className="col order-lg-1">
                     <h2>HELLO!</h2>
                     <h3 id="name">I am, <b>Irfan Filipovic</b></h3>
                     <em id="degree">B.S Computer and Information Science</em>
@@ -23,9 +26,6 @@ const Home = () => {
                 <p>
                     Currently I am starting a project on the Unreal Engine 4 to develop a rogue-like game.
                 </p>
-                </div>
-                <div className="col" id="picOfMe">
-                    <img alt="500x500" src={photo}></img>
                 </div>
             </div>
         </div>

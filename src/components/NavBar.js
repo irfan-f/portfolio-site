@@ -1,6 +1,6 @@
 import React from "react";
 
-const NavBar = ({navs, drops}) => {
+const NavBar = ({navs}) => {
   return (
     <div className="navigation-bar sticky-top">
         <nav className="navbar navbar-expand-lg navbar-light" style={{background: "white"}}>

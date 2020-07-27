@@ -58,7 +58,6 @@ class CourseWork extends React.Component {
                                     <h4>Home</h4>
                                     <ul style={{listStyle: "None"}}>
                                         <li>All courses were taken at the University of Oregon</li>
-                                        <li>Select a course title to view the material covered</li>
                                         <li>Assignments and projects for several courses are available on my GitHub</li>
                                     </ul>
                                 </div>
