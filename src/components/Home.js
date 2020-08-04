@@ -24,7 +24,7 @@ const Home = () => {
                     Also familiar with Docker, Firebase, Git, and several software development strategies.
                 </p>
                 <p>
-                    Currently I am starting a project on the Unreal Engine 4 to develop a rogue-like game.
+                    Currently I am starting a project on Unity to develop a rogue-like game.
                 </p>
                 </div>
             </div>
