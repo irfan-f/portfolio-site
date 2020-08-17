@@ -2,6 +2,7 @@ import React from "react";
 import "./Projects.css"
 import locationPing from "../photos/location.png"
 import MLPic from "../photos/ML.png"
+import underConstruction from "../photos/underConstruction.png"
 
 const Projects = () => {
   return (
@@ -13,6 +14,25 @@ const Projects = () => {
                 </div>
             </div>
             <hr noshade="true" id="breakFoot"></hr>
+            <div className="row">
+                <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12" id="projectPic">
+                    <img alt="productivity" src={underConstruction}></img>
+                </div>
+                <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12" id="projectDesc">
+                    <h3>Productivy App</h3>
+                    <p>
+                    A web application allowing users to create notes/tasks, and strikethrough upon completion.
+                    Each note has a field for a title, note, date to, date from, and an option for the color.
+                    The note body supports markdown and the notes are stored in the browser local storage, allowing for notes to persist through sessions.
+                    As this application is currently being developed further implementation will allow users to edit notes, as well as sort them.
+                    </p>
+                    <h6>Built with React, Javascript, and HTML/CSS</h6>
+                    <h6><button type="button" ><a href="https://irfan-f.github.io/productivity-app/" target = "_blank" 
+rel = "noopener noreferrer"><strong> &middot; Try it out! &middot; </strong></a></button></h6>
+                </div>  
+            </div>
+            <hr noshade="true" id="breakFoot"></hr>
+
             <div className="row">
                 <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12" id="projectPic">
                     <img alt="laser" src="https://piazza.com/redirect/s3?bucket=uploads&prefix=paste%2Fjn3ebqey4he3ne%2Ff0c8138511dd012b9fe399685f73dec810703d23a08f8d770fd58c21c1e7fd30%2FScreen_Shot_2020-06-04_at_10.31.36_PM.png" href="https://classes.cs.uoregon.edu/20S/cis410gameprog/games/Laser/index.html"></img>
