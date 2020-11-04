@@ -3,6 +3,7 @@ import "./Projects.css"
 import locationPing from "../photos/location.png"
 import MLPic from "../photos/ML.png"
 import underConstruction from "../photos/underConstruction.png"
+import NWYS from "../photos/nobodyWantsYourSheep.png";
 
 const Projects = () => {
   return (
@@ -12,6 +13,26 @@ const Projects = () => {
                 <div className="col" id="projectT">
                     <h1 id="titleP"><em>Projects</em></h1>
                 </div>
+            </div>
+            <hr noshade="true" id="breakFoot"></hr>
+            <div className="row">
+                <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12" id="projectPic">
+                    <img alt="productivity" src={NWYS}></img>
+                </div>
+                <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12" id="projectDesc">
+                    <h3>Nobody Wants Your Sheep</h3>
+                    <p>
+                    My current personal project is a take on the classic board game, Settlers of Catan.
+                    Users can play against their friends real-time, and save their progress for a later date.
+                    See who can utilize their resources best to become the successful pioneer! Trade resources, build settlements, and sabotage your friends.
+                    But remember, nobody wants your sheep.
+                    </p>
+                    <h6>Built with React, Redux, Firebase, Three.js, and others</h6>
+                    <h6><button type="button"><a href="https://nobody-wants-your-sheep.firebaseapp.com/" target = "_blank" 
+rel = "noopener noreferrer"><strong> &middot; Check out the game! &middot; </strong></a></button></h6>
+                    <h6><button type="button"><a href="https://github.com/needimf/nobody-wants-your-sheep" target = "_blank" 
+rel = "noopener noreferrer"><strong> &middot; Check out the code! &middot; </strong></a></button></h6>
+                </div>  
             </div>
             <hr noshade="true" id="breakFoot"></hr>
             <div className="row">

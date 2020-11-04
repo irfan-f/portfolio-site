@@ -4,7 +4,6 @@
 }
 .feature h2 {
     font-size: 100px;
-    padding-top: 30px;
     color: #026670;
     font-weight: 800;
     font-style: italic;
@@ -28,7 +27,7 @@
 }
 
 .feature p {
-    padding-top: 20px;
+    padding-top: 10px;
     font-size: 16px;
     text-align: justify;
     padding-left: 20px;
