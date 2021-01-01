@@ -1,43 +1,46 @@
 #home {
-    text-align: center;
-    padding-right: 50px;
+  text-align: center;
+  padding-right: 50px;
 }
+
 .feature h2 {
-    font-size: 100px;
-    color: #026670;
-    font-weight: 800;
-    font-style: italic;
-    text-align: left;
-    padding-left: 20px;
+  font-size: 100px;
+  color: #026670;
+  font-weight: 800;
+  font-style: italic;
+  text-align: left;
+  padding-left: 20px;
 }
 
 #degree {
-    text-align: center;
+  text-align: center;
 }
-.feature {
-    text-align: left;
-}
-#name {
-    font-size: 28px;
-    text-align: center;
 
+.feature {
+  text-align: left;
 }
+
+#name {
+  font-size: 28px;
+  text-align: center;
+}
+
 #name b {
-    font-size: 48px;
+  font-size: 48px;
 }
 
 .feature p {
-    padding-top: 10px;
-    font-size: 16px;
-    text-align: justify;
-    padding-left: 20px;
+  padding-top: 10px;
+  font-size: 16px;
+  text-align: justify;
+  padding-left: 20px;
 }
 
 #picOfMe img {
-    max-width: 570px;
-    width: 50vw;
+  max-width: 570px;
+  width: 50vw;
 }
 
 #home button {
-    border: none;
+  border: none;
 }

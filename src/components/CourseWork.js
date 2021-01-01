@@ -17,7 +17,6 @@ class CourseWork extends React.Component {
     this.setState({
       activeTab: id,
     })
-    console.log(this.state);
   }
 
   render() {

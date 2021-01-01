@@ -1,5 +1,5 @@
 #titleC {
-    font-size: 60px;
+  font-size: 60px;
 }
 
 #courses img {
@@ -14,6 +14,7 @@
   width: 100%;
   height: fit-content;
 }
+
 .list-group-item {
   max-width: 255px;
   color: #9FEDD7;
@@ -45,7 +46,6 @@ h4 {
   padding-bottom: 10px;
 }
 
-#courseT h1,
-#picUO {
+#courseT h1, #picUO {
   text-align: center;
 }

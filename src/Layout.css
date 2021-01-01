@@ -1,9 +1,9 @@
 .layout-container .Footer {
-    position: fixed;
-    bottom: 0px;
-    width: 100%;
-    max-width: none;
-  }
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  max-width: none;
+}
 
 .layout {
   margin-top: 150px;
@@ -21,8 +21,7 @@
   margin-bottom: 60px;
 }
 
-#home,
-#about {
+#home, #about {
   padding-top: 70px;
 }
 
