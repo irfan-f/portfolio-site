@@ -1002,6 +1002,10 @@ video {
   padding-top: 6rem;
 }
 
+.pt-4 {
+  padding-top: 1rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -1333,6 +1337,14 @@ body:is(.dark *) {
 
   .md\:rounded-xl {
     border-radius: 0.75rem;
+  }
+
+  .md\:pt-0 {
+    padding-top: 0px;
+  }
+
+  .md\:text-left {
+    text-align: left;
   }
 }
 
