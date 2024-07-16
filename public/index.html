@@ -2,42 +2,53 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link 
-      rel="stylesheet" 
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" 
-      integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" 
-      crossorigin="anonymous">
-    </link>
-    <link rel="icon" href="%PUBLIC_URL%/Icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Site for Irfan Filipovic, detailing software development projects and various other interests."
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/Icon.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>Irfan Filipovic</title>
+    <link rel="icon" href="Icon.png" />
+    <link rel="apple-touch-icon" href="Icon.png" />
+    <link rel="manifest" href="manifest.json" />
+    <!-- Style sheets -->
+    <link href="./main.css" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Dosis, Libre Franklin, and Mulish -->
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">    <title>Irfan Filipovic</title>
   </head>
   <body>
+    <style>
+      body {
+        transition: background-color 0.4s ease-out;
+        background-color: transparent;
+      }
+      #modal-root, #fab-root {
+        position: fixed; /* Fixed relative to the viewport */
+        height: 100vh;
+        width: 100vw;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: transparent; /* Semi-transparent black background */
+        z-index: 1000; /* High z-index to ensure it's on top */
+        pointer-events: none; /* Allow users to click through the overlay */
+      }
+      #modal-root {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #modal-root .modal-dialog {
+        pointer-events: auto; /* Allow users to interact with the modal */
+      }
+    </style>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      Below scripts for Bootstrap
-    -->
-    <script 
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
-      crossorigin="anonymous">
-    </script>
-    <script 
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" 
-      integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" 
-      crossorigin="anonymous">
-    </script>
-    <script 
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" 
-      integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" 
-      crossorigin="anonymous">
-    </script>
+    <div id="modal-root"></div>
+    <div id="fab-root"></div>
   </body>
 </html>
