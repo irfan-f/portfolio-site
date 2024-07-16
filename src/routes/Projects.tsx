@@ -1,23 +1,42 @@
-import React from "react";
-import "./Projects.css"
+import React, { useState } from "react";
 import locationPing from "../photos/location.png"
 import MLPic from "../photos/ML.png"
 import underConstruction from "../photos/underConstruction.png"
 import NWYS from "../photos/nobodyWantsYourSheep.png";
 
+import Button from "../components/Button";
+import Mahjong from "../components/sections/Mahjong";
+
+const projectSections = [
+  Mahjong,
+];
+
 const Projects = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleCollapse = () => {
+    setIsOpen(!isOpen);
+  }
+
   return (
-    <React.Fragment>
-      <div className="container projects" id="projects">
+    <main>
+      {projectSections.map((ProjectSection, index) => <ProjectSection showDetails={true} />)}
+      <Button
+        className="btn btn-primary"
+        onClick={toggleCollapse}
+        message={isOpen ? 'Collapse Projects' : 'Expand Projects'}
+      />
+      <div
+        className={`mt-4 transition-height duration-500 ease-in-out ${ isOpen ? 'max-h-full' : 'max-h-0' } overflow-hidden`}
+      >
         <div className="row">
-          <div className="col" id="projectT">
-            <h1 id="titleP"><em>Projects</em></h1>
-          </div>
-        </div>
-        <hr noshade="true" id="breakFoot"></hr>
-        <div className="row">
-          <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12" id="projectPic">
-            <img alt="productivity" src={NWYS}></img>
+          <div className="align-center flex justify-center" id="projectPic">
+            <img
+              alt="productivity"
+              src={NWYS.src}
+              srcSet={NWYS.srcSet}
+              sizes="(max-width: 300px) 100vw, (max-width: 705px) 50vw, (max-width: 1110px) 33vw, 25vw"
+            />
           </div>
           <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12" id="projectDesc">
             <h3>Nobody Wants Your Sheep</h3>
@@ -34,10 +53,15 @@ const Projects = () => {
               rel="noopener noreferrer"><strong> &middot; Check out the code! &middot; </strong></a></button></h6>
           </div>
         </div>
-        <hr noshade="true" id="breakFoot"></hr>
+        <hr id="breakFoot"></hr>
         <div className="row">
-          <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12" id="projectPic">
-            <img alt="productivity" src={underConstruction}></img>
+          <div className="align-center flex justify-center" id="projectPic">
+            <img
+              alt="productivity"
+              src={underConstruction.src}
+              srcSet={underConstruction.srcSet}
+              sizes="(max-width: 300px) 100vw, (max-width: 705px) 50vw, (max-width: 1110px) 33vw, 25vw"
+            />
           </div>
           <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12" id="projectDesc">
             <h3>Productivy App</h3>
@@ -54,11 +78,11 @@ const Projects = () => {
               rel="noopener noreferrer"><strong> &middot; Check out the code! &middot; </strong></a></button></h6>
           </div>
         </div>
-        <hr noshade="true" id="breakFoot"></hr>
+        <hr id="breakFoot"></hr>
 
         <div className="row">
-          <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12" id="projectPic">
-            <img alt="laser" src="https://piazza.com/redirect/s3?bucket=uploads&prefix=paste%2Fjn3ebqey4he3ne%2Ff0c8138511dd012b9fe399685f73dec810703d23a08f8d770fd58c21c1e7fd30%2FScreen_Shot_2020-06-04_at_10.31.36_PM.png" href="https://classes.cs.uoregon.edu/20S/cis410gameprog/games/Laser/index.html"></img>
+          <div className="align-center flex justify-center" id="projectPic">
+            <img alt="laser" src="https://piazza.com/redirect/s3?bucket=uploads&prefix=paste%2Fjn3ebqey4he3ne%2Ff0c8138511dd012b9fe399685f73dec810703d23a08f8d770fd58c21c1e7fd30%2FScreen_Shot_2020-06-04_at_10.31.36_PM.png"></img>
           </div>
           <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12" id="projectDesc">
             <h3>Laser Unloaded</h3>
@@ -76,10 +100,15 @@ const Projects = () => {
           </div>
 
         </div>
-        <hr noshade="true" id="breakFoot"></hr>
+        <hr id="breakFoot"></hr>
         <div className="row">
-          <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12" id="projectPic">
-            <img id="location" alt="locationAssistance" src={locationPing}></img>
+          <div className="align-center flex justify-center" id="projectPic">
+            <img
+              alt="productivity"
+              src={locationPing.src}
+              srcSet={locationPing.srcSet}
+              sizes="(max-width: 300px) 100vw, (max-width: 705px) 50vw, (max-width: 1110px) 33vw, 25vw"
+            />
           </div>
           <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12" id="projectDesc">
             <h3>Social Distance Assitance</h3>
@@ -98,10 +127,15 @@ const Projects = () => {
           </div>
 
         </div>
-        <hr noshade="true" id="breakFoot"></hr>
+        <hr id="breakFoot"></hr>
         <div className="row">
-          <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12" id="projectPic">
-            <img alt="MLClassifiers" src={MLPic}></img>
+          <div className="align-center flex justify-center" id="projectPic">
+            <img
+              alt="productivity"
+              src={MLPic.src}
+              srcSet={MLPic.srcSet}
+              sizes="(max-width: 300px) 100vw, (max-width: 705px) 50vw, (max-width: 1110px) 33vw, 25vw"
+            />
           </div>
           <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12" id="projectDesc">
             <h3>Machine Learning Classifiers</h3>
@@ -115,11 +149,9 @@ const Projects = () => {
               rel="noopener noreferrer"><strong> &middot; Check out the code! &middot; </strong></a></button></h6>
           </div>
         </div>
-        <hr noshade="true" id="breakFoot"></hr>
       </div>
-    </React.Fragment>
+    </main>
   );
 };
 
 export default Projects;
-

@@ -1,47 +1,21 @@
-.App {
-  text-align: center;
-}
-
-.text-responsive {
-  overflow: hidden;
-}
-
-@media (min-width: 200px) {
-  .text-responsive {
-    font-size: 2vw;
-  }
-}
-
-/* Small devices (landscape phones, 576px and up) */
-
-@media (min-width: 576px) {
-  @media (max-width: 767px) {
-    .text-responsive {
-      font-size: calc(1.8vw);
-    }
-  }
-}
-
-/* Medium devices (tablets, 768px and up) */
-
-@media (min-width: 768px) {
-  .text-responsive {
-    font-size: 1.5vw;
-  }
-}
-
-/* Large devices (desktops, 992px and up) */
-
-@media (min-width: 992px) {
-  .text-responsive {
-    font-size: 1.3vw;
-  }
-}
-
-/* Extra large devices (large desktops, 1200px and up) */
-
-@media (min-width: 1200px) {
-  .text-responsive {
-    font-size: calc(1.12vw);
-  }
+:root {
+	--color-black: #000;
+	--color-white: #fff;
+	--color-blue-100: #e8f2ff;
+	--color-blue-500: #4b96ff;
+	--color-slate-500: #a9adc1;
+	--color-gray-100: #f7f7f7;
+	--color-gray-200: #e6e9ee;
+	--color-gray-300: #dde0e4;
+	--color-gray-400: #818890;
+	--color-gray-500: #535661;
+	--color-gray-600: #4b4c53;
+	--color-gray-700: #3a3d4a;
+	--color-gray-800: #2e3039;
+	--color-gray-900: #1f2028;
+	--color-green-100: #e7f9ed;
+	--color-green-500: #30c85e;
+	--color-green-600: #68d94a;
+	--color-red-500: #ff4545;
+	--color-yellow-500: #ffd644;
 }

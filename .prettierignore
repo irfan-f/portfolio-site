@@ -1,0 +1,6 @@
+# .prettierignore
+src/**/*.css
+.vscode
+node_modules
+dist
+build
