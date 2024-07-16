@@ -7,7 +7,7 @@ const UnderDevelopment: FC = () => {
       <CogComponent className="w-12 m-auto svg-dark animate-spin-slow" />
       <div className="w-full flex flex-col items-center justify-center">
       <h1 className="w-full text-center text-2xl">Under Construction</h1>
-        <h3 className="text-xl">
+        <h3 className="text center pt-4 md:pt-0 md:text-left text-xl">
           This site is currently under construction. Please check back later.
         </h3>
       </div>

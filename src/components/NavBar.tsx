@@ -65,7 +65,8 @@ const NavBar = ({ navs }: { navs: any }) => {
         </div>
         <div className={thirdDivClassName}>
           <div className={menuItemClassName}>
-            Menu
+              
+            {/* Menu */}
             {/* <MenuItem /> */}
           </div>
         </div>
