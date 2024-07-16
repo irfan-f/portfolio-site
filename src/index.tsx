@@ -22,7 +22,7 @@ const RootComponent = () => {
 
   return (
     <React.StrictMode>
-      <Router>
+      <Router basename={window.location.pathname || ''}>
         <IconContext.Provider value={{ className: 'react-icons' }}>
           <AppearanceToggle theme={theme} applyTheme={applyTheme} />
           <App />
