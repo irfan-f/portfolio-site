@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { createPortal } from 'react-dom';
 import mahjongImage from '../../photos/mahjong-logo.png';
-import Button from '../Button';
+import Button from '../interactive/Button';
 import ModalWrapper from './ModalWrapper';
 
 const imgAlt = 'A logo of Mahjong with Friends';

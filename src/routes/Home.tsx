@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import IntroView from '../components/IntroView';
+import IntroView from '../components/core/IntroView';
 import MahjongHome from '../components/sections/Mahjong';
 import HammerSpoon from '../components/sections/HammerSpoon';
-import UnderDevelopment from '../components/UnderDevelopment';
+import UnderDevelopment from '../components/misc/UnderDevelopment';
 
 const sectionsComponents = [
   MahjongHome,

@@ -53,7 +53,7 @@ body {
   }
 
   .svg-dark {
-    @apply fill-gray-500 dark:fill-black  stroke-black dark:stroke-gray-500;
+    @apply fill-gray-500 stroke-black;
   }
 
   .svg-secondary {
@@ -105,7 +105,7 @@ body {
 
 :root {
   --accent: #2D3142;
-  --bg-primary: #E6B89C;
+  --bg-primary: #F0FFCE;
   --bg-accent: #2D3142;
   --text-primary: black;
   --text-secondary: #9CA3AF;
@@ -116,12 +116,12 @@ body {
 
 
 .dark {
-  --accent: #E6B89C;
+  --accent: #F0FFCE;
   --bg-primary: #2D3142;
-  --bg-accent: #E6B89C;
+  --bg-accent: #F0FFCE;
   --text-primary: white;
   --text-secondary: #c6c6c6;
-  --text-accent: #E6B89C;
+  --text-accent: #F0FFCE;
   color-scheme: dark;
 }
 

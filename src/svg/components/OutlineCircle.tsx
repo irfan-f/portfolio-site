@@ -1,4 +1,5 @@
 import { FC, HtmlHTMLAttributes, lazy, Suspense } from 'react';
+import clsx from 'clsx';
 
 type OutlineCircleProps = {
   fillColor?: string | 'transparent';
@@ -11,39 +12,43 @@ type OutlineCircleProps = {
 
 const OutlineCircle: FC<OutlineCircleProps> = ({ width = 24, height = 24, svgName, fillColor }) => {
   const SvgComponent = lazy(() => import(`../svgs/${svgName}.svg`));
+  const divHeight = `h-${height / 4}`;
+  const divWidth = `w-${height / 4}`;
 
+  const svgHeight = 24;
+  const svgWidth = 24;
   return (
-    <div className="">
-      <div className="outline-circle">
+    <>
+      <div className={clsx("outline-circle absolute z-10", divHeight, divWidth)}>
         <svg
-          className="absolute top-0 right-0"
+          className="relative top-0 right-0"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
-          viewBox={`0 0 ${width} ${height}`}
+          viewBox={`0 0 ${svgWidth} ${svgHeight}`}
           stroke="currentColor"
         >
           <circle
             className="svg-secondary base-outline-circle"
-            cx={`${width / 2}`}
-            cy={`${height / 2}`}
-            r={`${(width - 2) / 2}`}
+            cx={`${svgWidth / 2}`}
+            cy={`${svgHeight / 2}`}
+            r={`${(svgWidth - 2) / 2}`}
             strokeWidth="1"
           />
-          <circle
+        <circle
             className="outline-circle"
-            cx={`${width / 2}`}
-            cy={`${height / 2}`}
-            r={`${(width - 2) / 2}`}
+            cx={`${svgWidth / 2}`}
+            cy={`${svgHeight / 2}`}
+            r={`${(svgWidth - 2) / 2}`}
             strokeWidth="1"
           />
         </svg>
       </div>
-      <div className="p-2">
+      <div className={clsx("svg-in-outline-circle p-2 relative top-0 right-0 z-9", divWidth, divHeight )}>
         <Suspense fallback={<div />}>
-          <SvgComponent className="fill-none svg-primary z-50 hover:stroke-accent" />
+          <SvgComponent className="fill-none svg-primary z-50" />
         </Suspense>
       </div>
-    </div>
+    </>
   );
 };
 

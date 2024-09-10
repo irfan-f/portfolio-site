@@ -4,7 +4,7 @@ import MLPic from "../photos/ML.png"
 import underConstruction from "../photos/underConstruction.png"
 import NWYS from "../photos/nobodyWantsYourSheep.png";
 
-import Button from "../components/Button";
+import Button from "../components/interactive/Button";
 import Mahjong from "../components/sections/Mahjong";
 
 const projectSections = [

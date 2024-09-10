@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import homePageProfileImage from '../photos/homepage_profile.jpg';
+import homePageProfileImage from '../../photos/homepage_profile.jpg';
 
 const h1Text = 'Irfan Filipovic';
 const h2Text = 'Software Engineer';

@@ -1,15 +1,12 @@
 import { FC } from 'react';
-import  CogComponent from '../svg/svgs/cog.svg';
+import  CogComponent from '../../svg/svgs/cog.svg';
 
 const UnderDevelopment: FC = () => {
   return (
-    <div className="w-full bg-accent text-inverse m-auto flex flex-row justify-evenly px-24 py-4">
+    <div className="under-development w-full bg-accent text-inverse m-auto flex flex-row justify-evenly px-12 md:px-24 py-4">
       <CogComponent className="w-12 m-auto svg-dark animate-spin-slow" />
       <div className="w-full flex flex-col items-center justify-center">
       <h1 className="w-full text-center text-2xl">Under Construction</h1>
-        <h3 className="text center pt-4 md:pt-0 md:text-left text-xl">
-          This site is currently under construction. Please check back later.
-        </h3>
       </div>
       <CogComponent className="w-12 m-auto svg-dark animate-spin-slow" />
     </div>

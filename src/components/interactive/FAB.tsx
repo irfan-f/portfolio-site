@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { DraggableBounds } from 'react-draggable';
 const Draggable = lazy(() => import('react-draggable'));
 import { GiHamburgerMenu } from 'react-icons/gi';
-const Tooltip = lazy(() => import('./Tooltip'));
+const Tooltip = lazy(() => import('../detail/Tooltip'));
 
 type FABOptions = {
   axis?: 'x' | 'y' | 'both' | 'none';

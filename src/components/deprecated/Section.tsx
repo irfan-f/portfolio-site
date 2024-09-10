@@ -1,5 +1,5 @@
 import { FC, HTMLAttributes, useRef, RefObject } from 'react';
-import useIsVisible from '../helpers/useIsVisible';
+import useIsVisible from '../../helpers/useIsVisible';
 
 export type SectionProps = {
   slideDirection: 'left' | 'right' | 'top' | 'bottom' | 'none';

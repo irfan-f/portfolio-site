@@ -1,12 +1,12 @@
 import { lazy, useEffect, FC, Suspense, useState } from 'react';
 import { Routes, Route } from "react-router-dom";
-import NavBar from './components/NavBar';
+import NavBar from './components/core/NavBar';
 import Home from './routes/Home';
 import About from './routes/About';
 import CourseWork from './routes/CourseWork';
 import Projects from './routes/Projects';
-const FAB = lazy(() => import('./components/FAB'));
-import UnderDevelopment from './components/UnderDevelopment';
+const FAB = lazy(() => import('./components/interactive/FAB'));
+import UnderDevelopment from './components/misc/UnderDevelopment';
 
 interface Nav {
   id: string;
@@ -79,7 +79,7 @@ const App: FC = () => {
     <div className="" style={{ backgroundColor: isFirstload ? '#0c1826' : 'unset' }}>
       <UnderDevelopment />
       <NavBar navs={navs} />
-      <div className="">
+      <>
           <Routes>
             <Route key="main" path='/' element={<Home />} />
             {navs.map((stack) => {
@@ -89,7 +89,7 @@ const App: FC = () => {
               );
             })}
           </Routes>
-      </div>
+      </>
       { needsScroll && !isAtTop &&
         <Suspense fallback={<></>}>
           <FAB onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} options={{ axis: 'x', bounds: 'parent' }}>

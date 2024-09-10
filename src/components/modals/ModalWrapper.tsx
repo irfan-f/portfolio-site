@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { createPortal } from 'react-dom';
-import Button from '../Button';
+import Button from '../interactive/Button';
 
 interface ModalWrapperProps extends React.HTMLAttributes<HTMLElement> {
   isOpen: boolean;

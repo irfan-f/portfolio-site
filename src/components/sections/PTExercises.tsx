@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import mahjongImage from '../../photos/automationFigure.png';
-import Button from '../Button';
+import Button from '../interactive/Button';
 
 const imgAlt = 'A logo of Mahjong with Friends';
 

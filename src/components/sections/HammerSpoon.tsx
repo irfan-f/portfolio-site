@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import automationImage from '../../photos/automationFigure.png';
-import Button from '../Button';
+import Button from '../interactive/Button';
 
 const imgAlt = 'A logo of a stick figure trying to spin a settings cog';
 

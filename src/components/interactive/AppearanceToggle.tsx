@@ -1,6 +1,7 @@
-import { FC } from "react";
-import OutlineCircle from "../svg/components/OutlineCircle";
-import { ThemeType } from "../helpers/useTheme";
+import { FC, HTMLAttributes } from "react";
+import OutlineCircle from "../..//svg/components/OutlineCircle";
+import { ThemeType } from "../../helpers/useTheme";
+import clsx from 'clsx';
 
 type ThemeIcon = 'moon' | 'sun' | 'cog';
 
@@ -23,19 +24,19 @@ const themeActionMapping: ThemeActionMapping = {
   auto: 'dark'
 };
 
-type AppearanceToggleProps = {
+type AppearanceToggleProps  = {
   theme: ThemeType;
   applyTheme: (theme: ThemeType) => void;
 };
 
-const AppearanceToggle: FC<AppearanceToggleProps> = ({ theme, applyTheme}) => {
+const AppearanceToggle: FC<AppearanceToggleProps & HTMLAttributes<HTMLElement>> = ({ theme, applyTheme, className}) => {
   const handleClick = () => {
     applyTheme(themeActionMapping[theme]);
   };
 
   return (
-    <div className="cursor-pointer absolute top-28 right-4 h-12 w-12" onClick={handleClick}>
-      <OutlineCircle className="outline-circle absolute h-12 w-12" svgName={themeIconMapping[theme]} />
+    <div className={clsx("appearance-toggle cursor-pointer h-12 w-12", className)} onClick={handleClick}>
+      <OutlineCircle className="outline-circle h-12 w-12" svgName={themeIconMapping[theme]} height={48} width={48} />
     </div>
   );
 };

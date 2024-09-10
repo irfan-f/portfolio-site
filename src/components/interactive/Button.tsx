@@ -1,6 +1,6 @@
 import { FC, lazy } from 'react';
 import clsx from 'clsx';
-const ForwardArrowComponent = lazy(() => import(`../svg/svgs/forwardArrow.svg`));
+const ForwardArrowComponent = lazy(() => import(`../../svg/svgs/forwardArrow.svg`));
 
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
