@@ -1,5 +1,8 @@
 import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
+import useTheme from '../../helpers/useTheme';
+import AppearanceToggle from '../interactive/AppearanceToggle';
+import MenuToggle from '../interactive/MenuToggle';
 
 // Function to generate classname for the primary nav
 const primaryNavClassName =({ isActive }: { isActive: boolean }) => clsx(
@@ -30,16 +33,19 @@ const subNavLinkClassName = ({ isActive }: { isActive: boolean }) => clsx(
 );
 
 // Classnames to reduce clutter within the JSX,
-const headerClassName = 'px-4vw py-9 lg:py-12';
+const headerClassName = 'navbar px-4vw py-9 lg:py-12';
 const gridDivClassName = 'mx-auto grid grid-cols-2 lg:grid-cols-6 items-center w-full';
 const brandNavClassName = 'justify-self-start flex items-end lg:col-span-1 animate-slide-in-left-1';
 const secondDivClassName = 'justify-self-center hidden lg:flex lg:items-end lg:justify-between lg:w-fit lg:col-span-4 p-auto font-dosis font-semibold text-lg animate-slide-in-top-1';
 const subNavClassName = 'px-5';
 const thirdDivClassName = 'items-center justify-self-end lg:col-span-1';
-const menuItemClassName = 'block lg:hidden';
+const appearanceToggleClassname = 'hidden lg:flex';
+const menuToggleClassName = 'menu-toggle block lg:hidden';
 
 
 const NavBar = ({ navs }: { navs: any }) => {
+  const { theme, applyTheme } = useTheme();
+
   return (
     <div className={headerClassName}>
       <div className={gridDivClassName}>
@@ -64,11 +70,8 @@ const NavBar = ({ navs }: { navs: any }) => {
         ))} */}
         </div>
         <div className={thirdDivClassName}>
-          <div className={menuItemClassName}>
-              
-            {/* Menu */}
-            {/* <MenuItem /> */}
-          </div>
+          <AppearanceToggle className={appearanceToggleClassname} theme={theme} applyTheme={applyTheme} />
+          <MenuToggle className={menuToggleClassName} />
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, ReactNode } from 'react';
 
 type TooltipProps = {
-  children: React.ReactElement;
+  children: React.ReactElement | ReactNode;
   tooltipText: string;
   draggable?: boolean;
 }
@@ -104,7 +104,7 @@ const Tooltip = ({ children, tooltipText, draggable = false }: TooltipProps) => 
     >
       {children}
       {showTooltip && (
-        <div ref={tooltipRef} className="absolute bottom-full mb-2 w-32 text-center p-2 bg-black text-white text-xs rounded" style={{ left: '0px', transform: 'translateX(-40.5%)' }}>
+        <div ref={tooltipRef} className="absolute bottom-full mb-2 w-fit whitespace-nowrap text-center p-2 bg-black text-white text-xs rounded" style={{ left: '0px', transform: 'translateX(-40.5%)' }}>
           {tooltipText}
           <div className="absolute w-0 h-0 border-black border-l-2 border-t-2 border-r-2 bottom-full left-1/2 transform -translate-x-1/2" style={{borderColor: 'transparent transparent black transparent'}}></div>
         </div>

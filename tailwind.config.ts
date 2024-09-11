@@ -53,6 +53,7 @@ export default {
         'accent-tint': 'var(--accent-tint)',
       },
       spacing: {
+        '1px': '1px',
         '4vw': '4vw',
         '10vw': '10vw',
       },

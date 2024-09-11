@@ -1,12 +1,11 @@
-import { lazy, useEffect, FC, Suspense, useState } from 'react';
-import { Routes, Route } from "react-router-dom";
-import NavBar from './components/NavBar';
+import { useState, useEffect, FC } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Home from './routes/Home';
 import About from './routes/About';
-import CourseWork from './routes/CourseWork';
 import Projects from './routes/Projects';
-const FAB = lazy(() => import('./components/FAB'));
-import UnderDevelopment from './components/UnderDevelopment';
+import CourseWork from './routes/CourseWork';
+import UnderDevelopment from './components/misc/UnderDevelopment';
+import NavBar from './components/core/NavBar';
 
 interface Nav {
   id: string;
@@ -40,67 +39,33 @@ const components: Components = {
 };
 
 const App: FC = () => {
-  const [needsScroll, setNeedsScroll] = useState(false);
-  const [isAtTop, setIsAtTop] = useState(true);
-  const [isFirstload, setIsFirstLoad] = useState(true);
+  // State to track if it's the first load
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+
+  // Effect to handle first load
   useEffect(() => {
-    if (isFirstload) {
+    if (isFirstLoad) {
       setIsFirstLoad(false);
     }
-  }, []);
-
-  useEffect(() => {
-    const checkScroll = () => {
-      setNeedsScroll(document.body.scrollHeight > window.innerHeight);
-    };
-
-    const handleScroll = () => {
-      setIsAtTop(window.scrollY === 0);
-    };
-
-    // Check scroll on load and window resize
-    window.onload = checkScroll;
-    window.addEventListener('resize', checkScroll);
-
-    // Check scroll on scroll
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-
-    // Clean up event listener on unmount
-    return () => {
-      window.onload = null;
-      window.removeEventListener('resize', checkScroll);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  }, [isFirstLoad]);
 
   return (
-    <div className="" style={{ backgroundColor: isFirstload ? '#0c1826' : 'unset' }}>
+    <div className='' style={{ backgroundColor: isFirstLoad ? '#0c1826' : 'unset' }}>
       <UnderDevelopment />
       <NavBar navs={navs} />
-      <div className="">
-          <Routes>
-            <Route key="main" path='/' element={<Home />} />
-            {navs.map((stack) => {
-              const ComponentToUse = components[stack.id];
-              return (
-                <Route key={stack.id} path={stack.id} element={<ComponentToUse />} />
-              );
-            })}
-          </Routes>
-      </div>
-      { needsScroll && !isAtTop &&
-        <Suspense fallback={<></>}>
-          <FAB onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} options={{ axis: 'x', bounds: 'parent' }}>
-            <svg className="size-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-            </svg>
-          </FAB>
-        </Suspense>
-      }
+      <>
+        <Routes>
+          <Route key='main' path='/' element={<Home />} />
+          {navs.map((stack) => {
+            const ComponentToUse = components[stack.id];
+            return (
+              <Route key={stack.id} path={stack.id} element={<ComponentToUse />} />
+            );
+          })}
+        </Routes>
+      </>
     </div>
   );
-}
+};
 
 export default App;
