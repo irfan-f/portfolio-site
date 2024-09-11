@@ -1,0 +1,1 @@
+(self.webpackChunkportfolio_app=self.webpackChunkportfolio_app||[]).push([[319],{319:(e,p,t)=>{var a=t(540);function h(e){return a.createElement("svg",e,a.createElement("path",{d:"M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"}))}h.defaultProps={height:"24px",viewBox:"0 -960 960 960",width:"24px"},e.exports=h,h.default=h}}]);
