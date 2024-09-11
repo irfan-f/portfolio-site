@@ -3,52 +3,38 @@
 // Import Cypress types
 /// <reference types="cypress" />
 
-// Define a function to get the Tailwind breakpoint size
-// sm = 375 = 0, md = 414 = 1, lg = 768 = 2, xl = 1280 = 3, 2xl = 1920 = 4
-// Using numbers instead of strings for easier comparison
-const tailwindBreakpointSize = ( width: number ) => {
-  if ( width < 640 ) {
-    return 0; // sm
-  } else if ( width < 768 ) {
-    return 1; // md
-  } else if ( width < 1024 ) {
-    return 2; // lg
-  } else if ( width < 1280 ) {
-    return 3; // xl
-  } else {
-    return 4; // 2xl
-  }
-}
+import { viewports, MenuToggleTest, AppearanceToggleTest, NavbarTest } from '../helpers/index.ts';
 
-describe( 'Responsive Design Tests', () => {
-  const viewports = [
-    { device: 'iPhone 6', width: 375, height: 667 },
-    { device: 'iPhone XR', width: 414, height: 896 },
-    { device: 'iPad Mini', width: 768, height: 1024 },
-    { device: 'MacBook 13', width: 1280, height: 800 },
-    { device: 'Desktop', width: 1920, height: 1080 }
-  ];
-
+describe( 'Responsive Home Page Design Tests', () => {
   viewports.forEach( viewport => {
-    it( `should display correctly on ${viewport.device}`, () => {
-      // Set the viewport size
+    const { breakpoint } = viewport;
+
+
+    // TODO - Remove once out of development
+    it( `Under development banner should be visible when you load the home page; ${viewport.device}`, () => {
       cy.viewport( viewport.width, viewport.height );
-      // Get tailwind breakpoint size
-      const breakpoint = tailwindBreakpointSize( viewport.width );
-      // Visit the site
       cy.visit( 'http://localhost:9000/' );
-
-      // TODO - Remove once out of development
+      // Check if the under development banner is visible
       cy.get( '.under-development' ).should( 'be.visible' );
+    });
 
-      // Check if the navbar is visible
-      cy.get( '.navbar' ).should( 'be.visible' );
+    it( `Introduction view should be visible when you load the home page; ${viewport.device}`, () => {
+      cy.viewport( viewport.width, viewport.height );
+      cy.visit( 'http://localhost:9000/' );
       // Check if the header is visible
       cy.get( 'header' ).should( 'be.visible' );
-      // Check if the footer is visible
+    });
+
+    it( `Image should be fully visible when you load the home page; ${viewport.device}`, () => {
+      cy.viewport( viewport.width, viewport.height );
+      cy.visit( 'http://localhost:9000/' );
       // Need to wait for the image to animate in
       cy.get( '.introview-image' ).wait(1000).isFullyWithinViewport( viewport );
+    });
 
+    it( `Scroll to top FAB should: appear if scrolled down, take user to top of page when clicked, and not exist when at top; ${viewport.device}`, () => {
+      cy.viewport( viewport.width, viewport.height );
+      cy.visit( 'http://localhost:9000/' );
       // Check if the scroll to top button appears when scrolling is possible and is not already at the top
       cy.document().then((doc) => {
         const scrollHeight = doc.body.scrollHeight;
@@ -68,29 +54,36 @@ describe( 'Responsive Design Tests', () => {
           cy.get('.scroll-to-top').should('not.exist');
         }
       });
-
-
-      // Checks that will run based on the breakpoint
-      if (breakpoint === 0) {
-        // Check if the menu toggle is visible
-        cy.get( '.menu-toggle' ).should( 'be.visible' );
-      }
-      if (breakpoint === 1) {
-        // Check if the menu toggle is visible
-        cy.get( '.menu-toggle' ).should( 'be.visible' );
-      }
-      if (breakpoint === 2) {
-        // Check if the menu toggle is visible
-        cy.get( '.menu-toggle' ).should( 'be.visible' );
-      }
-      if (breakpoint === 3) {
-        // Check if the menu toggle is visible
-        cy.get( '.appearance-toggle' ).should( 'be.visible' );
-      }
-      if (breakpoint === 4) {
-        // Check if the menu toggle is visible
-        cy.get( '.appearance-toggle' ).should( 'be.visible' );
-      }
     });
-  } );
+
+    if (breakpoint === 0) {
+      // Check if the menu toggle is visible
+      MenuToggleTest( viewport );
+
+    } else if (breakpoint === 1) {
+      // Check if the menu toggle is visible
+      MenuToggleTest( viewport );
+
+    } else if (breakpoint === 2) {
+      // Check if the navbar is visible
+      NavbarTest( viewport );
+      // Check if the appearance toggle is visible
+      AppearanceToggleTest( viewport );
+
+    } else if (breakpoint === 3) {
+      // Check if the navbar is visible
+      NavbarTest( viewport );
+      // Check if the appearance toggle is visible
+      AppearanceToggleTest( viewport );
+
+    } else if (breakpoint === 4) {
+      // Check if the navbar is visible
+      NavbarTest( viewport );
+      // Check if the appearance toggle is visible
+      AppearanceToggleTest( viewport );
+
+    }
+
+  });
+
 } );
