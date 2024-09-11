@@ -33,33 +33,62 @@ describe( 'Responsive Design Tests', () => {
     it( `should display correctly on ${viewport.device}`, () => {
       // Set the viewport size
       cy.viewport( viewport.width, viewport.height );
-
       // Get tailwind breakpoint size
       const breakpoint = tailwindBreakpointSize( viewport.width );
-      // Log the viewport and breakpoint
-      cy.log( `Viewport: ${viewport.device}, Breakpoint: ${breakpoint}` );
-
       // Visit the site
       cy.visit( 'http://localhost:9000/' );
 
-      // Add your assertions here
+      // TODO - Remove once out of development
       cy.get( '.under-development' ).should( 'be.visible' );
-      cy.get( '.navbar' ).should( 'be.visible' );
-      cy.get( 'header' ).should( 'be.visible' );
 
+      // Check if the navbar is visible
+      cy.get( '.navbar' ).should( 'be.visible' );
+      // Check if the header is visible
+      cy.get( 'header' ).should( 'be.visible' );
+      // Check if the footer is visible
+      // Need to wait for the image to animate in
+      cy.get( '.introview-image' ).wait(1000).isFullyWithinViewport( viewport );
+
+      // Check if the scroll to top button appears when scrolling is possible and is not already at the top
+      cy.document().then((doc) => {
+        const scrollHeight = doc.body.scrollHeight;
+
+        console.log('scrollHeight', scrollHeight);
+        console.log('viewport.height', viewport.height);
+
+        if (scrollHeight <= viewport.height) {
+          cy.log('Page is not scrollable, skipping scroll FAB tests');
+        } else {
+          cy.scrollTo('bottom');
+          cy.get('.scroll-to-top').should('be.visible');
+          // Check if the scroll to top button scrolls to the top of the page
+          cy.get('.scroll-to-top').click();
+          cy.get('body').should('have.prop', 'scrollTop', 0);
+          // Check if the scroll to top button disappears when scrolling to the top
+          cy.get('.scroll-to-top').should('not.exist');
+        }
+      });
+
+
+      // Checks that will run based on the breakpoint
       if (breakpoint === 0) {
+        // Check if the menu toggle is visible
         cy.get( '.menu-toggle' ).should( 'be.visible' );
       }
       if (breakpoint === 1) {
+        // Check if the menu toggle is visible
         cy.get( '.menu-toggle' ).should( 'be.visible' );
       }
       if (breakpoint === 2) {
+        // Check if the menu toggle is visible
         cy.get( '.menu-toggle' ).should( 'be.visible' );
       }
       if (breakpoint === 3) {
+        // Check if the menu toggle is visible
         cy.get( '.appearance-toggle' ).should( 'be.visible' );
       }
       if (breakpoint === 4) {
+        // Check if the menu toggle is visible
         cy.get( '.appearance-toggle' ).should( 'be.visible' );
       }
     });

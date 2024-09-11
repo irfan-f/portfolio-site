@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
-import AppearanceToggle from '../interactive/AppearanceToggle';
 import useTheme from '../../helpers/useTheme';
+import AppearanceToggle from '../interactive/AppearanceToggle';
+import MenuToggle from '../interactive/MenuToggle';
 
 // Function to generate classname for the primary nav
 const primaryNavClassName =({ isActive }: { isActive: boolean }) => clsx(
@@ -70,11 +71,7 @@ const NavBar = ({ navs }: { navs: any }) => {
         </div>
         <div className={thirdDivClassName}>
           <AppearanceToggle className={appearanceToggleClassname} theme={theme} applyTheme={applyTheme} />
-          <div className={menuToggleClassName}>
-            Menu
-            {/* Menu */}
-            {/* <MenuItem /> */}
-          </div>
+          <MenuToggle className={menuToggleClassName} />
         </div>
       </div>
     </div>

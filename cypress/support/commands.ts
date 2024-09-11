@@ -1,37 +1,17 @@
-/// <reference types="cypress" />
-// ***********************************************
-// This example commands.ts shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+// / <reference types="cypress" />
+
+// Add a custom command to check if an element is fully within the viewport
+Cypress.Commands.add( 'isFullyWithinViewport', { prevSubject: 'element' }, ( subject, viewport ) => {
+  const bounding = subject[0].getBoundingClientRect();
+
+  const isWithinViewport = (
+    bounding.top >= 0 &&
+    bounding.left >= 0 &&
+    bounding.bottom <= viewport.height &&
+    bounding.right <= viewport.width
+  );
+
+  expect( isWithinViewport ).to.be.true;
+
+  return subject;
+});
