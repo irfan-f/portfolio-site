@@ -12,6 +12,7 @@ interface MahjongProps extends React.HTMLAttributes<HTMLElement> {
 const Mahjong: FC<MahjongProps> = ({ showDetails }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   let AdditionalDetails;
+  showDetails = false;
 
   if (showDetails) {
     AdditionalDetails = (
@@ -40,16 +41,16 @@ const Mahjong: FC<MahjongProps> = ({ showDetails }) => {
           sizes="(max-width: 300px) 70vw, (max-width: 705px) 30vw, (max-width: 1110px) 20vw, 20vw"
         />
       </div>
-      <div className="h-full m-auto flex flex-col justify-evenly lg:col-start-2 lg:col-end-4">
+      <div className="h-full m-auto flex flex-col justify-evenly lg:col-start-2 lg:col-end-4 text-center lg:text-left">
         <div>
-          <h2 className="pb-1 text-left font-mulish text-2xl font-bold text-accent lg:text-3xl xl:text-4xl">
+          <h2 className="pb-1 font-mulish text-2xl font-bold text-accent lg:text-3xl xl:text-4xl">
             Mahjong with Friends
           </h2>
-          <h3 className="text-secondary pb-1 text-left font-dosis text-xl font-bold lg:text-2xl xl:text-3xl">
+          <h3 className="text-secondary pb-1 font-dosis text-xl font-bold lg:text-2xl xl:text-3xl">
             A web and mobile game
           </h3>
         </div>
-        <p className="text-md text-left align-bottom font-libre lg:text-lg">
+        <p className="text-md align-bottom font-libre lg:text-lg pt-4 lg:pt-0">
           This project aims to create a comprehensive mobile and web interface
           for playing Mahjong, a traditional Chinese tile game, online. The
           motivation behind this project is the lack of existing applications

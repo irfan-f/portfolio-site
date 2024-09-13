@@ -1,7 +1,7 @@
-// / <reference types="cypress" />
+/// <reference types="cypress" />
 
 // Add a custom command to check if an element is fully within the viewport
-Cypress.Commands.add( 'isFullyWithinViewport', { prevSubject: 'element' }, ( subject, viewport ) => {
+Cypress.Commands.add( 'isFullyWithinViewport', { prevSubject: true }, ( subject, viewport: Types.CustomViewport ) => {
   const bounding = subject[0].getBoundingClientRect();
 
   const isWithinViewport = (

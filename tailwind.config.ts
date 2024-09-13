@@ -74,6 +74,9 @@ export default {
         'primary': 'var(--bg-primary)',
         'accent': 'var(--bg-accent)',
         'opaque': 'rgba(0, 0, 0, 0.5)',
+      },
+      transitionDuration: {
+        '400': '400ms',
       }
     },
   },

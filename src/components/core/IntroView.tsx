@@ -17,7 +17,7 @@ const IntroView: FC = () => {
   const [alreadyLoaded, setAlreadyLoaded] = useState(false);
 
   return (
-    <header className="relative mx-4vw flex items-center flex-col lg:flex-row justify-evenly lg:justify-center pt-24 pb-12 lg:pb-0 lg:mb-64">
+    <header className="relative mx-4vw flex items-center flex-col lg:flex-row justify-evenly lg:justify-center pt-16 pb-12 lg:pb-0 lg:mb-64">
       <div className='flex flex-col justify-center animate-slide-in-left pb-12 lg:pb-0 lg:w-1/2'>
         <div className="font-mulish">
           <h1 className="font-dosis font-bold text-center pb-1 text-5xl xl:text-6xl 2xl:text-7xl">{h1Text}</h1>

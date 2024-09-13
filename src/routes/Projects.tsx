@@ -12,25 +12,25 @@ const projectSections = [
 ];
 
 const Projects = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
 
-  const toggleCollapse = () => {
-    setIsOpen(!isOpen);
-  }
+  // const toggleCollapse = () => {
+  //   setIsOpen(!isOpen);
+  // }
 
   return (
     <main>
       {projectSections.map((ProjectSection, index) => <ProjectSection showDetails={true} />)}
-      <Button
+      {/* <Button
         className="btn btn-primary"
         onClick={toggleCollapse}
         message={isOpen ? 'Collapse Projects' : 'Expand Projects'}
-      />
-      <div
+      /> */}
+      {/* <div
         className={`mt-4 transition-height duration-500 ease-in-out ${ isOpen ? 'max-h-full' : 'max-h-0' } overflow-hidden`}
-      >
-        <div className="row">
-          <div className="align-center flex justify-center" id="projectPic">
+      > */}
+        {/* <div className="row"> */}
+          {/* <div className="align-center flex justify-center" id="projectPic">
             <img
               alt="productivity"
               src={NWYS.src}
@@ -148,8 +148,8 @@ const Projects = () => {
             <h6><button type="button"><a href="https://github.com/irfan-f/CIS-472-Final-Project" target="_blank"
               rel="noopener noreferrer"><strong> &middot; Check out the code! &middot; </strong></a></button></h6>
           </div>
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
     </main>
   );
 };

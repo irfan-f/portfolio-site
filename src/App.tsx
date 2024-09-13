@@ -7,7 +7,7 @@ import CourseWork from './routes/CourseWork';
 import UnderDevelopment from './components/misc/UnderDevelopment';
 import NavBar from './components/core/NavBar';
 
-interface Nav {
+export interface Nav {
   id: string;
   name: string;
 }
@@ -17,10 +17,10 @@ const navs: Nav[] = [
     id: 'projects',
     name: 'Projects',
   },
-  {
-    id: 'coursework',
-    name: 'Coursework',
-  },
+  // {
+  //   id: 'coursework',
+  //   name: 'Coursework',
+  // },
   {
     id: 'about',
     name: 'About',
