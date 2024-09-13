@@ -26,9 +26,6 @@ const About: FC = () => {
         <p>
           A mountain biker.
         </p>
-        <p>
-          An enjoyer of the outdoors.
-        </p>
       </div>
     </div>
   )
