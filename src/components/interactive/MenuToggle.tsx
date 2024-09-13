@@ -53,6 +53,9 @@ const MenuToggle: FC<MenuToggleProps & HTMLAttributes<HTMLElement>> = ({
         />
         <div
           id="menu-sidebar"
+          style={{
+            maxHeight: 'var(--webkit-fill-available)',
+          }}
           className={clsx(
             'fixed right-0 top-0 z-20 h-screen w-64 bg-primary pt-4 transition-transform duration-400',
             {
