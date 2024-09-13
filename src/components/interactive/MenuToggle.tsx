@@ -102,7 +102,7 @@ const MenuToggle: FC<MenuToggleProps & HTMLAttributes<HTMLElement>> = ({
                 </li>
               ))}
             </ul>
-            <div className="w-fit">
+            <div className="w-fit pb-20">
               <AppearanceToggle
                 theme={theme}
                 applyTheme={applyTheme}
