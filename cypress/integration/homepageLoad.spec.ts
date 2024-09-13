@@ -3,7 +3,7 @@
 // Import Cypress types
 /// <reference types="cypress" />
 
-import { viewports, MenuToggleTest, AppearanceToggleTest, NavbarTest } from '../helpers/index.ts';
+import { viewports, MenuToggleTest, AppearanceToggleTest, NavbarTest } from '../helpers/index';
 
 describe( 'Responsive Home Page Design Tests', () => {
   viewports.forEach( viewport => {

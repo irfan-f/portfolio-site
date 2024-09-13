@@ -1,29 +1,34 @@
-import React, { FC } from "react";
-// import photo from "../photos/homepage/IMG_1444.jpeg"
+import { FC } from "react";
+import homePageProfileImage from '../photos/homepage_profile.jpg';
+const imgAlt = 'A photo of Irfan Filipovic smiling in front of some trees and nature';
+
+
 
 const About: FC = () => {
   return (
-    <div className="container-fluid feature" id="home">
-      <div className="row" id="about">
-        {/* <div className="col order-lg-12" id="picOfMe">
-          <img alt="500x500" src={photo}></img>
-        </div> */}
-        <div className="prose dark:prose-invert col order-lg-1">
-          <h2>HELLO!</h2>
-          <h3 id="name">I am, <b>Irfan Filipovic</b></h3>
-          <em id="degree">B.S Computer and Information Science</em>
-          <p>
-            I'm a recent graduate from the University of Oregon I am well acquainted with strict deployment dates, group collaboration, and resolving bugs and questions through the use of research.
-            Projects were only part of my education, the rest of my time was spent reinforcing algorithms, data structures, computer architecture, and software methodologies.
-          </p>
-          <p>
-            As a Technical Intern at PayClearly I experienced the fast pace of production, value of communication between coworkers and teams, and incorporating code into an existing codebase.
-            Time not spent developing was utilized to acquire data from various vendors, refining professional communication to be clear and concise giving me research experience.
-          </p>
-          <p>
-            I am also working on a personal project called Nobody Wants Your Sheep. It is a real-time Settlers of Catan browser game, built with React, Redux, Firebase, and others.
-          </p>
-        </div>
+    <div className="flex flex-col sm:flex-row mx-12 items-center justify-evenly" id="about">
+      <div className="flex justify-left w-1/2 sm:w-1/3 h-1/2 mb-4 sm:mb-0">
+        <img
+          className='introview-image rounded-full md:rounded-xl lg:rounded-lg'
+          src={homePageProfileImage.src}
+          alt={imgAlt}
+          srcSet={homePageProfileImage.srcSet}
+          sizes="(max-width: 300px) 100vw, (max-width: 705px) 50vw, (max-width: 1110px) 40vw, 30vw"
+        />
+      </div>
+      <div className="text-primary flex flex-col my-2 text-center sm:text-left">
+        <p>
+          A full-stack Software Engineer.
+        </p>
+        <p>
+          A rock climber.
+        </p>
+        <p>
+          A mountain biker.
+        </p>
+        <p>
+          An enjoyer of the outdoors.
+        </p>
       </div>
     </div>
   )

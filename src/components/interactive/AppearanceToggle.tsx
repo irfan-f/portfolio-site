@@ -35,7 +35,7 @@ const AppearanceToggle: FC<AppearanceToggleProps & HTMLAttributes<HTMLElement>> 
   };
 
   return (
-    <div className={clsx("appearance-toggle cursor-pointer h-12 w-12", className)} onClick={handleClick}>
+    <div className={clsx(className, "appearance-toggle cursor-pointer h-12 w-12")} onClick={handleClick}>
       <OutlineCircle className="outline-circle h-12 w-12" svgName={themeIconMapping[theme]} height={48} width={48} />
     </div>
   );

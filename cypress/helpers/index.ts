@@ -1,3 +1,7 @@
+// Import Cypress types
+/// <reference types="cypress" />
+
+// Tailwind Breakpoints
 // 0 sm 640px
 // 1 md	768px
 // 2 lg	1024px
@@ -13,7 +17,7 @@ export const viewports = [
   { device: 'Desktop', width: 1920, height: 1080, breakpoint: 4 }
 ];
 
-export const AppearanceToggleTest = (viewport: CustomViewport) => {
+export const AppearanceToggleTest = (viewport: Types.CustomViewport) => {
   it( `Appearance toggle should be visible when you load the home page; ${viewport.device}`, () => {
     cy.viewport( viewport.width, viewport.height );
     cy.visit( 'http://localhost:9000/' );
@@ -22,7 +26,7 @@ export const AppearanceToggleTest = (viewport: CustomViewport) => {
   });
 }
 
-export const NavbarTest = (viewport: CustomViewport) => {
+export const NavbarTest = (viewport: Types.CustomViewport) => {
   it( `Navbar should be visible when you load the home page; ${viewport.device}`, () => {
     cy.viewport( viewport.width, viewport.height );
     cy.visit( 'http://localhost:9000/' );
@@ -31,7 +35,7 @@ export const NavbarTest = (viewport: CustomViewport) => {
   });
 }
 
-export const MenuToggleTest = (viewport: CustomViewport) => {
+export const MenuToggleTest = (viewport: Types.CustomViewport) => {
   it( `Menu toggle should be visible when you load the home page; ${viewport.device}`, () => {
     cy.viewport( viewport.width, viewport.height );
     cy.visit( 'http://localhost:9000/' );

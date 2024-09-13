@@ -59,7 +59,6 @@ const ScrollToTop = () => {
   return (
     <Suspense fallback={<></>}>
       <Draggable
-        axis={'x'}
         bounds={'parent'}
         onDrag={handleOnDrag}
         onStop={handleOnStop}

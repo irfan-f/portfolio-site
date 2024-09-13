@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import useTheme from '../../helpers/useTheme';
 import AppearanceToggle from '../interactive/AppearanceToggle';
 import MenuToggle from '../interactive/MenuToggle';
+import { Nav } from '../../App';
 
 // Function to generate classname for the primary nav
 const primaryNavClassName =({ isActive }: { isActive: boolean }) => clsx(
@@ -26,7 +27,7 @@ const subNavLinkClassName = ({ isActive }: { isActive: boolean }) => clsx(
   'text-lg',
   {
     'text-primary': isActive,
-    'hover:text-white': true,
+    'hover:text-primary': true,
     'active': isActive,
     'text-secondary': !isActive,
   },
@@ -58,7 +59,7 @@ const NavBar = ({ navs }: { navs: any }) => {
           </NavLink>
         </nav>
         <div className={secondDivClassName}>
-        {/* {navs.map((stack: any) => (
+        {navs.map((stack: Nav) => (
           <nav key={stack.id} className={subNavClassName}>
             <NavLink
               to={stack.id}
@@ -67,11 +68,11 @@ const NavBar = ({ navs }: { navs: any }) => {
               {stack.name}
             </NavLink>
           </nav>
-        ))} */}
+        ))}
         </div>
         <div className={thirdDivClassName}>
           <AppearanceToggle className={appearanceToggleClassname} theme={theme} applyTheme={applyTheme} />
-          <MenuToggle className={menuToggleClassName} />
+          <MenuToggle className={menuToggleClassName} theme={theme} applyTheme={applyTheme} navs={navs} />
         </div>
       </div>
     </div>
