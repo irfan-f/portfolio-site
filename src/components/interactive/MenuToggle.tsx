@@ -7,6 +7,7 @@ import AppearanceToggle from './AppearanceToggle';
 const MenuSvgComponent = lazy(() => import(`../../svg/svgs/menu.svg`));
 const HomeSvgComponent = lazy(() => import(`../../svg/svgs/home.svg`));
 
+// Props
 interface MenuToggleProps {
   theme: ThemeType;
   applyTheme: (theme: ThemeType) => void;
