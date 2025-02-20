@@ -1,7 +1,6 @@
 import { FC, useState } from 'react';
 import mahjongImage from '../../photos/mahjong-logo.png';
 import Button from '../interactive/Button';
-import MahjongModal from '../modals/Mahjong';
 
 const imgAlt = 'A logo of Mahjong with Friends';
 
@@ -31,7 +30,6 @@ const Mahjong: FC<MahjongProps> = ({ showDetails }) => {
     <section
       className="flex flex-col justify-between px-4 mb-16 lg:grid lg:grid-cols-3"
     >
-      <MahjongModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
       <div className="flex flex-col justify-between lg:col-start-1 lg:col-end-2">
         <img
           className="order-1 m-auto rounded-xl lg:order-3"
