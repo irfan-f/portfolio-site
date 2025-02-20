@@ -4,11 +4,8 @@ import './index.css';
 import App from './App';
 import { HashRouter as Router } from 'react-router-dom';
 import { IconContext } from 'react-icons';
-import FAB from './components/interactive/FABs/ScrollToTop';
-import { createPortal } from 'react-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
-const fabRoot = document.getElementById('fab-root');
 
 const RootComponent = () => {
   useEffect(() => {
@@ -21,9 +18,6 @@ const RootComponent = () => {
 
   return (
     <React.StrictMode>
-      { fabRoot &&
-        createPortal(<FAB />, fabRoot)
-      }
       <Router basename={window.location.pathname || ''}>
         <IconContext.Provider value={{ className: 'react-icons' }}>
           <App />
