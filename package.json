@@ -17,7 +17,7 @@
     "build": "webpack --mode production",
     "test": "jest",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
+    "deploy": "gh-pages -d dist --branch gh-pages --dot-files --nojekyll --cname irfan-f.com",
     "lint": "eslint ./src",
     "lint:debug": "eslint ./src --debug",
     "lint:fix": "eslint ./src --fix"
@@ -46,7 +46,6 @@
     "@types/node": "^20.12.12",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.3.0",
-    "@types/tailwindcss": "^3.1.0",
     "@types/webpack-env": "^1.18.5",
     "@typescript-eslint/parser": "^5.62.0",
     "autoprefixer": "^10.4.19",
