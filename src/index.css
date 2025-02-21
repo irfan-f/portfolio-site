@@ -49,7 +49,7 @@ body {
 	}
 
   .svg-primary {
-    @apply text-black dark:text-white stroke-black dark:stroke-white;
+    @apply fill-black dark:fill-white stroke-black dark:stroke-white;
   }
 
   .svg-dark {
@@ -57,12 +57,11 @@ body {
   }
 
   .svg-secondary {
-    @apply text-secondary;
-    stroke: var(--color-gray-800);
+    @apply fill-gray-500 dark:fill-slate-500 stroke-gray-500 dark:stroke-slate-500;
   }
 
   .svg-accent {
-    @apply text-accent stroke-accent;
+    @apply fill-accent stroke-accent;
   }
 
   .outline-circle {

@@ -45,7 +45,7 @@ const OutlineCircle: FC<OutlineCircleProps> = ({ width = 24, height = 24, svgNam
       </div>
       <div className={clsx("svg-in-outline-circle p-2 relative top-0 right-0 z-9", divWidth, divHeight )}>
         <Suspense fallback={<div />}>
-          <SvgComponent className="fill-none svg-primary z-50" />
+          <SvgComponent className="svg-primary fill-none z-50" />
         </Suspense>
       </div>
     </>

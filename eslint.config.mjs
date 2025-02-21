@@ -14,26 +14,3 @@ export default tseslint.config(
     },
   },
 );
-
-// import globals from "globals";
-// import tseslint from "typescript-eslint";
-// import pluginReact from "eslint-plugin-react";
-// import eslintPluginPrettier from "eslint-plugin-prettier";
-
-// export default {
-//   files: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.css"],
-//   languageOptions: { globals: globals.browser },
-//   plugins: {
-//     "@typescript-eslint": tseslint,
-//     "react": pluginReact,
-//     "prettier": eslintPluginPrettier,
-//     "tailwindcss": tailwind
-//   },
-//   ...tseslint.configs.recommended,
-//   // ...pluginReact.configs.recommended,
-//   // ...eslintPluginPrettier.configs.recommended,
-//   // ...tailwind.configs["flat/recommended"],
-//   rules: {
-//     "react/jsx-props-no-spreading": "off"
-//   }
-// };
