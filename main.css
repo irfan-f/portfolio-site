@@ -1446,6 +1446,10 @@ body:is(.dark *) {
     grid-column-start: 2;
   }
 
+  .lg\:col-end-1 {
+    grid-column-end: 1;
+  }
+
   .lg\:col-end-2 {
     grid-column-end: 2;
   }
