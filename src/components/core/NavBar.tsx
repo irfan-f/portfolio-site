@@ -12,7 +12,7 @@ const primaryNavClassName =({ isActive }: { isActive: boolean }) => clsx(
   'font-bold',
   'text-2xl',
   {
-    'text-primary': !isActive,
+    'text-secondary': !isActive,
     'hover:text-accent': true,
     'active': isActive,
     'text-accent': isActive

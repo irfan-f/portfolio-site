@@ -72,7 +72,8 @@ const MenuToggle: FC<MenuToggleProps & HTMLAttributes<HTMLElement>> = ({
                 'relative h-10 w-10 cursor-pointer',
                 {
                   'svg-primary': isActive,
-                  'fill-accent': isActive,
+                  'svg-secondary': !isActive,
+                  'hover:svg-primary': !isActive,
                 }
               )}
               onClick={handleClick}
@@ -82,8 +83,8 @@ const MenuToggle: FC<MenuToggleProps & HTMLAttributes<HTMLElement>> = ({
             </NavLink>
             <ul className="mt-16 flex h-full flex-col items-center overflow-y-auto text-2xl">
               {navs.map((stack) => (
-                <li className="mb-8 last:mb-0">
-                  <nav key={stack.id} className="">
+                <li className="mb-8 last:mb-0" key={stack.id}>
+                  <nav className="">
                     <NavLink
                       to={stack.id}
                       className={( { isActive } ) => clsx(

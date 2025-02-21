@@ -65,6 +65,10 @@ export default {
         'n4px': '-4px',
         '-15px': 'n15px',
       },
+      fill: ({ theme }) => ({
+        'accent': theme('colors.accent'),
+        'none': 'none !important',
+      }),
       stroke: ({ theme }) => ({
         'black': theme('colors.black'),
         'white': theme('colors.white'),

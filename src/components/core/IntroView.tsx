@@ -1,10 +1,9 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import homePageProfileImage from '../../photos/homepage_profile.jpg';
-import clsx from 'clsx';
 
 const h1Text = 'Irfan Filipovic';
 const h2Text = 'Software Engineer';
-const h3Text = 'Looking to expand my knowledge and indulge in my hobbies.';
+const h3Text = 'Currently delving into code styles and structure';
 
 const imgAlt = 'A photo of Irfan Filipovic smiling in front of some trees and nature';
 
@@ -14,8 +13,6 @@ const imgAlt = 'A photo of Irfan Filipovic smiling in front of some trees and na
   */
 
 const IntroView: FC = () => {
-  const [alreadyLoaded, setAlreadyLoaded] = useState(false);
-
   return (
     <header className="relative mx-4vw flex items-center flex-col lg:flex-row justify-evenly lg:justify-center pt-16 pb-12 lg:pb-0 lg:mb-64">
       <div className='flex flex-col justify-center animate-slide-in-left pb-12 lg:pb-0 lg:w-1/2'>
@@ -25,7 +22,7 @@ const IntroView: FC = () => {
           <h3 className="text-center text-base lg:text-l xl:text-xl">{h3Text}</h3>
         </div>
       </div>
-      <div className={clsx("lg:w-1/2 flex justify-center", { "animate-slide-in-right": !alreadyLoaded })}>
+      <div className="lg:w-1/2 flex justify-center animate-slide-in-right">
         <img
           className='introview-image rounded-full md:rounded-xl lg:rounded-lg'
           src={homePageProfileImage.src}
