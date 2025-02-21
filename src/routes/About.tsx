@@ -17,14 +17,15 @@ const About: FC = () => {
         />
       </div>
       <div className="text-primary flex flex-col my-2 text-center sm:text-left">
+        Irfan
         <p>
-          A full-stack Software Engineer.
+          A bit focused on getting the site code to a good state...
         </p>
         <p>
-          A rock climber.
+          Not so focused on filling out the content for this site...
         </p>
         <p>
-          A mountain biker.
+          Please check back for some new code, and maybe some new content
         </p>
       </div>
     </div>
