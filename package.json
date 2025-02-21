@@ -16,7 +16,7 @@
     "cy:open": "cypress open",
     "build": "webpack --mode production",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist --branch gh-pages --dot-files --nojekyll --cname irfan-f.com",
+    "deploy": "gh-pages -d dist --branch gh-pages --dotfiles --nojekyll --cname irfan-f.com",
     "lint": "eslint ./src",
     "lint:debug": "eslint ./src --debug",
     "lint:fix": "eslint ./src --fix"
