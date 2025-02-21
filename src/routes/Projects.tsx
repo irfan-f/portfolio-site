@@ -6,9 +6,11 @@ import NWYS from "../photos/nobodyWantsYourSheep.png";
 
 import Button from "../components/interactive/Button";
 import Mahjong from "../components/sections/Mahjong";
+import HammerSpoon from "../components/sections/HammerSpoon";
 
 const projectSections = [
   Mahjong,
+  HammerSpoon
 ];
 
 const Projects = () => {
