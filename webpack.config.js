@@ -12,7 +12,7 @@ module.exports = (env, argv) => {
     entry: './src/index.tsx',
     output: {
       path: path.resolve(__dirname, 'dist'),
-      publicPath: '/portfolio-site/',
+      publicPath: './',
       filename: 'bundle.js',
       clean: true, // clean old builds automatically
     },
@@ -54,7 +54,7 @@ module.exports = (env, argv) => {
         template: './public/index.html',
         favicon: './public/favicon.ico',
         manifest: './public/manifest.webmanifest',
-        publicPath: isProd ? '/portfolio-site/' : '/',
+        publicPath: '/',
         inject: "body"
       }),
       new MiniCssExtractPlugin(),
