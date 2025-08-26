@@ -2,8 +2,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
-const imageminMozjpeg = require('imagemin-mozjpeg');
 const WriteFilePlugin = require('write-file-webpack-plugin');
 
 module.exports = (env, argv) => {
@@ -66,16 +64,6 @@ module.exports = (env, argv) => {
           { from: 'public/*.png', to: '[name][ext]' },
         ],
       }),
-      isProd &&
-        new ImageminPlugin({
-          test: /\.(jpe?g|png|gif|svg|webp)$/i,
-          plugins: [
-            imageminMozjpeg({
-              quality: 50,
-              progressive: true,
-            }),
-          ],
-        }),
       new WriteFilePlugin(),
     ].filter(Boolean),
     devServer: {
