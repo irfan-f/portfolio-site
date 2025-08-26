@@ -6,8 +6,9 @@ import { HashRouter as Router } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 
+console.log(root);
+
 const RootComponent = () => {
-  console.log('hello');
   return (
     <React.StrictMode>
       <Router basename={window.location.pathname || ''}>

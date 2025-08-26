@@ -47,7 +47,7 @@ const App: FC = () => {
       setIsFirstLoad(false);
     }
   }, [isFirstLoad]);
-
+  console.log('okay');
   return (
     <div className="max-h-[100svh]md:min-h-[100vh] flex select-text flex-col">
       <NavBar navs={navs} />
