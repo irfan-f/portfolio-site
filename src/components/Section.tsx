@@ -54,7 +54,6 @@ const Section: FC<SectionProps> = ({
     "xl:bg-none",
     "gap-y-4"
   ].join(" ");
-//animate ${imageLoaded ? `animate-slide-in-${orientation}` : 'opacity-0'}
   return (
     <div id={id} className={` py-4 bg-opaque xl:section-${style} w-auto md:w-1/2 2xl:w-1/3 rounded-inherit`}>
       <div className={`flex flex-col text-center overflow-hidden relative mx-8 rounded-xl depth ${sectionClasses}`}>{children}</div>
