@@ -1,7 +1,6 @@
 import { FC, HTMLAttributes, Suspense, lazy, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
-import { ThemeType } from '../../helpers/useTheme';
 import { Nav } from '../../App';
 import AppearanceToggle from './AppearanceToggle';
 const MenuSvgComponent = lazy(() => import(`../../svg/svgs/menu.svg`));
@@ -9,14 +8,14 @@ const HomeSvgComponent = lazy(() => import(`../../svg/svgs/home.svg`));
 
 // Props
 interface MenuToggleProps {
-  theme: ThemeType;
-  applyTheme: (theme: ThemeType) => void;
+  darkMode: boolean;
+  toggleDarkMode: (darkMode: boolean) => void;
   navs: Nav[];
 }
 
 const MenuToggle: FC<MenuToggleProps & HTMLAttributes<HTMLElement>> = ({
-  theme,
-  applyTheme,
+  darkMode,
+  toggleDarkMode,
   navs,
   className,
 }) => {
@@ -38,7 +37,7 @@ const MenuToggle: FC<MenuToggleProps & HTMLAttributes<HTMLElement>> = ({
       >
         <div className="absolute right-0 top-0 flex h-10 w-10 items-center justify-center p-2">
           <Suspense fallback={<div />}>
-            <MenuSvgComponent className="svg-primary fill-accent" />
+            <MenuSvgComponent className="menu-hamburger" />
           </Suspense>
         </div>
         <div className="absolute left-0 top-0 h-full w-full rounded-md hover:bg-accent hover:opacity-30" />
@@ -58,7 +57,7 @@ const MenuToggle: FC<MenuToggleProps & HTMLAttributes<HTMLElement>> = ({
             maxHeight: 'var(--webkit-fill-available)',
           }}
           className={clsx(
-            'fixed right-0 top-0 z-20 h-screen w-64 bg-primary pt-4 transition-transform duration-400',
+            'fixed right-0 top-0 z-20 h-screen w-64 bg-basic pt-4 transition-transform duration-400',
             {
               'translate-x-0': isSidebarOpen,
               'translate-x-64': !isSidebarOpen,
@@ -71,9 +70,9 @@ const MenuToggle: FC<MenuToggleProps & HTMLAttributes<HTMLElement>> = ({
               className={({ isActive }) => clsx(
                 'relative h-10 w-10 cursor-pointer',
                 {
-                  'svg-primary': isActive,
-                  'svg-secondary': !isActive,
-                  'hover:svg-primary': !isActive,
+                  'svg-active': isActive,
+                  'menu-hamburger': !isActive,
+                  'hover:svg-active': !isActive,
                 }
               )}
               onClick={handleClick}
@@ -89,10 +88,10 @@ const MenuToggle: FC<MenuToggleProps & HTMLAttributes<HTMLElement>> = ({
                       to={stack.id}
                       className={( { isActive } ) => clsx(
                         {
-                          'text-primary': isActive,
-                          'hover:text-primary': true,
+                          'text-basic': !isActive,
+                          'text-primary dark:text-secondary': isActive,
+                          'hover:text-primary dark:hover:text-secondary': true,
                           'active': isActive,
-                          'text-secondary': !isActive,
                         }
                       )}
                       onClick={handleClick}
@@ -105,9 +104,9 @@ const MenuToggle: FC<MenuToggleProps & HTMLAttributes<HTMLElement>> = ({
             </ul>
             <div className="w-fit pb-20">
               <AppearanceToggle
-                theme={theme}
-                applyTheme={applyTheme}
-                className=""
+                darkMode={darkMode}
+                toggleDarkMode={toggleDarkMode}
+                className="flex flex-row"
               />
             </div>
           </div>

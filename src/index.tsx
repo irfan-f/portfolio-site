@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -8,14 +8,6 @@ import { IconContext } from 'react-icons';
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 
 const RootComponent = () => {
-  useEffect(() => {
-    const bodyElement = document.body;
-    if (bodyElement) {
-      bodyElement.style.backgroundColor = '';
-      bodyElement.classList.add('bg-primary');
-    }
-  }, []);
-
   return (
     <React.StrictMode>
       <Router basename={window.location.pathname || ''}>

@@ -1,10 +1,8 @@
 import { useState, useEffect, FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './routes/Home';
-import About from './routes/About';
+import Me from './routes/Me';
 import Projects from './routes/Projects';
-import CourseWork from './routes/CourseWork';
-import UnderDevelopment from './components/misc/UnderDevelopment';
 import NavBar from './components/core/NavBar';
 
 export interface Nav {
@@ -17,13 +15,9 @@ const navs: Nav[] = [
     id: 'projects',
     name: 'Projects',
   },
-  // {
-  //   id: 'coursework',
-  //   name: 'Coursework',
-  // },
   {
-    id: 'about',
-    name: 'About',
+    id: 'me',
+    name: 'About Me'
   }
 ];
 
@@ -33,9 +27,8 @@ interface Components {
 
 const components: Components = {
   home: Home,
-  about: About,
+  me: Me,
   projects: Projects,
-  coursework: CourseWork
 };
 
 const App: FC = () => {
@@ -50,10 +43,9 @@ const App: FC = () => {
   }, [isFirstLoad]);
 
   return (
-    <div className='' style={{ backgroundColor: isFirstLoad ? '#0c1826' : 'unset' }}>
-      <UnderDevelopment />
+    <div className="min-h-[100vh] flex flex-col select-text">
       <NavBar navs={navs} />
-      <>
+      <div className="flex-1">
         <Routes>
           <Route key='main' path='/' element={<Home />} />
           {navs.map((stack) => {
@@ -63,7 +55,7 @@ const App: FC = () => {
             );
           })}
         </Routes>
-      </>
+      </div>
     </div>
   );
 };

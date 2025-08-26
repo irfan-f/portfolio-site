@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="320" height="320">
+  <style>
+    @media (prefers-color-scheme: dark) {
++     .backdrop { fill: #F7F8F2 }
++   }
+    .stroke{fill:none;stroke-width:18;stroke-linecap:square}
+  </style>
+  <rect class="backdrop" fill="#2B2C28" width="160" height="160" rx="8"/>
+  <path class="pathF" stroke="#769987" d="M60 36h60M60 80h50M60 36v88M50 36h20m-20 88h20"/>
+  <path class="pathI" stroke="#C3D8CB" d="M60 36v88M40 36h40m0 88H40"/>
+</svg>

@@ -22,7 +22,7 @@ const HammerSpoon: FC = () => {
           <h2 className="pb-1 font-mulish text-2xl font-bold text-accent lg:text-3xl xl:text-4xl">
             Hammerspoon Script
           </h2>
-          <h3 className="text-secondary pb-1 font-dosis text-xl font-bold lg:text-2xl xl:text-3xl">
+          <h3 className="text-primary dark:text-secondary pb-1 font-dosis text-xl font-bold lg:text-2xl xl:text-3xl">
             MacOS Automations
           </h3>
         </div>

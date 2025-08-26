@@ -1,29 +1,30 @@
 import { FC } from 'react';
-import IntroView from '../components/core/IntroView';
+import IntroText from '../components/core/IntroText';
 import MahjongHome from '../components/sections/Mahjong';
 import HammerSpoon from '../components/sections/HammerSpoon';
-// import UnderDevelopment from '../components/misc/UnderDevelopment';
+import irfanHomeView from '../photos/irfan.png';
 
 const sectionsComponents = [
   MahjongHome,
   HammerSpoon,
 ];
 
-// !--> Check out how to make the front page look good on large and little screen. Just make sure things line up well
-
 const Home: FC = () => {
   return (
-    <>
-      <IntroView />
-      <main>
-        {/* <div>
-          <h1 className="font-dosis font-bold text-center mb-32 text-3xl lg:text-4xl xl:text-5xl">What's Going On</h1>
-        </div> */}
-        {/* {
-          sectionsComponents.map((SectionComponent, index) => <SectionComponent key={index} />)
-        } */}
-      </main>
-    </>
+    <div className='pt-32'>
+      <IntroText />
+      <div className="w-full flex flex-col items-center">
+        <div className="w-fit">
+          <img
+              className="antialiased max-h-[30vh] rounded-xl"
+              src={irfanHomeView.src}
+              srcSet={irfanHomeView.srcSet}
+              sizes=""
+              alt={`Image`}
+            />
+        </div>
+      </div>
+    </div>
   );
 }
 

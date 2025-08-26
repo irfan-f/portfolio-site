@@ -16,7 +16,9 @@ export default {
         'spin-slow-reverse': 'spin 3s linear reverse infinite',
         'slide-in-left': 'slide-in-left 0.75s ease-in-out',
         'slide-in-left-1': 'slide-in-left 1s ease-in-out',
+        'slide-in-left-img': 'slide-in-left 2s ease-in-out',
         'slide-in-right': 'slide-in-right 0.75s ease-in-out',
+        'slide-in-right-img': 'slide-in-right 2s ease-in-out',
         'slide-in-top': 'slide-in-top 0.75s ease-in-out',
         'slide-in-top-1': 'slide-in-top 1s ease-in-out',
         'slide-in-bottom': 'slide-in-bottom 0.75s ease-in-out',
@@ -46,11 +48,14 @@ export default {
       },
       colors: {
         'accent': 'var(--accent)',
-        'accent-tint': 'var(--accent-tint)',
       },
       borderColor: {
         'accent': 'var(--accent)',
-        'accent-tint': 'var(--accent-tint)',
+        'depth': 'var(--depth)',
+        'opposite': 'var(--bg-opposite)',
+      },
+      borderStyle: {
+        'outset': 'outset',
       },
       spacing: {
         '1px': '1px',
@@ -65,19 +70,32 @@ export default {
         'n4px': '-4px',
         '-15px': 'n15px',
       },
-      fill: ({ theme }) => ({
-        'accent': theme('colors.accent'),
-        'none': 'none !important',
-      }),
-      stroke: ({ theme }) => ({
-        'black': theme('colors.black'),
-        'white': theme('colors.white'),
-        'accent': theme('colors.accent'),
-      }),
+      fill: {
+        'white': 'white',
+        'black': 'black',
+        'primary': 'var(--primary)',
+        'secondary': 'var(--secondary)',
+      },
+      stroke: {
+        'white': 'white',
+        'black': 'black',
+        'primary': 'var(--primary)',
+        'secondary': 'var(--secondary)',
+      },
       backgroundColor: {
-        'primary': 'var(--bg-primary)',
-        'accent': 'var(--bg-accent)',
-        'opaque': 'rgba(0, 0, 0, 0.5)',
+        'basic': 'var(--bg-primary)',
+        'primary': 'var(--primary)',
+        'secondary': 'var(--secondary)',
+        'tertiary': 'var(--tertiary)',
+        'bonus': 'var(--bonus)',
+        'depth': 'var(--depth)',
+        'opposite': 'var(--bg-opposite)',
+      },
+      textColor: {
+        'basic': 'var(--text-primary)',
+        'opposite': 'var(--text-opposite)',
+        'primary': 'var(--primary)',
+        'secondary': 'var(--secondary)',
       },
       transitionDuration: {
         '400': '400ms',
