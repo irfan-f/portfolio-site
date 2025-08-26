@@ -11,7 +11,7 @@ console.log(root);
 const RootComponent = () => {
   return (
     <React.StrictMode>
-      <Router basename={window.location.pathname || ''}>
+      <Router>
         <App />
       </Router>
     </React.StrictMode>
