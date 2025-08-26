@@ -14,7 +14,7 @@ module.exports = (env, argv) => {
     entry: './src/index.tsx',
     output: {
       path: path.resolve(__dirname, 'dist'),
-      publicPath: '/',
+      publicPath: './',
       filename: 'bundle.js',
       clean: true, // clean old builds automatically
     },
