@@ -5,7 +5,7 @@ const imgAlt = 'A logo of a stick figure trying to spin a settings cog';
 
 const HammerSpoon: FC = () => {
   return (
-    <section className="mb-16 flex flex-col justify-between px-4 lg:grid lg:grid-cols-3">
+    <section key="hammerSpoon" className="mb-16 flex flex-col justify-between px-4 lg:grid lg:grid-cols-3">
       <div className="flex flex-col justify-between lg:col-start-2 lg:col-end-1">
         <img
           className="order-1 m-auto rounded-xl lg:order-3"
@@ -13,6 +13,7 @@ const HammerSpoon: FC = () => {
           alt={imgAlt}
           srcSet={automationImage.srcSet}
           sizes="(max-width: 300px) 70vw, (max-width: 705px) 30vw, (max-width: 1110px) 20vw, 20vw"
+          loading='lazy'
         />
       </div>
       <div className="m-auto flex h-full flex-col justify-evenly text-center lg:col-start-2 lg:col-end-4 lg:text-left">

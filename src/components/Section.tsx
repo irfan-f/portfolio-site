@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import BalancedImageGallery from './Image';
+import ImageGallery from './Image';
 import { Image } from '../helpers/images';
 
 export interface SectionProps {
@@ -49,7 +49,7 @@ const Section: FC<SectionProps> = ({
         className="section-image relative max-h-[30vh] w-full flex-1 overflow-hidden"
         style={{ aspectRatio: `${images[0].width} / ${images[0].height}` }}
       >
-        <BalancedImageGallery
+        <ImageGallery
           setImageLoaded={setImageLoaded}
           images={images}
           objectFit={placeholder ? 'contain' : 'cover'}

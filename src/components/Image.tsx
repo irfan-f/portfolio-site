@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { Image } from '../helpers/images';
 
-export interface BalancedImageGalleryProps {
+export interface ImageGallery {
   images: Image[];
   objectFit: 'cover' | 'contain';
   setImageLoaded?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const BalancedImageGallery: FC<BalancedImageGalleryProps> = ({
+const ImageGallery: FC<ImageGallery> = ({
   images,
   objectFit = 'cover',
   setImageLoaded = () => {},
@@ -26,10 +26,11 @@ const BalancedImageGallery: FC<BalancedImageGalleryProps> = ({
           srcSet={img.srcSet}
           alt={`Image ${idx + 1}`}
           onLoad={() => setImageLoaded(true)}
+          loading='lazy'
         />
       ))}
     </div>
   );
 };
 
-export default BalancedImageGallery;
+export default ImageGallery;

@@ -15,6 +15,7 @@ const Home: FC = () => {
             srcSet={irfanHomeView.srcSet}
             sizes=""
             alt={`Image`}
+            loading='lazy'
           />
         </div>
         <SocialLinks className="w-32 pt-8" />

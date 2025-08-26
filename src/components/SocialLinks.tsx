@@ -22,12 +22,14 @@ const SocialLinks: FC<HTMLAttributes<HTMLElement>> = ({ className }) => {
           src={gitHubIconLight.src}
           srcSet={gitHubIconLight.srcSet}
           sizes="48px"
+          loading='lazy'
         />
         <img
           className="absolute left-0 top-0 opacity-100 dark:opacity-0"
           src={gitHubIconDark.src}
           srcSet={gitHubIconDark.srcSet}
           sizes="48px"
+          loading='lazy'
         />
       </a>
       {/* LinkedIn Logo + Link */}
@@ -43,12 +45,14 @@ const SocialLinks: FC<HTMLAttributes<HTMLElement>> = ({ className }) => {
           src={linkedInLight.src}
           srcSet={linkedInLight.srcSet}
           sizes="48px"
+          loading='lazy'
         />
         <img
           className="absolute right-0 top-0 opacity-100 dark:opacity-0"
           src={linkedInDark.src}
           srcSet={linkedInDark.srcSet}
           sizes="48px"
+          loading='lazy'
         />
       </a>
     </div>
