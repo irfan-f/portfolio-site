@@ -5,6 +5,7 @@ import App from './App';
 import { HashRouter as Router } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
+console.log('Root element:', root);
 console.log('hi');
 const RootComponent = () => {
   console.log('hello');
