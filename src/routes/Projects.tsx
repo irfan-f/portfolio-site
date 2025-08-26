@@ -1,17 +1,13 @@
-import React, { useState } from "react";
-import locationPing from "../photos/location.png"
-import MLPic from "../photos/ML.png"
-import underConstruction from "../photos/underConstruction.png"
-import NWYS from "../photos/nobodyWantsYourSheep.png";
+import React, { useState } from 'react';
+import locationPing from '../photos/location.png';
+import MLPic from '../photos/ML.png';
+import underConstruction from '../photos/underConstruction.png';
+import NWYS from '../photos/nobodyWantsYourSheep.png';
+import Button from '../components/Button';
+import Mahjong from '../components/Mahjong';
+import HammerSpoon from '../components/HammerSpoon';
 
-import Button from "../components/interactive/Button";
-import Mahjong from "../components/sections/Mahjong";
-import HammerSpoon from "../components/sections/HammerSpoon";
-
-const projectSections = [
-  Mahjong,
-  HammerSpoon
-];
+const projectSections = [Mahjong, HammerSpoon];
 
 const Projects = () => {
   // const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +18,9 @@ const Projects = () => {
 
   return (
     <main>
-      {projectSections.map((ProjectSection, index) => <ProjectSection showDetails={true} />)}
+      {projectSections.map((ProjectSection, index) => (
+        <ProjectSection showDetails={true} key={index} />
+      ))}
       {/* <Button
         className="btn btn-primary"
         onClick={toggleCollapse}
@@ -31,8 +29,8 @@ const Projects = () => {
       {/* <div
         className={`mt-4 transition-height duration-500 ease-in-out ${ isOpen ? 'max-h-full' : 'max-h-0' } overflow-hidden`}
       > */}
-        {/* <div className="row"> */}
-          {/* <div className="align-center flex justify-center" id="projectPic">
+      {/* <div className="row"> */}
+      {/* <div className="align-center flex justify-center" id="projectPic">
             <img
               alt="productivity"
               src={NWYS.src}

@@ -1,10 +1,11 @@
-import { FC, HTMLAttributes, Suspense, lazy, useState } from 'react';
+import { FC, HTMLAttributes, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
-import { Nav } from '../../App';
+import { Nav } from '../App';
 import AppearanceToggle from './AppearanceToggle';
-const MenuSvgComponent = lazy(() => import(`../../svg/svgs/menu.svg`));
-const HomeSvgComponent = lazy(() => import(`../../svg/svgs/home.svg`));
+import MenuSvgComponent from '../svg/svgs/menu.svg';
+import HomeSvgComponent from '../svg/svgs/home.svg';
+import SocialLinks from './SocialLinks';
 
 // Props
 interface MenuToggleProps {
@@ -36,9 +37,7 @@ const MenuToggle: FC<MenuToggleProps & HTMLAttributes<HTMLElement>> = ({
         onClick={handleClick}
       >
         <div className="absolute right-0 top-0 flex h-10 w-10 items-center justify-center p-2">
-          <Suspense fallback={<div />}>
-            <MenuSvgComponent className="menu-hamburger" />
-          </Suspense>
+          <MenuSvgComponent className="menu-hamburger" />
         </div>
         <div className="absolute left-0 top-0 h-full w-full rounded-md hover:bg-accent hover:opacity-30" />
       </button>
@@ -67,14 +66,13 @@ const MenuToggle: FC<MenuToggleProps & HTMLAttributes<HTMLElement>> = ({
         >
           <div className="flex h-full flex-col items-center justify-between px-3 py-4">
             <NavLink
-              className={({ isActive }) => clsx(
-                'relative h-10 w-10 cursor-pointer',
-                {
+              className={({ isActive }) =>
+                clsx('relative h-10 w-10 cursor-pointer', {
                   'svg-active': isActive,
                   'menu-hamburger': !isActive,
                   'hover:svg-active': !isActive,
-                }
-              )}
+                })
+              }
               onClick={handleClick}
               to="/"
             >
@@ -86,14 +84,14 @@ const MenuToggle: FC<MenuToggleProps & HTMLAttributes<HTMLElement>> = ({
                   <nav className="">
                     <NavLink
                       to={stack.id}
-                      className={( { isActive } ) => clsx(
-                        {
+                      className={({ isActive }) =>
+                        clsx({
                           'text-basic': !isActive,
                           'text-primary dark:text-secondary': isActive,
                           'hover:text-primary dark:hover:text-secondary': true,
-                          'active': isActive,
-                        }
-                      )}
+                          active: isActive,
+                        })
+                      }
                       onClick={handleClick}
                     >
                       {stack.name}
@@ -102,12 +100,13 @@ const MenuToggle: FC<MenuToggleProps & HTMLAttributes<HTMLElement>> = ({
                 </li>
               ))}
             </ul>
-            <div className="w-fit pb-20">
+            <div className="flex flex-col gap-y-12">
               <AppearanceToggle
                 darkMode={darkMode}
                 toggleDarkMode={toggleDarkMode}
                 className="flex flex-row"
               />
+              <SocialLinks className="h-12 w-32" />
             </div>
           </div>
         </div>

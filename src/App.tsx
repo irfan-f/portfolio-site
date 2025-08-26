@@ -3,7 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './routes/Home';
 import Me from './routes/Me';
 import Projects from './routes/Projects';
-import NavBar from './components/core/NavBar';
+import NavBar from './components/NavBar';
+import CourseWork from './routes/CourseWork';
 
 export interface Nav {
   id: string;
@@ -15,10 +16,14 @@ const navs: Nav[] = [
     id: 'projects',
     name: 'Projects',
   },
+  // {
+  //   id: 'courseWork',
+  //   name: 'Course Work',
+  // },
   {
     id: 'me',
-    name: 'About Me'
-  }
+    name: 'About Me',
+  },
 ];
 
 interface Components {
@@ -29,6 +34,7 @@ const components: Components = {
   home: Home,
   me: Me,
   projects: Projects,
+  // courseWork: CourseWork,
 };
 
 const App: FC = () => {
@@ -43,15 +49,19 @@ const App: FC = () => {
   }, [isFirstLoad]);
 
   return (
-    <div className="min-h-[100vh] flex flex-col select-text">
+    <div className="max-h-[100svh]md:min-h-[100vh] flex select-text flex-col">
       <NavBar navs={navs} />
       <div className="flex-1">
         <Routes>
-          <Route key='main' path='/' element={<Home />} />
+          <Route key="main" path="/" element={<Home />} />
           {navs.map((stack) => {
             const ComponentToUse = components[stack.id];
             return (
-              <Route key={stack.id} path={stack.id} element={<ComponentToUse />} />
+              <Route
+                key={stack.id}
+                path={stack.id}
+                element={<ComponentToUse />}
+              />
             );
           })}
         </Routes>

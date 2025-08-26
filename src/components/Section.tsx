@@ -1,34 +1,44 @@
-import { FC, useState } from "react";
-import BalancedImageGallery from "./Image";
-import { Image } from "../helpers/images";
+import { FC, useState } from 'react';
+import BalancedImageGallery from './Image';
+import { Image } from '../helpers/images';
 
 export interface SectionProps {
   id: string;
   title?: string;
   content?: string;
   images?: Image[];
-  orientation?: "left" | "right";
+  orientation?: 'left' | 'right';
   imageFirst?: boolean;
-  style?: "secondary" | "tertiary" | "bonus" | "basic";
+  style?: 'secondary' | 'tertiary' | 'bonus' | 'basic';
   placeholder?: boolean;
 }
+
+// Still a work in progress
 
 const Section: FC<SectionProps> = ({
   id,
   title,
   content,
   images,
-  orientation = "left",
+  orientation = 'left',
   imageFirst = true,
-  style = "basic",
-  placeholder = false
+  style = 'basic',
+  placeholder = false,
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   // Content block
   const Content = (
-    <div className="section-content flex-1 flex flex-col items-start pb-4 px-4 gap-y-2">
-      {title && <h2 className="text-3xl text-primary font-bold font-dosis antialiased">{title}</h2>}
-      {content && <p className="leading-relaxed text-black text-start font-libre antialiased">{content}</p>}
+    <div className="section-content flex flex-1 flex-col items-start gap-y-2 px-4 pb-4">
+      {title && (
+        <h2 className="font-dosis text-3xl font-bold text-primary antialiased">
+          {title}
+        </h2>
+      )}
+      {content && (
+        <p className="text-start font-libre leading-relaxed text-black antialiased">
+          {content}
+        </p>
+      )}
     </div>
   );
 
@@ -36,10 +46,14 @@ const Section: FC<SectionProps> = ({
   const ImageEl =
     images && images.length > 0 ? (
       <div
-        className="section-image flex-1 relative overflow-hidden max-h-[30vh] w-full"
-        style={{  aspectRatio: `${images[0].width} / ${images[0].height}` }}
+        className="section-image relative max-h-[30vh] w-full flex-1 overflow-hidden"
+        style={{ aspectRatio: `${images[0].width} / ${images[0].height}` }}
       >
-        <BalancedImageGallery setImageLoaded={setImageLoaded} images={images} objectFit={placeholder ? "contain" : "cover"}/>
+        <BalancedImageGallery
+          setImageLoaded={setImageLoaded}
+          images={images}
+          objectFit={placeholder ? 'contain' : 'cover'}
+        />
       </div>
     ) : null;
 
@@ -48,15 +62,22 @@ const Section: FC<SectionProps> = ({
 
   // Classes that vary by orientation
   const sectionClasses = [
-    "",
+    '',
     `section-${orientation}`,
     `section-${style}`,
-    "xl:bg-none",
-    "gap-y-4"
-  ].join(" ");
+    'xl:bg-none',
+    'gap-y-4',
+  ].join(' ');
   return (
-    <div id={id} className={` py-4 bg-opaque xl:section-${style} w-auto md:w-1/2 2xl:w-1/3 rounded-inherit`}>
-      <div className={`flex flex-col text-center overflow-hidden relative mx-8 rounded-xl depth ${sectionClasses}`}>{children}</div>
+    <div
+      id={id}
+      className={`bg-opaque py-4 xl:section-${style} rounded-inherit w-auto md:w-1/2 2xl:w-1/3`}
+    >
+      <div
+        className={`depth relative mx-8 flex flex-col overflow-hidden rounded-xl text-center ${sectionClasses}`}
+      >
+        {children}
+      </div>
     </div>
   );
 };

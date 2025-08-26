@@ -6,12 +6,12 @@ declare module 'react-dom' {
 
   function createRoot(
     container: Element | Document | DocumentFragment | Comment,
-    options?: RootOptions
+    options?: RootOptions,
   ): Root;
 
   function createPortal(
     children: React.ReactNode,
     container: Element | Document | DocumentFragment | Comment,
-    key?: null | string
+    key?: null | string,
   ): React.ReactPortal;
 }

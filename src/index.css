@@ -11,35 +11,6 @@
 }
 
 @layer utilities {
-  .outline-circle {
-    @apply stroke-current fill-none;
-    svg circle {
-      stroke-dasharray: 180;
-      stroke-dashoffset: 180;
-      transform-origin: center;
-      transform: rotate(-90deg);
-    }
-  }
-
-  .outline-circle:hover {
-    @apply stroke-current fill-none;
-    svg circle {
-      stroke-dasharray: 180;
-      transform-origin: center;
-      animation: stroke 1.5s ease forwards;
-    }
-  }
-
-  svg circle.base-outline-circle {
-    @apply fill-none !important;
-    stroke-dashoffset: 0px !important;
-    stroke-dasharray: 180 !important;
-  }
-
-  .react-icons {
-    @apply stroke-black dark:stroke-white justify-center h-6 w-6;
-  }
-
   .animation-delay-500 {
     animation-delay: 500ms;
   }
@@ -120,34 +91,6 @@ transition: transform ease-in-out 0.3s;
 
 .rounded-inherit {
   border-radius: inherit;
-}
-
-.tab-button {
-  background-color: black;
-}
-
-.tab-button-active {
-  background-color: var(--bg-primary);
-}
-
-.tab-button-active:before {
-  z-index: 1;
-  content: "";
-  display: block;
-  position: absolute;
-  width: .5rem;
-  height: 100%;
-  right: -.5rem;
-  top: 0px;
-  transition: none;
-  background-size: var(--tab-radius, .5rem);
-  background-color: var(--bg-primary);
-  background-position: top left, top right;
-  background-repeat: no-repeat;
-}
-
-.page {
-  z-index: 1;
 }
 
 .section-primary {

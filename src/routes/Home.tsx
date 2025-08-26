@@ -1,31 +1,26 @@
 import { FC } from 'react';
-import IntroText from '../components/core/IntroText';
-import MahjongHome from '../components/sections/Mahjong';
-import HammerSpoon from '../components/sections/HammerSpoon';
+import IntroText from '../components/IntroText';
 import irfanHomeView from '../photos/irfan.png';
-
-const sectionsComponents = [
-  MahjongHome,
-  HammerSpoon,
-];
+import SocialLinks from '../components/SocialLinks';
 
 const Home: FC = () => {
   return (
-    <div className='pt-32'>
+    <div className="md:pt-32">
       <IntroText />
-      <div className="w-full flex flex-col items-center">
+      <div className="flex w-full flex-col items-center">
         <div className="w-fit">
           <img
-              className="antialiased max-h-[30vh] rounded-xl"
-              src={irfanHomeView.src}
-              srcSet={irfanHomeView.srcSet}
-              sizes=""
-              alt={`Image`}
-            />
+            className="max-h-[40svh] rounded-xl antialiased md:max-h-[30vh]"
+            src={irfanHomeView.src}
+            srcSet={irfanHomeView.srcSet}
+            sizes=""
+            alt={`Image`}
+          />
         </div>
+        <SocialLinks className="w-32 pt-8" />
       </div>
     </div>
   );
-}
+};
 
 export default Home;
