@@ -4,7 +4,6 @@ import Home from './routes/Home';
 import Me from './routes/Me';
 import Projects from './routes/Projects';
 import NavBar from './components/NavBar';
-import CourseWork from './routes/CourseWork';
 
 export interface Nav {
   id: string;
