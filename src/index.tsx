@@ -5,8 +5,9 @@ import App from './App';
 import { HashRouter as Router } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
-
+console.log('hi');
 const RootComponent = () => {
+  console.log('hello');
   return (
     <React.StrictMode>
       <Router basename={window.location.pathname || ''}>
@@ -16,4 +17,4 @@ const RootComponent = () => {
   );
 };
 
-root.render(<RootComponent />);
+root.render(<div><h1>hello</h1></div>);

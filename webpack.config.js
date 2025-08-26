@@ -55,6 +55,7 @@ module.exports = (env, argv) => {
         favicon: './public/favicon.ico',
         manifest: './public/manifest.webmanifest',
         publicPath: isProd ? '/portfolio-site/' : '/',
+        inject: "body"
       }),
       new MiniCssExtractPlugin(),
       new CopyPlugin({
