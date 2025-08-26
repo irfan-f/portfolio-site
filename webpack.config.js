@@ -54,7 +54,7 @@ module.exports = (env, argv) => {
         template: './public/index.html',
         favicon: './public/favicon.ico',
         manifest: './public/manifest.webmanifest',
-        publicPath: '/',
+        publicPath: './',
         inject: "body"
       }),
       new MiniCssExtractPlugin(),
