@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import ImageWithLoader from './ImageWithLoader';
 import type { ProjectMeta } from '../types/project';
 
 interface ProjectCardProps {
@@ -16,29 +17,31 @@ function ProjectImage({
 }) {
   if (typeof imageSrc === 'string') {
     return (
-      <img
+      <ImageWithLoader
         src={imageSrc}
         alt={alt}
+        containerClassName="h-full w-full"
+        imgClassName={className}
+        objectFit="contain"
+        loading="lazy"
         width={16}
         height={9}
-        className={className}
-        loading="lazy"
       />
     );
   }
   return (
-    <picture>
-      <source type="image/avif" srcSet={imageSrc.avif} />
-      <source type="image/webp" srcSet={imageSrc.webp} />
-      <img
-        src={imageSrc.png}
-        alt={alt}
-        width={16}
-        height={9}
-        className={className}
-        loading="lazy"
-      />
-    </picture>
+    <ImageWithLoader
+      src={imageSrc.png}
+      alt={alt}
+      webp={imageSrc.webp}
+      avif={imageSrc.avif}
+      containerClassName="h-full w-full"
+      imgClassName={className}
+      objectFit="contain"
+      loading="lazy"
+      width={16}
+      height={9}
+    />
   );
 }
 

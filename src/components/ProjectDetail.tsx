@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
+import ImageWithLoader from './ImageWithLoader';
 import type { ProjectMeta } from '../types/project';
 
 interface ProjectDetailProps {
@@ -14,21 +15,31 @@ function ProjectDetailImage({
   alt: string;
 }) {
   const imgProps = {
-    className: 'project-image',
-    alt,
     sizes:
       '(max-width: 300px) 70vw, (max-width: 705px) 30vw, (max-width: 1110px) 20vw, 20vw',
     loading: 'lazy' as const,
   };
   if (typeof imageSrc === 'string') {
-    return <img src={imageSrc} {...imgProps} />;
+    return (
+      <ImageWithLoader
+        src={imageSrc}
+        alt={alt}
+        imgClassName="project-image"
+        objectFit="contain"
+        {...imgProps}
+      />
+    );
   }
   return (
-    <picture>
-      <source type="image/avif" srcSet={imageSrc.avif} />
-      <source type="image/webp" srcSet={imageSrc.webp} />
-      <img src={imageSrc.png} {...imgProps} />
-    </picture>
+    <ImageWithLoader
+      src={imageSrc.png}
+      alt={alt}
+      webp={imageSrc.webp}
+      avif={imageSrc.avif}
+      imgClassName="project-image"
+      objectFit="contain"
+      {...imgProps}
+    />
   );
 }
 

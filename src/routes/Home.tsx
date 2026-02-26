@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Helmet } from 'react-helmet-async';
+import ImageWithLoader from '../components/ImageWithLoader';
 import IntroText from '../components/IntroText';
 import SocialLinks from '../components/SocialLinks';
 
@@ -37,20 +38,18 @@ const Home: FC = () => {
           <div className="w-8 shrink-0 sm:w-9" aria-hidden />
           <div className="flex flex-1 justify-center">
             <div className="aspect-[3/4] w-full max-w-[20rem] overflow-hidden rounded-xl shadow-md md:max-w-[22rem]">
-              <picture>
-                <source type="image/avif" srcSet="/images/irfan.avif" />
-                <source type="image/webp" srcSet="/images/irfan.webp" />
-                <img
-                  className="h-full w-full object-cover object-center antialiased"
-                  src="/images/irfan.png"
-                  sizes="(max-width: 768px) 85vw, 42vw"
-                  alt="Irfan Filipović"
-                  width={3}
-                  height={4}
-                  fetchPriority="high"
-                  loading="eager"
-                />
-              </picture>
+              <ImageWithLoader
+                src="/images/irfan.png"
+                alt="Irfan Filipović"
+                webp="/images/irfan.webp"
+                avif="/images/irfan.avif"
+                containerClassName="h-full w-full"
+                sizes="(max-width: 768px) 85vw, 42vw"
+                fetchPriority="high"
+                loading="eager"
+                width={3}
+                height={4}
+              />
             </div>
           </div>
           <SocialLinks className="flex flex-col" />
