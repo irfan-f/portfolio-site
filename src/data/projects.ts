@@ -22,17 +22,4 @@ export const projects: ProjectMeta[] = [
     description:
       "Web and mobile Mahjong for playing online with friends. Existing apps didn't fit our needs, so building our own—in active development.",
   },
-  {
-    id: 'hammerspoon',
-    title: 'Hammerspoon Script',
-    subtitle: 'MacOS Automations',
-    imageSrc: {
-      png: '/images/automationFigure.png',
-      webp: '/images/automationFigure.webp',
-      avif: '/images/automationFigure.avif',
-    },
-    imageAlt: 'Logo of a stick figure trying to spin a settings cog',
-    description:
-      'MacOS automation scripts with Hammerspoon. Learning Lua while tinkering with UI and automations. Cleaning up before pushing to GitHub.',
-  },
 ];
