@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "generate-images": "node scripts/generate-images.mjs",
-    "build": "npm run generate-images && tsc -b && vite build",
+    "build": "tsc -b && vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist --branch gh-pages --dotfiles --nojekyll --cname irfan-f.com",
