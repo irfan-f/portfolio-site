@@ -20,15 +20,6 @@ export interface CourseTopic {
   icon?: CourseIcon;
 }
 
-export const courseHome: CourseTopic = {
-  id: 'homeTab',
-  title: 'Home',
-  items: [
-    'All courses were taken at the University of Oregon',
-    'Assignments and projects for several courses are available on my GitHub',
-  ],
-};
-
 export const courseTopics: CourseTopic[] = [
   {
     id: 'introCS',

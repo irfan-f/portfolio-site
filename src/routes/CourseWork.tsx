@@ -20,6 +20,48 @@ const topicsWithIcons = courseTopics.filter(hasIcon);
 const ICONS_TOP = topicsWithIcons.slice(0, 7);
 const ICONS_BOTTOM = topicsWithIcons.slice(7);
 
+type TopicWithIcon = CourseTopic & { icon: CourseIcon };
+
+function CourseNav({
+  courses,
+  activeTab,
+  updateTab,
+  borderSide,
+}: {
+  courses: TopicWithIcon[];
+  activeTab: string;
+  updateTab: (id: string) => void;
+  borderSide: 'b' | 't';
+}) {
+  const borderClass = borderSide === 'b' ? 'border-b' : 'border-t';
+  return (
+    <nav
+      className={`border-border flex min-w-0 flex-row flex-nowrap items-center justify-between gap-2 ${borderClass} px-2 py-4 sm:gap-4 sm:px-4 md:gap-6 md:px-6`}
+      aria-label="Course list"
+    >
+      {courses.map((c, i) => (
+        <div
+          key={c.id}
+          className="flex min-w-0 flex-1 basis-0 items-center justify-center gap-2 sm:gap-3 md:gap-4"
+        >
+          {i > 0 && (
+            <span
+              className="bg-border h-4 w-px shrink-0 sm:h-5 md:h-6"
+              aria-hidden
+            />
+          )}
+          <CourseNavButton
+            title={c.title}
+            icon={c.icon}
+            isActive={activeTab === c.id}
+            onClick={() => updateTab(c.id)}
+          />
+        </div>
+      ))}
+    </nav>
+  );
+}
+
 function CourseContent({ topic }: { topic: CourseTopic }) {
   return (
     <div className="mx-auto w-full max-w-md space-y-2 px-6 text-left sm:px-12">
@@ -69,7 +111,7 @@ function CourseNavButton({
       aria-label={title}
       title={title}
       onClick={onClick}
-      className={`hover:bg-secondary/30 focus-visible:ring-primary flex min-w-0 shrink items-center justify-center rounded-lg p-2 transition-colors focus:outline-none focus-visible:ring-1 sm:p-3 ${
+      className={`hover:bg-secondary/30 focus-visible:ring-primary flex min-w-0 shrink cursor-pointer items-center justify-center rounded-lg p-2 transition-colors focus:outline-none focus-visible:ring-1 sm:p-3 ${
         isActive ? 'bg-secondary/30 text-accent' : 'text-on-surface'
       }`}
     >
@@ -120,30 +162,12 @@ const CourseWork: FC = () => {
       <main id="courses" className="flex min-h-0 flex-1 flex-col px-4 py-8">
         <div className="mx-auto flex min-h-[60vh] w-full max-w-3xl flex-col">
           <div className="depth bg-surface-panel flex h-[75vh] flex-col overflow-hidden rounded-xl">
-            <nav
-              className="border-border flex min-w-0 flex-row flex-nowrap items-center justify-between gap-2 border-b px-2 py-4 sm:gap-4 sm:px-4 md:gap-6 md:px-6"
-              aria-label="Course list"
-            >
-              {ICONS_TOP.map((c, i) => (
-                <div
-                  key={c.id}
-                  className="flex min-w-0 flex-1 basis-0 items-center justify-center gap-2 sm:gap-3 md:gap-4"
-                >
-                  {i > 0 && (
-                    <span
-                      className="bg-border h-4 w-px shrink-0 sm:h-5 md:h-6"
-                      aria-hidden
-                    />
-                  )}
-                  <CourseNavButton
-                    title={c.title}
-                    icon={c.icon}
-                    isActive={activeTab === c.id}
-                    onClick={() => updateTab(c.id)}
-                  />
-                </div>
-              ))}
-            </nav>
+            <CourseNav
+              courses={ICONS_TOP}
+              activeTab={activeTab}
+              updateTab={updateTab}
+              borderSide="b"
+            />
 
             <section
               className="flex min-h-0 flex-1 flex-col items-center overflow-x-hidden overflow-y-auto p-8"
@@ -152,30 +176,12 @@ const CourseWork: FC = () => {
               <CourseContent topic={topic} />
             </section>
 
-            <nav
-              className="border-border flex min-w-0 flex-row flex-nowrap items-center justify-between gap-2 border-t px-2 py-4 sm:gap-4 sm:px-4 md:gap-6 md:px-6"
-              aria-label="Course list"
-            >
-              {ICONS_BOTTOM.map((c, i) => (
-                <div
-                  key={c.id}
-                  className="flex min-w-0 flex-1 basis-0 items-center justify-center gap-2 sm:gap-3 md:gap-4"
-                >
-                  {i > 0 && (
-                    <span
-                      className="bg-border h-4 w-px shrink-0 sm:h-5 md:h-6"
-                      aria-hidden
-                    />
-                  )}
-                  <CourseNavButton
-                    title={c.title}
-                    icon={c.icon}
-                    isActive={activeTab === c.id}
-                    onClick={() => updateTab(c.id)}
-                  />
-                </div>
-              ))}
-            </nav>
+            <CourseNav
+              courses={ICONS_BOTTOM}
+              activeTab={activeTab}
+              updateTab={updateTab}
+              borderSide="t"
+            />
           </div>
         </div>
       </main>

@@ -7,7 +7,7 @@ export interface ImageGallery {
 }
 
 const ImageGallery: FC<ImageGallery> = ({ images, objectFit = 'cover' }) => {
-  if (!images || images.length === 0) return null;
+  if (images.length === 0) return null;
 
   const img = images[0];
   const objectFitCSS =

@@ -56,7 +56,7 @@ const Section: FC<SectionProps> = ({
   return (
     <div
       id={id}
-      className="bg-opaque rounded-inherit w-auto py-4 md:w-1/2 2xl:w-1/3"
+      className="bg-opaque rounded-inherit w-auto py-4 sm:w-1/2 md:w-1/3 lg:w-1/4"
     >
       <div className="depth bg-surface-panel relative mx-8 flex flex-col gap-y-4 overflow-hidden rounded-xl text-center">
         {children}
