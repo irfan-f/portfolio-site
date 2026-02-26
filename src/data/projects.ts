@@ -1,24 +1,38 @@
-import mahjongImage from '../photos/mahjong-logo.png';
-import automationImage from '../photos/automationFigure.png';
+import mahjongIcon from '../assets/photos/mahjong-icon.svg';
+import todateImage from '../assets/photos/todate-icon.svg';
 import type { ProjectMeta } from '../types/project';
 
 export const projects: ProjectMeta[] = [
   {
+    id: 'todate',
+    title: 'todate',
+    subtitle: 'React timeline app',
+    imageSrc: todateImage,
+    imageAlt: 'todate calendar and checklist icon',
+    description:
+      'Timeline app with tags, school-year dates, and theme support. Built with React, Vite, and Tailwind v4.',
+    url: 'https://irfan-f.github.io/todate/',
+  },
+  {
     id: 'mahjong',
     title: 'Mahjong with Friends',
     subtitle: 'A web and mobile game',
-    imageSrc: mahjongImage,
-    imageAlt: 'Logo of Mahjong with Friends',
+    imageSrc: mahjongIcon,
+    imageAlt: 'Mahjong tile icon',
     description:
-      'This project aims to create a comprehensive mobile and web interface for playing Mahjong, a traditional Chinese tile game, online. The motivation behind this project is the lack of existing applications that fully meet the needs of the project creator and their friends. The project is currently in active development, focusing on delivering a seamless and enjoyable experience for Mahjong enthusiasts.',
+      "Web and mobile Mahjong for playing online with friends. Existing apps didn't fit our needs, so building our own—in active development.",
   },
   {
     id: 'hammerspoon',
     title: 'Hammerspoon Script',
     subtitle: 'MacOS Automations',
-    imageSrc: automationImage,
+    imageSrc: {
+      png: '/images/automationFigure.png',
+      webp: '/images/automationFigure.webp',
+      avif: '/images/automationFigure.avif',
+    },
     imageAlt: 'Logo of a stick figure trying to spin a settings cog',
     description:
-      "This project aims to create a comprehensive set of scripts for the MacOS application Hammerspoon. I'm learning Lua as well as having a blast experimenting with UI elements and fun automations. Code is being cleaned and then will be pushed and linked on GitHub.",
+      'MacOS automation scripts with Hammerspoon. Learning Lua while tinkering with UI and automations. Cleaning up before pushing to GitHub.',
   },
 ];

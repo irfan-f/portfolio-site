@@ -1,0 +1,221 @@
+export type CourseIcon =
+  | 'brackets'
+  | 'graphMaze'
+  | 'tree'
+  | 'binary'
+  | 'gantt'
+  | 'lambda'
+  | 'cpu'
+  | 'cacheHierarchy'
+  | 'brain'
+  | 'neuron'
+  | 'codeTag'
+  | 'gamepad'
+  | 'sigma';
+
+export interface CourseTopic {
+  id: string;
+  title: string;
+  items: (string | string[])[];
+  icon?: CourseIcon;
+}
+
+export const courseHome: CourseTopic = {
+  id: 'homeTab',
+  title: 'Home',
+  items: [
+    'All courses were taken at the University of Oregon',
+    'Assignments and projects for several courses are available on my GitHub',
+  ],
+};
+
+export const courseTopics: CourseTopic[] = [
+  {
+    id: 'introCS',
+    title: 'Intro to Computer Science',
+    icon: 'brackets',
+    items: [
+      'Algorithmic problem solving',
+      'OOP and design',
+      'Virtual Machine (Arch Linux)',
+    ],
+  },
+  {
+    id: 'intermedAlgorithms',
+    title: 'Intermediate Algorithms',
+    icon: 'graphMaze',
+    items: [
+      'Graph searching',
+      'Topological sort',
+      "Kruskal's and Prim's methods",
+      'Bellman-Ford and Floyd-Warshall algorithms',
+      'Greedy algorithms',
+    ],
+  },
+  {
+    id: 'dataStructures',
+    title: 'Intermediate Data Structures',
+    icon: 'tree',
+    items: [
+      'Structure operations',
+      'Operation analysis',
+      [
+        'List of structures',
+        'Lists',
+        'Trees',
+        'Heaps',
+        'Stacks',
+        'Queues',
+        'Dictionaries',
+        'Priority Queues',
+      ],
+    ],
+  },
+  {
+    id: 'compOrganization',
+    title: 'Computer Organization',
+    icon: 'binary',
+    items: [
+      'Bitwise operations',
+      'Machine-Level code',
+      'Register manipulation',
+      'x86-64 Assembly code',
+      'Virtual Machine (Ubuntu)',
+    ],
+  },
+  {
+    id: 'softwareMethod',
+    title: 'Software Methodologies',
+    icon: 'gantt',
+    items: [
+      'Software project management and lifecycle',
+      'Software architecture',
+      'Software design and modeling languages',
+      'Project planning',
+      'Requirements engineering',
+      'Software testing',
+      'User Interface design',
+    ],
+  },
+  {
+    id: 'princLanguages',
+    title: 'Principles of Programming Languages',
+    icon: 'lambda',
+    items: [
+      'Grammar, language, and parse trees',
+      'Intro to Lambda Calculus',
+      'Racket and ML',
+      'Haskell',
+      'Scope and storage management',
+      'Monads',
+    ],
+  },
+  {
+    id: 'os',
+    title: 'Operating Systems',
+    icon: 'cpu',
+    items: [
+      'Operating system structure',
+      'Linux system calls',
+      'Processes',
+      'Interprocess communication',
+      'Threads',
+      'Scheduling',
+      'Synchronization',
+      'Deadlocks: Multi-object synchronization',
+      'Memory management',
+      'Paging and virtual memory',
+      'File systems theory',
+      'I/O systems',
+    ],
+  },
+  {
+    id: 'compArch',
+    title: 'Computer Architecture',
+    icon: 'cacheHierarchy',
+    items: [
+      'RISC and CISC design',
+      'Storage hierarchies (Memory and Cache)',
+      'High-performance processor design',
+      'Pipelining',
+      'Vector processing',
+    ],
+  },
+  {
+    id: 'introAI',
+    title: 'Intro to Artificial Intelligence',
+    icon: 'brain',
+    items: [
+      'Uninformed and informed search',
+      'Constraint satisfaction problems',
+      'Game trees: Minimax and Expectimax',
+      'Markov Decision Processes',
+      'Reinforcement learning',
+      'Bayes nets',
+      'Hidden Markov Models',
+    ],
+  },
+  {
+    id: 'ML',
+    title: 'Machine Learning',
+    icon: 'neuron',
+    items: [
+      'Decision trees',
+      'Inductive learning',
+      'Nearest Neighbor algorithm',
+      'Perceptron algorithm',
+      'Linear and Logistic regression',
+      'Support Vector Machines',
+      'Neural Networks and Convolutional NNs',
+      'Deep Learning',
+      'Optimizers and Initializers',
+      'Recurrent NN',
+    ],
+  },
+  {
+    id: 'introEngineering',
+    title: 'Intro to Software Engineering',
+    icon: 'codeTag',
+    items: [
+      'Git and Linux basics',
+      'Docker and Flask',
+      'REST APIs',
+      'Session management and security',
+      'Authentication, forms, and login',
+      ['Intro to databases', 'NoSQL', 'MongoDB'],
+    ],
+  },
+  {
+    id: 'game',
+    title: 'Game Programming',
+    icon: 'gamepad',
+    items: [
+      'Unity',
+      'Linear Algebra (Games)',
+      'Kanban organization',
+      'Gameplay progression',
+      '3D Math and Physics',
+      'AI algorithms in games',
+      [
+        'Game patterns',
+        'Command',
+        'Flyweight',
+        'Observer',
+        'State',
+        'Subclass Sandbox',
+        'Spatial Partition',
+      ],
+    ],
+  },
+  {
+    id: 'math',
+    title: 'Mathematics',
+    icon: 'sigma',
+    items: [
+      'Discrete mathematics',
+      'Calculus',
+      'Networks and combinatorics',
+      'Statistic models and mathematics',
+    ],
+  },
+];

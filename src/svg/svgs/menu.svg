@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
-  <!-- Top line -->
-  <path d="M10 20 H90" stroke-width="8" stroke-linecap="round" />
-  <!-- Middle line -->
-  <path d="M10 50 H90" stroke-width="8" stroke-linecap="round" />
-  <!-- Bottom line -->
-  <path d="M10 80 H90" stroke-width="8" stroke-linecap="round" />
-</svg>

@@ -1,13 +1,50 @@
 import { FC, HTMLAttributes } from 'react';
-import gitHubIconDark from '../icons/thirdParty/GitHub_Invertocat_Dark.png';
-import gitHubIconLight from '../icons/thirdParty/GitHub_Invertocat_Light.png';
-import linkedInDark from '../icons/thirdParty/InBug-Black.png';
-import linkedInLight from '../icons/thirdParty/InBug-White.png';
+
+const IMG = '/images';
+
+function SocialIcon({
+  lightSrc,
+  darkSrc,
+}: {
+  lightSrc: string;
+  darkSrc: string;
+}) {
+  const lightWebp = lightSrc.replace(/\.png$/, '.webp');
+  const lightAvif = lightSrc.replace(/\.png$/, '.avif');
+  const darkWebp = darkSrc.replace(/\.png$/, '.webp');
+  const darkAvif = darkSrc.replace(/\.png$/, '.avif');
+  return (
+    <>
+      <picture className="absolute top-0 left-0 h-full w-full object-contain opacity-0 dark:opacity-100">
+        <source type="image/avif" srcSet={lightAvif} />
+        <source type="image/webp" srcSet={lightWebp} />
+        <img
+          src={lightSrc}
+          sizes="36px"
+          loading="lazy"
+          alt=""
+          className="h-full w-full object-contain"
+        />
+      </picture>
+      <picture className="absolute top-0 left-0 h-full w-full object-contain opacity-100 dark:opacity-0">
+        <source type="image/avif" srcSet={darkAvif} />
+        <source type="image/webp" srcSet={darkWebp} />
+        <img
+          src={darkSrc}
+          sizes="36px"
+          loading="lazy"
+          alt=""
+          className="h-full w-full object-contain"
+        />
+      </picture>
+    </>
+  );
+}
 
 const SocialLinks: FC<HTMLAttributes<HTMLElement>> = ({ className }) => {
   return (
     <div
-      className={`m-auto flex h-6 min-w-16 flex-row items-center justify-center gap-10 ${className}`}
+      className={`m-auto flex h-6 min-w-16 flex-row items-center justify-center gap-10 ${className ?? ''}`}
     >
       <a
         className="relative h-8 w-8 sm:h-9 sm:w-9"
@@ -17,19 +54,9 @@ const SocialLinks: FC<HTMLAttributes<HTMLElement>> = ({ className }) => {
         aria-label="GitHub"
         title="GitHub"
       >
-        <img
-          className="absolute left-0 top-0 h-full w-full object-contain opacity-0 dark:opacity-100"
-          src={gitHubIconLight}
-          sizes="36px"
-          loading="lazy"
-          alt=""
-        />
-        <img
-          className="absolute left-0 top-0 h-full w-full object-contain opacity-100 dark:opacity-0"
-          src={gitHubIconDark}
-          sizes="36px"
-          loading="lazy"
-          alt=""
+        <SocialIcon
+          lightSrc={`${IMG}/GitHub_Invertocat_Light.png`}
+          darkSrc={`${IMG}/GitHub_Invertocat_Dark.png`}
         />
       </a>
       <a
@@ -40,19 +67,9 @@ const SocialLinks: FC<HTMLAttributes<HTMLElement>> = ({ className }) => {
         aria-label="LinkedIn"
         title="LinkedIn"
       >
-        <img
-          className="absolute left-0 top-0 h-full w-full object-contain opacity-0 dark:opacity-100"
-          src={linkedInLight}
-          sizes="36px"
-          loading="lazy"
-          alt=""
-        />
-        <img
-          className="absolute left-0 top-0 h-full w-full object-contain opacity-100 dark:opacity-0"
-          src={linkedInDark}
-          sizes="36px"
-          loading="lazy"
-          alt=""
+        <SocialIcon
+          lightSrc={`${IMG}/InBug-White.png`}
+          darkSrc={`${IMG}/InBug-Black.png`}
         />
       </a>
     </div>

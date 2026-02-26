@@ -1,6 +1,6 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import ImageGallery from './Image';
-import { Image } from '../helpers/images';
+import { Image } from '../utils/images';
 
 export interface SectionProps {
   id: string;
@@ -20,19 +20,18 @@ const Section: FC<SectionProps> = ({
   images,
   orientation: _orientation = 'left',
   imageFirst = true,
-  style = 'basic',
+  style: _style = 'basic',
   placeholder = false,
 }) => {
-  const [, setImageLoaded] = useState(false);
   const Content = (
     <div className="section-content">
       {title && (
-        <h2 className="font-dosis text-3xl font-bold text-primary antialiased">
+        <h2 className="font-dosis text-accent text-3xl font-bold antialiased">
           {title}
         </h2>
       )}
       {content && (
-        <p className="text-start font-libre leading-relaxed text-on-surface antialiased">
+        <p className="font-libre text-on-surface text-start leading-relaxed antialiased">
           {content}
         </p>
       )}
@@ -46,32 +45,20 @@ const Section: FC<SectionProps> = ({
         style={{ aspectRatio: `${images[0].width} / ${images[0].height}` }}
       >
         <ImageGallery
-          setImageLoaded={setImageLoaded}
           images={images}
           objectFit={placeholder ? 'contain' : 'cover'}
         />
       </div>
-    )     : null;
+    ) : null;
 
   const children = imageFirst ? [ImageEl, Content] : [Content, ImageEl];
 
-  const styleMap = {
-    secondary: 'xl:section-secondary',
-    tertiary: 'xl:section-tertiary',
-    bonus: 'xl:section-bonus',
-    basic: 'xl:section-basic',
-  } as const;
-  const sectionClasses = ['section-' + style, 'xl:bg-none', 'gap-y-4'].join(
-    ' ',
-  );
   return (
     <div
       id={id}
-      className={`bg-opaque py-4 ${styleMap[style]} rounded-inherit w-auto md:w-1/2 2xl:w-1/3`}
+      className="bg-opaque rounded-inherit w-auto py-4 md:w-1/2 2xl:w-1/3"
     >
-      <div
-        className={`depth relative mx-8 flex flex-col overflow-hidden rounded-xl text-center ${sectionClasses}`}
-      >
+      <div className="depth bg-surface-panel relative mx-8 flex flex-col gap-y-4 overflow-hidden rounded-xl text-center">
         {children}
       </div>
     </div>

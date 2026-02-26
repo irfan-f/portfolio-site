@@ -16,7 +16,7 @@ const TypeWriter: FC<TypeWriterProps & HTMLAttributes<HTMLElement>> = ({
   useEffect(() => {
     const intervalId = setInterval(() => {
       setShowCaret((prev) => !prev);
-    }, 600)
+    }, 600);
 
     return () => clearInterval(intervalId);
   }, []);
@@ -28,14 +28,14 @@ const TypeWriter: FC<TypeWriterProps & HTMLAttributes<HTMLElement>> = ({
       }, delay);
       return () => clearTimeout(timeoutId);
     }
-  }, [textToDisplay, text, delay]); // watch these!
+  }, [textToDisplay, text, delay]);
 
   return (
     <div className={`${className} relative`}>
       <div className="invisible w-fit" aria-hidden>
         {text}
       </div>
-      <div className="absolute left-0 top-0">
+      <div className="absolute top-0 left-0">
         {textToDisplay}
         <span
           className={`absolute -top-1 ${showCaret ? 'opacity-100' : 'opacity-0'}`}

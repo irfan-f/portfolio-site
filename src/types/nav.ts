@@ -6,4 +6,5 @@ export interface Nav {
 export const navs: Nav[] = [
   { id: 'projects', name: 'Projects' },
   { id: 'me', name: 'About Me' },
+  { id: 'courses', name: 'Course Work' },
 ];

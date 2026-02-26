@@ -9,14 +9,18 @@
       name="description"
       content="Site for Irfan Filipovic, detailing software development projects and various other interests."
     />
+    <meta property="og:title" content="Irfan Filipovic" />
+    <meta property="og:description" content="Site for Irfan Filipovic, detailing software development projects and various other interests." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://irfan-f.com/" />
+    <meta property="og:image" content="https://irfan-f.com/images/irfan.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Irfan Filipovic" />
+    <meta name="twitter:description" content="Site for Irfan Filipovic, detailing software development projects and various other interests." />
+    <meta name="twitter:image" content="https://irfan-f.com/images/irfan.png" />
     <link rel="icon" type="image/svg+xml" href="/icon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" as="image" href="/images/irfan.png" />
     <title>Irfan Filipovic</title>
     <script>
       (function(){var t=localStorage.theme,d=localStorage.darkMode;var dark=(t==="dark")||(t!=="light"&&!(t||d)&&window.matchMedia("(prefers-color-scheme: dark)").matches)||(d==="true");document.documentElement.classList.toggle("dark",dark);})();
@@ -29,6 +33,7 @@
     </style>
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>

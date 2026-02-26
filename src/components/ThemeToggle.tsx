@@ -1,9 +1,8 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { useClickOutside } from '../hooks/useClickOutside';
-import type { Theme } from '../helpers/useTheme';
-import SunIcon from '../svg/svgs/sun.svg?react';
-import MoonIcon from '../svg/svgs/moon.svg?react';
-import SystemIcon from '../svg/svgs/system.svg?react';
+import type { Theme } from '../hooks/useTheme';
+import Icon from './Icon';
+import { icons } from '../icons';
 
 const LABELS: Record<Theme, string> = {
   light: 'Light',
@@ -12,9 +11,29 @@ const LABELS: Record<Theme, string> = {
 };
 
 function ThemeIcon({ theme }: { theme: Theme }) {
-  if (theme === 'light') return <SunIcon className="svg-primary h-6 w-6 sm:h-5 sm:w-5" aria-hidden />;
-  if (theme === 'dark') return <MoonIcon className="svg-primary h-6 w-6 sm:h-5 sm:w-5" aria-hidden />;
-  return <SystemIcon className="svg-primary h-6 w-6 sm:h-5 sm:w-5" aria-hidden />;
+  if (theme === 'light')
+    return (
+      <Icon
+        src={icons.sun}
+        className="svg-primary h-6 w-6 sm:h-5 sm:w-5"
+        aria-hidden
+      />
+    );
+  if (theme === 'dark')
+    return (
+      <Icon
+        src={icons.moon}
+        className="svg-primary h-6 w-6 sm:h-5 sm:w-5"
+        aria-hidden
+      />
+    );
+  return (
+    <Icon
+      src={icons.defaultMode}
+      className="svg-primary h-6 w-6 sm:h-5 sm:w-5"
+      aria-hidden
+    />
+  );
 }
 
 export default function ThemeToggle({
@@ -28,8 +47,9 @@ export default function ThemeToggle({
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const handleClose = useCallback(() => setOpen(false), []);
 
-  useClickOutside(ref, () => setOpen(false), open);
+  useClickOutside(ref, handleClose, open);
 
   const listboxId = 'theme-listbox';
 
@@ -53,7 +73,7 @@ export default function ThemeToggle({
           id={listboxId}
           role="listbox"
           aria-label="Theme options"
-          className="absolute right-0 top-full mt-1 py-1 min-w-32 rounded-lg bg-surface-panel border border-border shadow-lg z-50"
+          className="bg-surface-panel border-border absolute top-full right-0 z-50 mt-1 min-w-32 rounded-lg border py-1 shadow-lg"
         >
           {(['light', 'dark', 'system'] as const).map((t) => (
             <button
@@ -65,7 +85,7 @@ export default function ThemeToggle({
                 setTheme(t);
                 setOpen(false);
               }}
-              className="w-full text-left px-4 py-2 text-sm text-on-surface hover:bg-secondary/50 focus:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded cursor-pointer"
+              className="text-on-surface hover:bg-secondary/50 focus-visible:ring-primary w-full cursor-pointer rounded px-4 py-2 text-left text-sm focus:outline-none focus-visible:ring-1"
             >
               {LABELS[t]}
             </button>

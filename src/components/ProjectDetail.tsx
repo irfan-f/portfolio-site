@@ -6,16 +6,39 @@ interface ProjectDetailProps {
   project: ProjectMeta;
 }
 
+function ProjectDetailImage({
+  imageSrc,
+  alt,
+}: {
+  imageSrc: ProjectMeta['imageSrc'];
+  alt: string;
+}) {
+  const imgProps = {
+    className: 'project-image',
+    alt,
+    sizes:
+      '(max-width: 300px) 70vw, (max-width: 705px) 30vw, (max-width: 1110px) 20vw, 20vw',
+    loading: 'lazy' as const,
+  };
+  if (typeof imageSrc === 'string') {
+    return <img src={imageSrc} {...imgProps} />;
+  }
+  return (
+    <picture>
+      <source type="image/avif" srcSet={imageSrc.avif} />
+      <source type="image/webp" srcSet={imageSrc.webp} />
+      <img src={imageSrc.png} {...imgProps} />
+    </picture>
+  );
+}
+
 const ProjectDetail: FC<ProjectDetailProps> = ({ project }) => {
   return (
     <section className="project-section">
       <div className="flex flex-col justify-between lg:col-start-1 lg:col-end-2">
-        <img
-          className="project-image"
-          src={project.imageSrc}
+        <ProjectDetailImage
+          imageSrc={project.imageSrc}
           alt={project.imageAlt}
-          sizes="(max-width: 300px) 70vw, (max-width: 705px) 30vw, (max-width: 1110px) 20vw, 20vw"
-          loading="lazy"
         />
       </div>
       <div className="project-content">

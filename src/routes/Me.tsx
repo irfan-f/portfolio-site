@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Helmet } from 'react-helmet-async';
 import Section, { SectionProps } from '../components/Section';
 import {
   rootImages,
@@ -7,7 +8,7 @@ import {
   cookingImages,
   bikingImages,
   placeHolderImages,
-} from '../helpers/images';
+} from '../utils/images';
 
 const sectionsData: SectionProps[] = [
   {
@@ -69,14 +70,41 @@ const placeHolderSectionData: SectionProps = {
   placeholder: true,
 };
 
+const SITE_URL = 'https://irfan-f.com';
+
 const Me: FC = () => {
   return (
-    <div className="flex flex-row flex-wrap">
-      {sectionsData.map((section) => (
-        <Section {...section} key={section.id} />
-      ))}
-      {sectionsData.length % 2 === 1 && <Section {...placeHolderSectionData} />}
-    </div>
+    <>
+      <Helmet>
+        <title>About — Irfan Filipovic</title>
+        <meta
+          name="description"
+          content="Learn about Irfan Filipovic — roots, outdoors, cooking, biking, gardening, and more."
+        />
+        <meta property="og:title" content="About — Irfan Filipovic" />
+        <meta
+          property="og:description"
+          content="Learn about Irfan Filipovic — roots, outdoors, cooking, biking, gardening, and more."
+        />
+        <meta property="og:url" content={`${SITE_URL}/#/me`} />
+        <meta property="og:image" content={`${SITE_URL}/images/irfan.png`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About — Irfan Filipovic" />
+        <meta
+          name="twitter:description"
+          content="Learn about Irfan Filipovic — roots, outdoors, cooking, biking, gardening, and more."
+        />
+        <meta name="twitter:image" content={`${SITE_URL}/images/irfan.png`} />
+      </Helmet>
+      <div className="flex flex-row flex-wrap">
+        {sectionsData.map((section) => (
+          <Section {...section} key={section.id} />
+        ))}
+        {sectionsData.length % 2 === 1 && (
+          <Section {...placeHolderSectionData} />
+        )}
+      </div>
+    </>
   );
 };
 
