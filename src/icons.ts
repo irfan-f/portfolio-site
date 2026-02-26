@@ -7,16 +7,16 @@ import homeIcon from './assets/icons/home.svg?raw';
 import forwardArrowIcon from './assets/icons/forwardArrow.svg?raw';
 import bracketsIcon from './assets/icons/courses/brackets.svg?raw';
 import graphMazeIcon from './assets/icons/courses/graph-maze.svg?raw';
-import treeIcon from './assets/icons/courses/tree.svg?raw';
+import databaseIcon from './assets/icons/courses/database.svg?raw';
 import binaryIcon from './assets/icons/courses/binary.svg?raw';
-import ganttIcon from './assets/icons/courses/gantt.svg?raw';
+import chartIcon from './assets/icons/courses/chart.svg?raw';
 import lambdaIcon from './assets/icons/courses/lambda.svg?raw';
-import cpuIcon from './assets/icons/courses/cpu.svg?raw';
-import cacheHierarchyIcon from './assets/icons/courses/cache-hierarchy.svg?raw';
+import memoryIcon from './assets/icons/courses/memory.svg?raw';
+import stacksIcon from './assets/icons/courses/stacks.svg?raw';
 import brainIcon from './assets/icons/courses/brain.svg?raw';
-import neuronIcon from './assets/icons/courses/neuron.svg?raw';
-import codeTagIcon from './assets/icons/courses/code-tag.svg?raw';
-import gamepadIcon from './assets/icons/courses/gamepad.svg?raw';
+import automationIcon from './assets/icons/courses/automation.svg?raw';
+import codeBlocksIcon from './assets/icons/courses/code-blocks.svg?raw';
+import controllerIcon from './assets/icons/courses/controller.svg?raw';
 import sigmaIcon from './assets/icons/courses/sigma.svg?raw';
 
 export const icons = {
@@ -30,16 +30,16 @@ export const icons = {
   courses: {
     brackets: bracketsIcon,
     graphMaze: graphMazeIcon,
-    tree: treeIcon,
+    database: databaseIcon,
     binary: binaryIcon,
-    gantt: ganttIcon,
+    chart: chartIcon,
     lambda: lambdaIcon,
-    cpu: cpuIcon,
-    cacheHierarchy: cacheHierarchyIcon,
+    memory: memoryIcon,
+    stacks: stacksIcon,
     brain: brainIcon,
-    neuron: neuronIcon,
-    codeTag: codeTagIcon,
-    gamepad: gamepadIcon,
+    automation: automationIcon,
+    codeBlocks: codeBlocksIcon,
+    controller: controllerIcon,
     sigma: sigmaIcon,
   },
 } as const;

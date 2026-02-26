@@ -1,16 +1,16 @@
 export type CourseIcon =
   | 'brackets'
   | 'graphMaze'
-  | 'tree'
+  | 'database'
   | 'binary'
-  | 'gantt'
+  | 'chart'
   | 'lambda'
-  | 'cpu'
-  | 'cacheHierarchy'
+  | 'memory'
+  | 'stacks'
   | 'brain'
-  | 'neuron'
-  | 'codeTag'
-  | 'gamepad'
+  | 'automation'
+  | 'codeBlocks'
+  | 'controller'
   | 'sigma';
 
 export interface CourseTopic {
@@ -55,7 +55,7 @@ export const courseTopics: CourseTopic[] = [
   {
     id: 'dataStructures',
     title: 'Intermediate Data Structures',
-    icon: 'tree',
+    icon: 'database',
     items: [
       'Structure operations',
       'Operation analysis',
@@ -86,7 +86,7 @@ export const courseTopics: CourseTopic[] = [
   {
     id: 'softwareMethod',
     title: 'Software Methodologies',
-    icon: 'gantt',
+    icon: 'chart',
     items: [
       'Software project management and lifecycle',
       'Software architecture',
@@ -113,7 +113,7 @@ export const courseTopics: CourseTopic[] = [
   {
     id: 'os',
     title: 'Operating Systems',
-    icon: 'cpu',
+    icon: 'memory',
     items: [
       'Operating system structure',
       'Linux system calls',
@@ -132,7 +132,7 @@ export const courseTopics: CourseTopic[] = [
   {
     id: 'compArch',
     title: 'Computer Architecture',
-    icon: 'cacheHierarchy',
+    icon: 'stacks',
     items: [
       'RISC and CISC design',
       'Storage hierarchies (Memory and Cache)',
@@ -144,7 +144,7 @@ export const courseTopics: CourseTopic[] = [
   {
     id: 'introAI',
     title: 'Intro to Artificial Intelligence',
-    icon: 'brain',
+    icon: 'automation',
     items: [
       'Uninformed and informed search',
       'Constraint satisfaction problems',
@@ -158,7 +158,7 @@ export const courseTopics: CourseTopic[] = [
   {
     id: 'ML',
     title: 'Machine Learning',
-    icon: 'neuron',
+    icon: 'brain',
     items: [
       'Decision trees',
       'Inductive learning',
@@ -175,7 +175,7 @@ export const courseTopics: CourseTopic[] = [
   {
     id: 'introEngineering',
     title: 'Intro to Software Engineering',
-    icon: 'codeTag',
+    icon: 'codeBlocks',
     items: [
       'Git and Linux basics',
       'Docker and Flask',
@@ -188,7 +188,7 @@ export const courseTopics: CourseTopic[] = [
   {
     id: 'game',
     title: 'Game Programming',
-    icon: 'gamepad',
+    icon: 'controller',
     items: [
       'Unity',
       'Linear Algebra (Games)',

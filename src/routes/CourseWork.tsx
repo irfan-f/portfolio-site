@@ -14,8 +14,11 @@ const courseMap = new Map<string, CourseTopic>(
   courseTopics.map((c) => [c.id, c] as const),
 );
 
-const ICONS_TOP = courseTopics.slice(0, 7);
-const ICONS_BOTTOM = courseTopics.slice(7);
+const hasIcon = (c: CourseTopic): c is CourseTopic & { icon: CourseIcon } =>
+  c.icon != null;
+const topicsWithIcons = courseTopics.filter(hasIcon);
+const ICONS_TOP = topicsWithIcons.slice(0, 7);
+const ICONS_BOTTOM = topicsWithIcons.slice(7);
 
 function CourseContent({ topic }: { topic: CourseTopic }) {
   return (
@@ -72,7 +75,7 @@ function CourseNavButton({
     >
       <Icon
         src={iconSrc}
-        className="svg-primary svg-stroke-only h-6 w-6 min-w-0 shrink sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-12 lg:w-12"
+        className="svg-primary h-6 w-6 min-w-0 shrink sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-12 lg:w-12"
         aria-hidden
       />
     </button>
@@ -118,23 +121,23 @@ const CourseWork: FC = () => {
         <div className="mx-auto flex min-h-[60vh] w-full max-w-3xl flex-col">
           <div className="depth bg-surface-panel flex h-[75vh] flex-col overflow-hidden rounded-xl">
             <nav
-              className="border-border flex min-w-0 flex-row flex-nowrap items-center justify-evenly gap-1 border-b px-2 py-4 sm:gap-2 sm:px-4 md:gap-4 md:px-6"
+              className="border-border flex min-w-0 flex-row flex-nowrap items-center justify-between gap-2 border-b px-2 py-4 sm:gap-4 sm:px-4 md:gap-6 md:px-6"
               aria-label="Course list"
             >
               {ICONS_TOP.map((c, i) => (
                 <div
                   key={c.id}
-                  className="flex min-w-0 shrink items-center gap-1 sm:gap-2 md:gap-4"
+                  className="flex min-w-0 flex-1 basis-0 items-center justify-center gap-2 sm:gap-3 md:gap-4"
                 >
                   {i > 0 && (
                     <span
-                      className="h-4 w-px shrink-0 bg-black/40 sm:h-5 md:h-6"
+                      className="bg-border h-4 w-px shrink-0 sm:h-5 md:h-6"
                       aria-hidden
                     />
                   )}
                   <CourseNavButton
                     title={c.title}
-                    icon={c.icon!}
+                    icon={c.icon}
                     isActive={activeTab === c.id}
                     onClick={() => updateTab(c.id)}
                   />
@@ -150,23 +153,23 @@ const CourseWork: FC = () => {
             </section>
 
             <nav
-              className="border-border flex min-w-0 flex-row flex-nowrap items-center justify-evenly gap-1 border-t px-2 py-4 sm:gap-2 sm:px-4 md:gap-4 md:px-6"
+              className="border-border flex min-w-0 flex-row flex-nowrap items-center justify-between gap-2 border-t px-2 py-4 sm:gap-4 sm:px-4 md:gap-6 md:px-6"
               aria-label="Course list"
             >
               {ICONS_BOTTOM.map((c, i) => (
                 <div
                   key={c.id}
-                  className="flex min-w-0 shrink items-center gap-1 sm:gap-2 md:gap-4"
+                  className="flex min-w-0 flex-1 basis-0 items-center justify-center gap-2 sm:gap-3 md:gap-4"
                 >
                   {i > 0 && (
                     <span
-                      className="h-4 w-px shrink-0 bg-black/40 sm:h-5 md:h-6"
+                      className="bg-border h-4 w-px shrink-0 sm:h-5 md:h-6"
                       aria-hidden
                     />
                   )}
                   <CourseNavButton
                     title={c.title}
-                    icon={c.icon!}
+                    icon={c.icon}
                     isActive={activeTab === c.id}
                     onClick={() => updateTab(c.id)}
                   />

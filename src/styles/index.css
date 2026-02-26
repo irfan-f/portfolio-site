@@ -185,10 +185,11 @@
 
   .svg-primary svg {
     stroke: var(--text-on-surface);
-    transition: stroke var(--theme-transition);
+    transition: stroke var(--theme-transition), fill var(--theme-transition);
   }
 
-  .svg-stroke-only svg {
+  .svg-stroke-only svg,
+  .svg-stroke-icon {
     fill: none;
   }
 

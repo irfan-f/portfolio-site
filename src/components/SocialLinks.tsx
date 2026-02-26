@@ -44,7 +44,7 @@ function SocialIcon({
 const SocialLinks: FC<HTMLAttributes<HTMLElement>> = ({ className }) => {
   return (
     <div
-      className={`m-auto flex h-6 min-w-16 flex-row items-center justify-center gap-10 ${className ?? ''}`}
+      className={`flex w-fit flex-col items-center justify-center gap-10 ${className ?? ''}`}
     >
       <a
         className="relative h-8 w-8 sm:h-9 sm:w-9"
