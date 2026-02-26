@@ -1,30 +1,19 @@
 import { FC, HTMLAttributes, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import clsx from 'clsx';
-import { Nav } from '../App';
-import AppearanceToggle from './AppearanceToggle';
-import MenuSvgComponent from '../svg/svgs/menu.svg';
-import HomeSvgComponent from '../svg/svgs/home.svg';
-import SocialLinks from './SocialLinks';
+import { Nav } from '../types/nav';
+import MenuSvgComponent from '../svg/svgs/menu.svg?react';
+import HomeSvgComponent from '../svg/svgs/home.svg?react';
 
-// Props
 interface MenuToggleProps {
-  darkMode: boolean;
-  toggleDarkMode: (darkMode: boolean) => void;
   navs: Nav[];
 }
 
 const MenuToggle: FC<MenuToggleProps & HTMLAttributes<HTMLElement>> = ({
-  darkMode,
-  toggleDarkMode,
   navs,
   className,
 }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const handleClick = () => {
-    // Handle opening and closing of the menu
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+  const handleClick = () => setIsSidebarOpen(!isSidebarOpen);
 
   return (
     <>
@@ -32,8 +21,10 @@ const MenuToggle: FC<MenuToggleProps & HTMLAttributes<HTMLElement>> = ({
         data-drawer-target="menu-sidebar"
         data-drawer-toggle="menu-sidebar"
         aria-controls="menu-sidebar"
+        aria-label="Open menu"
+        title="Open menu"
         type="button"
-        className={clsx('relative h-10 w-10 cursor-pointer', className)}
+        className={`relative h-10 w-10 cursor-pointer ${className ?? ''}`}
         onClick={handleClick}
       >
         <div className="absolute right-0 top-0 flex h-10 w-10 items-center justify-center p-2">
@@ -44,10 +35,7 @@ const MenuToggle: FC<MenuToggleProps & HTMLAttributes<HTMLElement>> = ({
 
       <>
         <div
-          className={clsx(
-            'fixed right-0 top-0 z-10 h-screen w-screen bg-black opacity-30',
-            { hidden: !isSidebarOpen, visible: isSidebarOpen },
-          )}
+          className={`fixed right-0 top-0 z-10 h-screen w-screen bg-black opacity-30 ${isSidebarOpen ? 'visible' : 'hidden'}`}
           onClick={handleClick}
         />
         <div
@@ -55,23 +43,13 @@ const MenuToggle: FC<MenuToggleProps & HTMLAttributes<HTMLElement>> = ({
           style={{
             maxHeight: 'var(--webkit-fill-available)',
           }}
-          className={clsx(
-            'fixed right-0 top-0 z-20 h-screen w-64 bg-basic pt-4 transition-transform duration-400',
-            {
-              'translate-x-0': isSidebarOpen,
-              'translate-x-64': !isSidebarOpen,
-            },
-          )}
+          className={`fixed right-0 top-0 z-20 h-screen w-64 bg-surface pt-4 transition-transform duration-400 ${isSidebarOpen ? 'translate-x-0' : 'translate-x-64'}`}
           aria-label="Sidebar"
         >
           <div className="flex h-full flex-col items-center justify-between px-3 py-4">
             <NavLink
               className={({ isActive }) =>
-                clsx('relative h-10 w-10 cursor-pointer', {
-                  'svg-active': isActive,
-                  'menu-hamburger': !isActive,
-                  'hover:svg-active': !isActive,
-                })
+                `relative h-10 w-10 cursor-pointer ${isActive ? 'svg-active' : 'menu-hamburger hover:svg-active'}`
               }
               onClick={handleClick}
               to="/"
@@ -81,33 +59,18 @@ const MenuToggle: FC<MenuToggleProps & HTMLAttributes<HTMLElement>> = ({
             <ul className="mt-16 flex h-full flex-col items-center overflow-y-auto text-2xl">
               {navs.map((stack) => (
                 <li className="mb-8 last:mb-0" key={stack.id}>
-                  <nav className="">
-                    <NavLink
+                  <NavLink
                       to={stack.id}
                       className={({ isActive }) =>
-                        clsx({
-                          'text-basic': !isActive,
-                          'text-primary dark:text-secondary': isActive,
-                          'hover:text-primary dark:hover:text-secondary': true,
-                          active: isActive,
-                        })
+                        `hover:text-primary dark:hover:text-secondary ${isActive ? 'text-primary dark:text-secondary active' : 'text-on-surface'}`
                       }
                       onClick={handleClick}
                     >
                       {stack.name}
                     </NavLink>
-                  </nav>
                 </li>
               ))}
             </ul>
-            <div className="flex flex-col gap-y-12">
-              <AppearanceToggle
-                darkMode={darkMode}
-                toggleDarkMode={toggleDarkMode}
-                className="flex flex-row"
-              />
-              <SocialLinks className="h-12 w-32" />
-            </div>
           </div>
         </div>
       </>

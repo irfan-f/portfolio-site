@@ -23,7 +23,6 @@ const ImageGallery: FC<ImageGallery> = ({
           key={idx}
           className={`w-full antialiased ${objectFitCSS} max-h-[30vh] ${idx === 0 ? 'block' : 'hidden'}`}
           src={img.src}
-          srcSet={img.srcSet}
           alt={`Image ${idx + 1}`}
           onLoad={() => setImageLoaded(true)}
           loading='lazy'

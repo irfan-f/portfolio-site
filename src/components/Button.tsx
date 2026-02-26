@@ -1,8 +1,5 @@
-import { FC, lazy } from 'react';
-import clsx from 'clsx';
-const ForwardArrowComponent = lazy(
-  () => import(`../svg/svgs/forwardArrow.svg`),
-);
+import { FC } from 'react';
+import ForwardArrowComponent from '../svg/svgs/forwardArrow.svg?react';
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   message: string;
@@ -11,10 +8,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 const Button: FC<ButtonProps> = ({ className, message, onClick }) => {
   return (
     <button
-      className={clsx(
-        'button lg:text-md flex w-fit items-center justify-between rounded-md border-2 border-accent p-1 pr-0 text-center font-libre text-sm',
-        className,
-      )}
+      className={`button lg:text-base flex w-fit items-center justify-between rounded-md border-2 border-accent p-1 pr-0 text-center font-libre text-sm ${className ?? ''}`}
       onClick={onClick}
     >
       <div className="flex flex-grow justify-center">{message}</div>

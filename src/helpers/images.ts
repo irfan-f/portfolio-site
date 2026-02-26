@@ -1,70 +1,49 @@
-// utils/importImages.ts
 export interface Image {
   src: string;
-  srcSet: string;
-  images: { path: string; width: number; height: number }[];
   width: number;
   height: number;
 }
 
-/**
- * Type guard to check if an object is an Image
- */
-function isImage(obj: unknown): obj is Image {
-  if (!obj || typeof obj !== 'object') return false;
-  const img = obj as any;
-  return (
-    typeof img.src === 'string' &&
-    typeof img.srcSet === 'string' &&
-    Array.isArray(img.images) &&
-    img.images.every(
-      (i: any) =>
-        i &&
-        typeof i.path === 'string' &&
-        typeof i.width === 'number' &&
-        typeof i.height === 'number',
-    ) &&
-    typeof img.width === 'number' &&
-    typeof img.height === 'number'
-  );
+const DEFAULT_ASPECT = { width: 16, height: 9 };
+
+function toImages(
+  modules: Record<string, { default: string }>,
+  folder: string,
+): Image[] {
+  return Object.entries(modules)
+    .filter(([path]) => path.includes(`/${folder}/`))
+    .map(([, mod]) => ({
+      src: mod.default,
+      ...DEFAULT_ASPECT,
+    }));
 }
 
-/**
- * Dynamically import all images from a folder and filter to Image[]
- */
-function importAll(r: __WebpackModuleApi.RequireContext): Image[] {
-  return r
-    .keys()
-    .map((key) => r(key))
-    .filter(isImage);
-}
-
-// Root images
-export const rootImages: Image[] = importAll(
-  require.context('../photos/roots', false, /\.(png|jpe?g|webp)$/),
+const allModules = import.meta.glob<{ default: string }>(
+  '../photos/*/*.{png,jpg,jpeg,webp}',
+  { eager: true, query: '?url', import: 'default' },
 );
 
-// Outdoor images
-export const outdoorImages: Image[] = importAll(
-  require.context('../photos/outdoors', false, /\.(png|jpe?g|webp)$/),
+export const rootImages: Image[] = toImages(
+  allModules as Record<string, { default: string }>,
+  'roots',
 );
-
-// Biking images
-export const bikingImages: Image[] = importAll(
-  require.context('../photos/biking', false, /\.(png|jpe?g|webp)$/),
+export const outdoorImages: Image[] = toImages(
+  allModules as Record<string, { default: string }>,
+  'outdoors',
 );
-
-// Gardening images
-export const gardenImages: Image[] = importAll(
-  require.context('../photos/gardening', false, /\.(png|jpe?g|webp)$/),
+export const bikingImages: Image[] = toImages(
+  allModules as Record<string, { default: string }>,
+  'biking',
 );
-
-// Cooking images
-export const cookingImages: Image[] = importAll(
-  require.context('../photos/cooking', false, /\.(png|jpe?g|webp)$/),
+export const gardenImages: Image[] = toImages(
+  allModules as Record<string, { default: string }>,
+  'gardening',
 );
-
-// Cooking images
-export const placeHolderImages: Image[] = importAll(
-  require.context('../photos/placeholder', false, /\.(png|jpe?g|webp)$/),
+export const cookingImages: Image[] = toImages(
+  allModules as Record<string, { default: string }>,
+  'cooking',
+);
+export const placeHolderImages: Image[] = toImages(
+  allModules as Record<string, { default: string }>,
+  'placeholder',
 );

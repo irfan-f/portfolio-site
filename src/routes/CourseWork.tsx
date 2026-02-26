@@ -23,7 +23,7 @@ const CourseWork: FC = () => {
     activeTab: 'homeTab',
   });
 
-  const updateTab = (id: any) => {
+  const updateTab = (id: string) => {
     setState({
       ...state,
       activeTab: id,

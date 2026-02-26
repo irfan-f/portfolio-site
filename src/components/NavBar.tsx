@@ -1,105 +1,54 @@
-import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
-import useDarkMode from '../helpers/useDarkMode';
-import AppearanceToggle from './AppearanceToggle';
+import { useTheme } from '../helpers/useTheme';
+import ThemeToggle from './ThemeToggle';
 import MenuToggle from './MenuToggle';
-import { Nav } from '../App';
-import IFIcon from '../svg/svgs/if.svg';
+import { Nav } from '../types/nav';
+import IFIcon from '../svg/svgs/if.svg?react';
 
-// Function to generate classname for the primary nav
-const primaryNavClassName = ({ isActive }: { isActive: boolean }) =>
-  clsx('font-dosis', 'font-bold', 'text-2xl', 'flex', 'items-center', 'h-16', {
-    'text-tertiary': !isActive,
-    'text-primary dark:text-secondary': isActive,
-    'hover:text-primary dark:hover:text-secondary': true,
-    active: isActive,
-  });
-// Function to generate classname for the primary nav
-const testClass = ({ isActive }: { isActive: boolean }) =>
-  clsx({
-    visible: !isActive,
-    hidden: isActive,
-  });
-
-// Function to generate classname for a subnav
-const subNavLinkClassName = ({ isActive }: { isActive: boolean }) =>
-  clsx(
-    'font-mulish',
-    'font-semibold',
-    'text-xl',
-    'h-16',
-    'flex',
-    'items-center',
-    {
-      'text-basic': !isActive,
-      'text-primary dark:text-secondary': isActive,
-      'hover:text-primary dark:hover:text-secondary': true,
-      active: isActive,
-    },
-  );
-
-// Classnames to reduce clutter within the JSX,
-const headerClassName = 'navbar px-4vw py-9 lg:py-12 align-center';
-const gridDivClassName =
-  'mx-auto grid grid-cols-2 lg:grid-cols-6 items-center w-full';
-const brandNavClassName =
-  'justify-self-start flex items-end lg:col-span-1 animate-slide-in-left-1';
-const secondDivClassName =
-  'justify-self-center hidden lg:flex lg:items-end lg:justify-between lg:w-fit lg:col-span-4 p-auto font-dosis font-semibold text-lg animate-slide-in-top-1';
-const subNavClassName = 'px-5';
-const thirdDivClassName = 'items-center justify-self-end lg:col-span-1';
-const appearanceToggleClassname = 'hidden lg:flex lg:flex-row';
-const menuToggleClassName = 'menu-toggle block lg:hidden';
-
-/**
- * Notes
- * F is first path element
- * I is the second path element
- */
-
-const NavBar = ({ navs }: { navs: any }) => {
-  const { darkMode, toggleDarkMode } = useDarkMode();
+const NavBar = ({ navs }: { navs: Nav[] }) => {
+  const { theme, setTheme } = useTheme();
 
   return (
-    <div className={headerClassName}>
-      <div className={gridDivClassName}>
-        <nav key="brand" className={brandNavClassName}>
-          <NavLink to="/" className={primaryNavClassName}>
+    <div className="navbar w-full shrink-0 px-4vw py-2 md:py-4 lg:py-5 items-center">
+      <div className="grid grid-cols-[1fr_auto_1fr] items-center w-full max-w-7xl mx-auto gap-2 sm:gap-4">
+        <nav key="brand" className="justify-self-start flex min-w-0 items-end animate-slide-in-left-1">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `font-dosis font-bold text-2xl flex items-center h-16 hover:text-primary dark:hover:text-secondary ${isActive ? 'text-primary dark:text-secondary active' : 'text-tertiary'}`
+            }
+          >
             {({ isActive }) => (
-              <div className="flex h-[48px] w-[48px] items-center md:h-[64px] md:w-[64px]">
-                <div className="h-full">
-                  <IFIcon
-                    className={`icon-stacked h-[48px] w-[48px] md:h-[64px] md:w-[64px] ${isActive && 'icon-shift'}`}
-                  />
-                </div>
-                <div className="w-full text-nowrap">
-                  {!isActive && 'Irfan Filipovic'}
-                </div>
+              <div className="flex min-w-0 shrink-0 items-center gap-1 sm:gap-2">
+                <IFIcon
+                  className={`icon-stacked h-[48px] w-[48px] shrink-0 sm:h-[56px] sm:w-[56px] md:h-[64px] md:w-[64px] ${isActive && 'icon-shift'}`}
+                />
+                {!isActive && (
+                  <span className="min-w-0 truncate">Irfan Filipovic</span>
+                )}
               </div>
             )}
           </NavLink>
         </nav>
-        <div className={secondDivClassName}>
+        <div className="flex shrink-0 items-center justify-center">
+          <nav className="hidden sm:flex sm:items-center sm:justify-center sm:gap-6 md:gap-8 font-dosis font-semibold text-base md:text-lg animate-slide-in-top-1">
           {navs.map((stack: Nav) => (
-            <nav key={stack.id} className={subNavClassName}>
-              <NavLink to={stack.id} className={subNavLinkClassName}>
+            <nav key={stack.id} className="px-5">
+              <NavLink
+                to={stack.id}
+                className={({ isActive }) =>
+                  `font-mulish font-semibold text-base md:text-xl h-12 sm:h-14 md:h-16 flex items-center hover:text-primary dark:hover:text-secondary ${isActive ? 'text-primary dark:text-secondary active' : 'text-on-surface'}`
+                }
+              >
                 {stack.name}
               </NavLink>
             </nav>
           ))}
+          </nav>
         </div>
-        <div className={thirdDivClassName}>
-          <AppearanceToggle
-            className={appearanceToggleClassname}
-            darkMode={darkMode}
-            toggleDarkMode={toggleDarkMode}
-          />
-          <MenuToggle
-            className={menuToggleClassName}
-            darkMode={darkMode}
-            toggleDarkMode={toggleDarkMode}
-            navs={navs}
-          />
+        <div className="flex shrink-0 items-center justify-self-end gap-2">
+          <ThemeToggle theme={theme} setTheme={setTheme} />
+          <MenuToggle className="menu-toggle block sm:hidden" navs={navs} />
         </div>
       </div>
     </div>
