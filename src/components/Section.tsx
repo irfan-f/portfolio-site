@@ -26,7 +26,7 @@ const Section: FC<SectionProps> = ({
   const Content = (
     <div className="section-content">
       {title && (
-        <h2 className="font-dosis text-accent text-3xl font-bold antialiased">
+        <h2 className="font-dosis text-teal text-3xl font-bold antialiased">
           {title}
         </h2>
       )}

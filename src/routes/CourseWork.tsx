@@ -67,7 +67,7 @@ function CourseContent({ topic }: { topic: CourseTopic }) {
     <div className="mx-auto w-full max-w-md space-y-2 px-6 text-left sm:px-12">
       <h2
         id={`course-heading-${topic.id}`}
-        className="font-dosis text-accent text-xl font-bold"
+        className="font-dosis text-teal text-xl font-bold"
       >
         {topic.title}
       </h2>
@@ -112,12 +112,12 @@ function CourseNavButton({
       title={title}
       onClick={onClick}
       className={`hover:bg-secondary/30 focus-visible:ring-primary flex min-w-0 shrink cursor-pointer items-center justify-center rounded-lg p-2 transition-colors focus:outline-none focus-visible:ring-1 sm:p-3 ${
-        isActive ? 'bg-secondary/30 text-accent' : 'text-on-surface'
+        isActive ? 'bg-secondary/30 text-teal' : 'text-on-surface'
       }`}
     >
       <Icon
         src={iconSrc}
-        className="svg-primary h-6 w-6 min-w-0 shrink sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-12 lg:w-12"
+        className={`h-6 w-6 min-w-0 shrink sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-12 lg:w-12 ${isActive ? 'svg-teal' : 'svg-primary'}`}
         aria-hidden
       />
     </button>

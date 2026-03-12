@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ImageWithLoader from './ImageWithLoader';
-import type { ProjectMeta } from '../types/project';
+import type { ProjectMeta, ProjectStats } from '../types/project';
 
 interface ProjectDetailProps {
   project: ProjectMeta;
@@ -44,6 +44,16 @@ function ProjectDetailImage({
 }
 
 const ProjectDetail: FC<ProjectDetailProps> = ({ project }) => {
+  const [stats, setStats] = useState<ProjectStats | null>(null);
+
+  useEffect(() => {
+    if (!project.statsUrl) return;
+    fetch(project.statsUrl)
+      .then((res) => (res.ok ? res.json() : Promise.reject(new Error('Stats failed'))))
+      .then((data: ProjectStats) => setStats(data))
+      .catch(() => {});
+  }, [project.statsUrl]);
+
   return (
     <section className="project-section">
       <div className="flex flex-col justify-between lg:col-start-1 lg:col-end-2">
@@ -58,12 +68,31 @@ const ProjectDetail: FC<ProjectDetailProps> = ({ project }) => {
           <h3 className="project-subtitle">{project.subtitle}</h3>
         </div>
         <p className="project-paragraph">{project.description}</p>
-        <Link
-          to="/projects"
-          className="font-libre text-primary dark:text-secondary hover:underline"
-        >
-          Back to projects
-        </Link>
+        {stats && (
+          <p className="font-mulish text-on-surface text-sm">
+            Live: {stats.users} users · {stats.lobbies} lobbies · {stats.games} games
+          </p>
+        )}
+        <div className="flex flex-wrap gap-4">
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-libre text-teal hover:underline"
+              aria-label={`${project.title} on GitHub`}
+              title={`${project.title} on GitHub`}
+            >
+              GitHub
+            </a>
+          )}
+          <Link
+            to="/projects"
+            className="font-libre text-primary dark:text-secondary hover:underline"
+          >
+            Back to projects
+          </Link>
+        </div>
       </div>
     </section>
   );

@@ -9,7 +9,7 @@ interface MenuToggleProps {
 }
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-  `rounded-md px-4 py-3 text-base font-medium transition-colors ${isActive ? 'text-primary bg-secondary/30' : 'text-on-surface hover:bg-secondary/20'}`;
+  `rounded-md px-4 py-3 text-base font-medium transition-colors ${isActive ? 'text-teal bg-secondary/30' : 'text-on-surface hover:bg-secondary/20'}`;
 
 const MenuToggle: FC<MenuToggleProps & HTMLAttributes<HTMLElement>> = ({
   navs,
