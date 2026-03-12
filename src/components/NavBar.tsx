@@ -19,7 +19,7 @@ const NavBar = ({ navs }: { navs: Nav[] }) => {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `font-dosis hover:text-primary flex h-16 items-center text-2xl font-bold ${isActive ? 'text-primary active' : 'text-tertiary'}`
+              `font-dosis hover:text-teal flex h-16 items-center text-2xl font-bold ${isActive ? 'text-teal active' : 'text-teal'}`
             }
           >
             {({ isActive }) => (
@@ -42,7 +42,7 @@ const NavBar = ({ navs }: { navs: Nav[] }) => {
                 <NavLink
                   to={stack.id}
                   className={({ isActive }) =>
-                    `font-mulish hover:text-primary flex h-12 items-center text-base font-semibold lg:h-16 lg:text-xl ${isActive ? 'text-primary active' : 'text-on-surface'}`
+                    `font-mulish hover:text-teal flex h-12 items-center text-base font-semibold lg:h-16 lg:text-xl ${isActive ? 'text-teal active' : 'text-on-surface'}`
                   }
                 >
                   {stack.name}

@@ -20,6 +20,7 @@
   --color-surface: var(--surface);
   --color-surface-panel: var(--surface-panel);
   --color-tertiary: var(--tertiary);
+  --color-teal: var(--teal);
   --color-bonus: var(--bonus);
   --color-muted: var(--text-muted);
   --color-on-surface: var(--text-on-surface);
@@ -137,6 +138,7 @@
   --btn-nav-hover: rgba(0, 0, 0, 0.06);
   --primary: #2AA298;
   --accent: #2AA298;
+  --teal: #2AA298;
   --secondary: #d3e8f8;
   --tertiary: #82AAFF;
   --bonus: #bfd7ea;
@@ -167,6 +169,7 @@
   --btn-nav-hover: rgba(255, 255, 255, 0.08);
   --primary: #7e57c2;
   --accent: #7e57c2;
+  --teal: #82AAFF;
   --secondary: #5f7e97;
   --tertiary: #5F7E97;
   --bonus: #8fb4d4;
@@ -181,7 +184,7 @@
   --border: #5f7e97;
   --error: #EF5350;
   --logo-I: #7e57c2;
-  --logo-F: #5F7E97;
+  --logo-F: #82AAFF;
   --bg-primary: var(--surface);
   --bg-opposite: var(--inverse);
   --text-primary: var(--text-on-surface);
@@ -225,7 +228,16 @@
   }
 
   .svg-stroke-only svg,
-  .svg-stroke-icon {
+  .icon-svg.svg-stroke-icon {
+    fill: none;
+    stroke: currentColor;
+  }
+
+  .svg-teal svg {
+    stroke: var(--teal);
+    fill: var(--teal);
+  }
+  .svg-teal svg.svg-stroke-icon {
     fill: none;
   }
 
@@ -413,7 +425,7 @@
     font-family: var(--font-family-mulish);
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--accent);
+    color: var(--teal);
   }
 
   @media (width >= 1024px) {
@@ -433,11 +445,7 @@
     font-family: var(--font-family-dosis);
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--primary);
-  }
-
-  .dark .project-subtitle {
-    color: var(--secondary);
+    color: var(--teal);
   }
 
   @media (width >= 1024px) {

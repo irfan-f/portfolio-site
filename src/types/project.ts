@@ -14,4 +14,12 @@ export interface ProjectMeta {
   imageAlt: string;
   description: string;
   url?: string;
+  statsUrl?: string;
+  githubUrl?: string;
+}
+
+export interface ProjectStats {
+  users: number;
+  lobbies: number;
+  games: number;
 }

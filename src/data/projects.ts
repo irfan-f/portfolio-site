@@ -12,6 +12,7 @@ export const projects: ProjectMeta[] = [
     description:
       'Timeline app with tags, school-year dates, and theme support. Built with React, Vite, and Tailwind v4.',
     url: 'https://irfan-f.github.io/todate/',
+    githubUrl: 'https://github.com/irfan-f/todate',
   },
   {
     id: 'mahjong',
@@ -20,6 +21,9 @@ export const projects: ProjectMeta[] = [
     imageSrc: mahjongIcon,
     imageAlt: 'Mahjong tile icon',
     description:
-      "Web and mobile Mahjong for playing online with friends. Existing apps didn't fit our needs, so building our own—in active development.",
+      'Real-time multiplayer Mahjong in the browser. Full-stack app with Firebase auth, Express API, and live game stats.',
+    url: 'https://irfan-f.github.io/mahjong-frontend/',
+    statsUrl: 'https://irfquake.tech/api/stats',
+    githubUrl: 'https://github.com/irfan-f/mahjong-frontend',
   },
 ];
