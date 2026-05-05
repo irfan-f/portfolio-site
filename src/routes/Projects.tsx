@@ -14,12 +14,12 @@ const ProjectsGrid: FC = () => {
         <title>Projects — Irfan Filipovic</title>
         <meta
           name="description"
-          content="Software development projects by Irfan Filipovic, including todate, Mahjong with Friends, and Hammerspoon automations."
+          content="Software development projects by Irfan Filipovic, including Mahjong with Friends, Hammerspoon automations, and todate."
         />
         <meta property="og:title" content="Projects — Irfan Filipovic" />
         <meta
           property="og:description"
-          content="Software development projects by Irfan Filipovic, including todate, Mahjong with Friends, and Hammerspoon automations."
+          content="Software development projects by Irfan Filipovic, including Mahjong with Friends, Hammerspoon automations, and todate."
         />
         <meta property="og:url" content={`${SITE_URL}/#/projects`} />
         <meta property="og:image" content={`${SITE_URL}/images/irfan.png`} />
