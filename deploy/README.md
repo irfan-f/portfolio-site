@@ -1,14 +1,27 @@
 # Deploy — Hostinger VPS (irfan-f.com)
 
-Static build output (`dist/`) is served by nginx at `/var/www/portfolio-site`. CI deploys on push to `main` via SSH/rsync as user **`deploy-portfolio`**.
+Static build output (`dist/`) is served by nginx at `/var/www/portfolio-site`. **Deploy manually** from your machine via SSH/rsync as user **`deploy-portfolio`**.
 
 Admin tasks (nginx, certbot, docker) use your normal VPS login (e.g. `irf`). Do not use `deploy-portfolio` for those.
 
-## First push / DNS cutover (checklist)
+GitHub Actions runs **build/tests on pull requests only** — it does not push to the VPS.
+
+## Deploy (every release)
+
+```bash
+npm run build
+rsync -avz --delete \
+  -e "ssh -i ~/.ssh/id_ed25519_portfolio_deploy" \
+  dist/ deploy-portfolio@YOUR_VPS_IP:/var/www/portfolio-site/
+```
+
+Replace `YOUR_VPS_IP` with the Hostinger VPS address.
+
+## One-time VPS setup
 
 Do **not** install `deploy/nginx/portfolio-site.conf` until Let's Encrypt certs exist — that file references `/etc/letsencrypt/live/irfan-f.com/` and `nginx -t` will fail without them.
 
-### 1. VPS — deploy user and web root
+### 1. Deploy user and web root
 
 SSH as `irf` (or your admin user):
 
@@ -21,7 +34,7 @@ sudo chmod 700 /home/deploy-portfolio/.ssh
 On your Mac, create a deploy-only key:
 
 ```bash
-ssh-keygen -t ed25519 -C "github-portfolio-deploy" -f ~/.ssh/id_ed25519_portfolio_deploy
+ssh-keygen -t ed25519 -C "portfolio-deploy" -f ~/.ssh/id_ed25519_portfolio_deploy
 ```
 
 On the VPS, add the public key:
@@ -47,7 +60,7 @@ ssh -i ~/.ssh/id_ed25519_portfolio_deploy deploy-portfolio@YOUR_VPS_IP \
   'touch /var/www/portfolio-site/.write-test && rm /var/www/portfolio-site/.write-test && echo ok'
 ```
 
-### 2. VPS — temporary HTTP nginx
+### 2. Temporary HTTP nginx
 
 Create `/etc/nginx/sites-available/portfolio-site` (HTTP only until TLS exists):
 
@@ -85,27 +98,16 @@ sudo nginx -t && sudo systemctl reload nginx
 
 Confirm Mahjong is unchanged (`irfquake.tech` vhost is separate).
 
-### 3. GitHub repository secrets
+### 3. First manual deploy
 
-| Secret | Value |
-|--------|--------|
-| `HOSTINGER_SSH_HOST` | VPS IP or hostname |
-| `HOSTINGER_SSH_USER` | `deploy-portfolio` |
-| `HOSTINGER_SSH_KEY` | full private PEM for `id_ed25519_portfolio_deploy` |
-| `HOSTINGER_DEPLOY_PATH` | `/var/www/portfolio-site` |
-
-### 4. Merge to `main` and watch Actions
-
-Merge the deploy PR. The workflow builds and rsyncs `dist/` to the VPS.
-
-On the VPS after a green run:
+Run the [Deploy](#deploy-every-release) commands above, then on the VPS:
 
 ```bash
 ls -la /var/www/portfolio-site/
 curl -I -H "Host: irfan-f.com" http://127.0.0.1/
 ```
 
-### 5. Cloudflare DNS
+### 4. Cloudflare DNS
 
 1. Remove GitHub Pages `185.199.*` A records and any `www` CNAME to `*.github.io`.
 2. Add `@` → **A** → VPS IPv4, and `www` → **A** (same IP) or **CNAME** → `irfan-f.com`.
@@ -117,13 +119,13 @@ curl -I -H "Host: irfan-f.com" http://127.0.0.1/
    dig +short www.irfan-f.com
    ```
 
-### 6. TLS on the VPS
+### 5. TLS on the VPS
 
 ```bash
 sudo certbot --nginx -d irfan-f.com -d www.irfan-f.com
 ```
 
-### 7. Install full nginx config
+### 6. Install full nginx config
 
 ```bash
 sudo cp deploy/nginx/portfolio-site.conf /etc/nginx/sites-available/portfolio-site
@@ -132,7 +134,7 @@ sudo nginx -t && sudo systemctl reload nginx
 
 (Optional) Re-enable Cloudflare proxy (orange cloud) and set SSL/TLS to **Full (strict)**.
 
-### 8. Verify and retire GitHub Pages
+### 7. Verify and retire GitHub Pages
 
 ```bash
 curl -I https://irfan-f.com
@@ -144,20 +146,11 @@ Deep links must return `200` with SPA fallback, not `404`.
 
 Disable GitHub Pages in repo settings after HTTPS works. Purge Cloudflare cache if the old site still appears.
 
-## Manual deploy
-
-```bash
-npm run build
-rsync -avz --delete \
-  -e "ssh -i ~/.ssh/id_ed25519_portfolio_deploy" \
-  dist/ deploy-portfolio@YOUR_VPS_IP:/var/www/portfolio-site/
-```
-
 ## Troubleshooting
 
 | Symptom | Likely fix |
 |---------|------------|
-| Actions SSH fails | `deploy-portfolio` key in `authorized_keys`, path ownership |
+| rsync permission denied | `deploy-portfolio` key in `authorized_keys`, path ownership |
 | `nginx -t` fails on repo config | Run certbot first; use HTTP-only config until certs exist |
 | certbot fails | DNS not on VPS yet, or Cloudflare proxied (orange cloud) during HTTP-01 |
 | Old GitHub Pages content | DNS/cache; purge Cloudflare, check `dig` |

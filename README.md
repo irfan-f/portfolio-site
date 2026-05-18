@@ -30,7 +30,7 @@ npm run dev
 
 ## Deploy
 
-Production deploys on push to `main` via GitHub Actions (rsync to Hostinger VPS). See [deploy/README.md](deploy/README.md) for one-time nginx setup, TLS, repository secrets, and DNS cutover.
+Production is on **Hostinger VPS** at [irfan-f.com](https://irfan-f.com). Deploy manually with `npm run build` and rsync (see [deploy/README.md](deploy/README.md) for VPS setup, TLS, and DNS).
 
 ## Images
 
