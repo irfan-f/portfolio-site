@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 export type Theme = 'light' | 'dark' | 'system';
 
@@ -22,25 +22,50 @@ function getStoredTheme(): Theme {
   return 'system';
 }
 
+function syncThemeColorMeta(isDark: boolean): void {
+  const meta = document.getElementById('theme-color-meta');
+  if (meta) meta.setAttribute('content', isDark ? '#18181b' : '#ffffff');
+}
+
+function prefersReducedMotion(): boolean {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
 function applyTheme(theme: Theme): void {
   const isDark =
     theme === 'dark' ||
     (theme === 'system' &&
       window.matchMedia('(prefers-color-scheme: dark)').matches);
   document.documentElement.classList.toggle('dark', isDark);
+  syncThemeColorMeta(isDark);
+}
+
+function applyThemeWithTransition(theme: Theme): void {
+  const update = () => applyTheme(theme);
+  if (prefersReducedMotion() || typeof document.startViewTransition !== 'function') {
+    update();
+    return;
+  }
+  document.startViewTransition(update);
 }
 
 export function useTheme() {
   const [theme, setThemeState] = useState<Theme>(getStoredTheme);
+  const isInitialMount = useRef(true);
 
   useEffect(() => {
-    applyTheme(theme);
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      applyTheme(theme);
+      return;
+    }
+    applyThemeWithTransition(theme);
   }, [theme]);
 
   useEffect(() => {
     if (theme !== 'system') return;
     const mq = window.matchMedia('(prefers-color-scheme: dark)');
-    const listener = () => applyTheme('system');
+    const listener = () => applyThemeWithTransition('system');
     mq.addEventListener('change', listener);
     return () => mq.removeEventListener('change', listener);
   }, [theme]);

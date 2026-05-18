@@ -1,21 +1,41 @@
+import imageMeta from '../data/image-meta.json';
+
 export interface Image {
   src: string;
   webp?: string;
   avif?: string;
+  responsiveBase?: string;
+  responsiveWidths?: number[];
   width: number;
   height: number;
+  sizes?: string;
   alt?: string;
 }
 
 const IMG = '/images';
-const DEFAULT_ASPECT = { width: 16, height: 9 };
+const GALLERY_RESPONSIVE_WIDTHS = [480, 720, 960, 1280] as const;
+const GALLERY_SIZES = '(max-width: 768px) 100vw, 42rem';
+
+type MetaEntry = { width: number; height: number };
+
+function dimensions(base: string): { width: number; height: number } {
+  const entry = (imageMeta as Record<string, MetaEntry>)[base];
+  if (entry) return entry;
+  return { width: 16, height: 9 };
+}
 
 function toImage(base: string, alt?: string): Image {
+  const { width, height } = dimensions(base);
+  const responsiveWidths = GALLERY_RESPONSIVE_WIDTHS.filter((w) => w <= width);
   return {
-    src: `${IMG}/${base}.png`,
+    src: `${IMG}/${base}.webp`,
     webp: `${IMG}/${base}.webp`,
     avif: `${IMG}/${base}.avif`,
-    ...DEFAULT_ASPECT,
+    responsiveBase: `${IMG}/${base}`,
+    ...(responsiveWidths.length > 0 && { responsiveWidths: [...responsiveWidths] }),
+    width,
+    height,
+    sizes: GALLERY_SIZES,
     ...(alt && { alt }),
   };
 }
@@ -30,5 +50,5 @@ export const cookingImages: Image[] = [
   toImage('backpacking', 'Backpacking cooking'),
 ];
 export const placeHolderImages: Image[] = [
-  toImage('irfancartoon', 'Placeholder'),
+  toImage('irfancartoon', 'Cartoon illustration of Irfan'),
 ];

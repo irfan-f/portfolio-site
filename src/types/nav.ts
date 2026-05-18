@@ -6,5 +6,6 @@ export interface Nav {
 export const navs: Nav[] = [
   { id: 'projects', name: 'Projects' },
   { id: 'me', name: 'About Me' },
-  { id: 'courses', name: 'Course Work' },
+  // Course Work: not enough substance yet — re-enable with App route + tests.
+  // { id: 'courses', name: 'Course Work' },
 ];

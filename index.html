@@ -3,8 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="theme-color" content="#FBFBFB" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#011627" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" id="theme-color-meta" />
     <meta
       name="description"
       content="Site for Irfan Filipovic, detailing software development projects and various other interests."
@@ -20,20 +19,24 @@
     <meta name="twitter:image" content="https://irfan-f.com/images/irfan.png" />
     <link rel="icon" type="image/svg+xml" href="/icon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="preload" as="image" href="/images/irfan.png" />
+    <link rel="preload" as="image" href="/images/irfan-720.avif" type="image/avif" />
     <title>Irfan Filipovic</title>
     <script>
-      (function(){var t=localStorage.theme,d=localStorage.darkMode;var dark=(t==="dark")||(t!=="light"&&!(t||d)&&window.matchMedia("(prefers-color-scheme: dark)").matches)||(d==="true");document.documentElement.classList.toggle("dark",dark);})();
+      (function(){var t=localStorage.theme,d=localStorage.darkMode;var dark=(t==="dark")||(t!=="light"&&!(t||d)&&window.matchMedia("(prefers-color-scheme: dark)").matches)||(d==="true");document.documentElement.classList.toggle("dark",dark);var m=document.getElementById("theme-color-meta");if(m)m.setAttribute("content",dark?"#18181b":"#ffffff");})();
     </script>
     <style>
-      html { height: 100%; width: 100%; background-color: #FBFBFB; }
-      html.dark { background-color: #011627; }
-      body { min-height: 100%; height: 100%; width: 100%; overflow: hidden; margin: 0; background-color: inherit; transition: background-color 0.2s ease; }
+      html { height: 100%; width: 100%; background-color: #ffffff; }
+      html.dark { background-color: #18181b; }
+      body { min-height: 100%; height: 100%; width: 100%; overflow: hidden; margin: 0; background-color: inherit; transition: background-color 0.25s ease; }
+      html { transition: background-color 0.25s ease; }
       #root { height: 100%; min-height: 0; }
+      .skip-link { position: fixed; left: 1rem; top: 1rem; z-index: 999; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; background: transparent; font: inherit; cursor: pointer; }
+      .nav-brand-reveal { overflow: hidden; }
+      html:not(.fonts-ready) .nav-brand-reveal { visibility: hidden; }
     </style>
   </head>
   <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <button type="button" class="skip-link">Skip to main content</button>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>

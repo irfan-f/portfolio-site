@@ -1,17 +1,30 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import { Helmet } from 'react-helmet-async';
-import { Routes, Route, useParams } from 'react-router-dom';
 import ProjectCard from '../components/ProjectCard';
-import ProjectDetail from '../components/ProjectDetail';
 import { projects } from '../data/projects';
+import { useProjectGridColumnCount } from '../hooks/useProjectGridColumnCount';
+import {
+  listStaggerOpacityOnlyForLayoutCells,
+  projectGridLayoutTransition,
+} from '../motion/entranceVariants';
+import { SITE_URL } from '../data/site';
 
-const SITE_URL = 'https://irfan-f.com';
+const Projects: FC = () => {
+  const reducedMotionPreference = useReducedMotion();
+  const reduceMotion = reducedMotionPreference === true;
+  const { container, item } = useMemo(
+    () => listStaggerOpacityOnlyForLayoutCells(reduceMotion),
+    [reduceMotion],
+  );
+  const gridLayoutTransition = projectGridLayoutTransition(reduceMotion);
+  const gridColumnCount = useProjectGridColumnCount();
 
-const ProjectsGrid: FC = () => {
   return (
     <>
       <Helmet>
         <title>Projects — Irfan Filipovic</title>
+        <link rel="canonical" href={`${SITE_URL}/projects`} />
         <meta
           name="description"
           content="Software development projects by Irfan Filipovic, including Mahjong with Friends, Hammerspoon automations, and todate."
@@ -21,75 +34,41 @@ const ProjectsGrid: FC = () => {
           property="og:description"
           content="Software development projects by Irfan Filipovic, including Mahjong with Friends, Hammerspoon automations, and todate."
         />
-        <meta property="og:url" content={`${SITE_URL}/#/projects`} />
-        <meta property="og:image" content={`${SITE_URL}/images/irfan.png`} />
+        <meta property="og:url" content={`${SITE_URL}/projects`} />
+        <meta property="og:image" content={`${SITE_URL}/images/irfan.webp`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Projects — Irfan Filipovic" />
         <meta
           name="twitter:description"
           content="Software development projects by Irfan Filipovic."
         />
-        <meta name="twitter:image" content={`${SITE_URL}/images/irfan.png`} />
+        <meta name="twitter:image" content={`${SITE_URL}/images/irfan.webp`} />
       </Helmet>
-      <main className="px-4 py-8">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
-      </main>
+      <h1 className="sr-only">Projects</h1>
+      {/* CSS Grid (not flex-wrap): 1 col default, 2 from `md`, 3 from `lg` — see useProjectGridColumnCount breakpoints */}
+      <motion.section
+        aria-label="Project grid"
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="layout-shift-smooth mx-auto grid w-full max-w-7xl grid-cols-1 gap-6 px-4 py-8 md:grid-cols-2 lg:grid-cols-3"
+      >
+        {projects.map((project) => (
+          <motion.div
+            key={project.id}
+            layout
+            layoutDependency={gridColumnCount}
+            transition={gridLayoutTransition}
+            variants={item}
+            initial="hidden"
+            animate="show"
+            className="flex min-h-0 h-full"
+          >
+            <ProjectCard project={project} />
+          </motion.div>
+        ))}
+      </motion.section>
     </>
-  );
-};
-
-const ProjectDetailRoute: FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const project = projects.find((p) => p.id === id);
-
-  if (!project) {
-    return (
-      <main className="px-4 py-8">
-        <p className="text-on-surface">Project not found.</p>
-      </main>
-    );
-  }
-
-  return (
-    <>
-      <Helmet>
-        <title>{project.title} — Irfan Filipovic</title>
-        <meta name="description" content={project.description} />
-        <meta
-          property="og:title"
-          content={`${project.title} — Irfan Filipovic`}
-        />
-        <meta property="og:description" content={project.description} />
-        <meta
-          property="og:url"
-          content={`${SITE_URL}/#/projects/${project.id}`}
-        />
-        <meta property="og:image" content={`${SITE_URL}/images/irfan.png`} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content={`${project.title} — Irfan Filipovic`}
-        />
-        <meta name="twitter:description" content={project.description} />
-        <meta name="twitter:image" content={`${SITE_URL}/images/irfan.png`} />
-      </Helmet>
-      <main className="px-4 py-8">
-        <ProjectDetail project={project} />
-      </main>
-    </>
-  );
-};
-
-const Projects: FC = () => {
-  return (
-    <Routes>
-      <Route index element={<ProjectsGrid />} />
-      <Route path=":id" element={<ProjectDetailRoute />} />
-    </Routes>
   );
 };
 

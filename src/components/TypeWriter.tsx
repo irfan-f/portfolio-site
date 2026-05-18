@@ -1,49 +1,97 @@
-import { useState, FC, useEffect, HTMLAttributes } from 'react';
+import { FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
+import { animate, useReducedMotion } from 'motion/react';
 
 interface TypeWriterProps {
   text: string;
   delay?: number;
+  /** When false, typing is paused and the display is cleared. */
+  active?: boolean;
 }
 
-const TypeWriter: FC<TypeWriterProps & HTMLAttributes<HTMLElement>> = ({
+const TypeWriter: FC<TypeWriterProps & HTMLAttributes<HTMLDivElement>> = ({
   className,
   text,
-  delay = 500,
+  delay = 240,
+  active = true,
+  ...rest
 }) => {
-  const [textToDisplay, setTextToDisplay] = useState('');
-  const [showCaret, setShowCaret] = useState(false);
+  const reduceMotion = useReducedMotion();
+  const [visibleCount, setVisibleCount] = useState(0);
+  const caretRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setShowCaret((prev) => !prev);
-    }, 600);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-  useEffect(() => {
-    if (textToDisplay.length < text.length) {
-      const timeoutId = setTimeout(() => {
-        setTextToDisplay(text.slice(0, textToDisplay.length + 1));
-      }, delay);
-      return () => clearTimeout(timeoutId);
+    if (!active) {
+      setVisibleCount(0);
+      return;
     }
-  }, [textToDisplay, text, delay]);
+
+    if (reduceMotion === true) {
+      setVisibleCount(text.length);
+      return;
+    }
+
+    if (text.length === 0) {
+      setVisibleCount(0);
+      return;
+    }
+
+    setVisibleCount(0);
+    let cancelled = false;
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    const schedule = (nextCount: number) => {
+      if (cancelled || nextCount > text.length) return;
+      timeoutId = window.setTimeout(() => {
+        setVisibleCount(nextCount);
+        schedule(nextCount + 1);
+      }, delay);
+    };
+
+    schedule(1);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timeoutId);
+    };
+  }, [active, delay, reduceMotion, text]);
+
+  useEffect(() => {
+    const el = caretRef.current;
+    if (!el || reduceMotion === true) return;
+
+    el.style.opacity = '1';
+    const controls = animate(
+      el,
+      { opacity: [1, 0, 1] },
+      {
+        repeat: Infinity,
+        duration: 0.85,
+        ease: 'easeInOut',
+      },
+    );
+
+    return () => {
+      controls.stop();
+    };
+  }, [reduceMotion]);
+
+  const visibleSlice = text
+    .slice(0, visibleCount)
+    .replace(/ /g, '\u00A0');
 
   return (
-    <div className={`${className} relative`}>
-      <div className="invisible w-fit" aria-hidden>
+    <div className={`${className} relative inline-grid justify-items-start`} {...rest}>
+      <p className="sr-only">{text}</p>
+      <span className="invisible col-start-1 row-start-1 whitespace-pre" aria-hidden>
         {text}
-      </div>
-      <div className="absolute top-0 left-0">
-        {textToDisplay}
+      </span>
+      <span className="col-start-1 row-start-1 inline-flex items-center gap-0.5 self-start whitespace-pre" aria-hidden>
+        <span>{visibleSlice}</span>
         <span
-          className={`absolute -top-1 ${showCaret ? 'opacity-100' : 'opacity-0'}`}
-          aria-hidden
-        >
-          |
-        </span>
-      </div>
+          ref={caretRef}
+          className="inline-block h-[1cap] w-[0.09em] max-w-[3px] shrink-0 self-center rounded-[1px] bg-current"
+        />
+      </span>
     </div>
   );
 };
