@@ -1,47 +1,74 @@
 # Portfolio site
 
-Personal site built with **React**, **Vite**, and **Tailwind**, deployed to **Hostinger VPS** at [irfan-f.com](https://irfan-f.com).
+Personal site at **[irfan-f.com](https://irfan-f.com)**
+
+## What it is
+
+A single-page React app with client-side routing: **Home**, **Projects**, and **About Me**. Project cards link out to live demos and GitHub repos. The site itself is mostly presentation — typography, motion, responsive layout, theme, and image delivery.
 
 ## Stack
 
-- React 18, React Router 6 (`BrowserRouter` with nginx SPA fallback)
-- TypeScript, Vite 6
-- Tailwind CSS 4
-- `react-helmet-async` for page metadata
-- Variable fonts via Fontsource (Dosis, Libre Franklin, Mulish)
+| Layer | Choice |
+|-------|--------|
+| UI | React 18, TypeScript |
+| Build | Vite 6 |
+| Styling | Tailwind CSS 4 (semantic tokens in `src/styles/index.css`) |
+| Routing | React Router 6 (`BrowserRouter`; nginx SPA fallback in production) |
+| Motion | Motion (`motion/react`) with `prefers-reduced-motion` respected |
+| Metadata | `react-helmet-async` per route |
+| Fonts | Fontsource variable faces (Dosis, Libre Franklin, Mulish) |
+| Hosting | Hostinger VPS — static `dist/` behind nginx + Let's Encrypt |
 
-## Run locally
+## Architecture notes
 
-```bash
-npm install
-cp -r public.example public   # once: icons + minimal static files (public/ is gitignored)
-npm run dev
+**Theme before paint.** An inline script in `index.html` reads `localStorage.theme` (and legacy `darkMode`) and toggles the `dark` class on `<html>` before React mounts, with matching `theme-color` and background colors so light/dark does not flash.
+
+**Route-level code splitting.** `Me` and `Projects` load via `React.lazy`; `Home` stays in the main bundle. A dev-only `/dev/cards` preview route exists for card layout experiments.
+
+**Page transitions.** `PageTransition` wraps routes and coordinates enter/exit motion; list sections use shared entrance variants from `src/motion/`.
+
+**Images.** Responsive AVIF/WebP variants are generated from masters via `scripts/generate-images.mjs` (local, gitignored). Runtime picks format/width using `src/data/image-meta.json` and helpers in `src/utils/images.ts`. Photo binaries live in local `public/images/` and are not committed.
+
+**Icons.** SVGs are defined in `src/icons.ts`, preloaded in `src/iconCache.ts`, and rendered through a small `Icon` component so stroke icons follow `currentColor` in both themes.
+
+**Accessibility.** Skip link to `#main-content`, drawer navigation with focus trap on mobile, theme toggle with explicit labels, and Playwright smoke tests for routing, theme persistence, and key interactions.
+
+## Repository layout
+
+```
+src/
+  routes/          Home, Me, Projects (+ dev preview)
+  components/      NavBar, cards, images, theme controls
+  data/            projects.ts, courses.ts, site.ts, image-meta.json
+  hooks/           theme, fonts-ready, skip-link, breakpoints
+  motion/          shared transition variants
+  styles/          Tailwind + design tokens
+public.example/    Committed template for icons and static files
+tests/             Playwright e2e (desktop + mobile projects)
 ```
 
-`deploy/` and `scripts/` are also gitignored; keep your VPS nginx configs and `scripts/generate-images.mjs` locally (see [public.example/README.md](public.example/README.md)).
-
-## Scripts
-
-| Script | Description |
-|--------|-------------|
-| `npm run dev` | Vite dev server |
-| `npm run build` | Typecheck + production build |
-| `npm run preview` | Serve `dist/` |
-| `npm run build:images` | Resize PNG/JPEG in `public/images/`, write WebP/AVIF + responsive variants |
-| `npm run lint` / `npm run format` | ESLint / Prettier |
-| `npm run test:e2e` | Playwright smoke tests |
-
-## Deploy
-
-Production is on **Hostinger VPS** at [irfan-f.com](https://irfan-f.com). Deploy manually with `npm run build` and rsync; keep VPS/nginx notes in your local `deploy/` directory (gitignored).
-
-## Images
-
-1. Add or replace masters in `public/images/` (or `scripts/sources/`).
-2. Run `npm run build:images` to resize (max 1280px wide), generate WebP/AVIF, and update `src/data/image-meta.json`.
-3. Keep optimized binaries in local `public/images/` (not committed).
+`public/`, `deploy/`, `scripts/`, and optimized image output are **gitignored** — they stay on the machine used to build and deploy. See `public.example/README.md` for what ships in git versus what you keep locally.
 
 ## Content
 
-- Project cards: `src/data/projects.ts`
-- About gallery: `src/utils/images.ts`
+| What | Where |
+|------|--------|
+| Project cards (title, copy, links) | `src/data/projects.ts` |
+| Nav items | `src/types/nav.ts` |
+| Site URL and feedback link copy | `src/data/site.ts` |
+| About gallery image keys | `src/utils/images.ts` |
+| Course work (disabled in nav for now) | `src/data/courses.ts`, `src/routes/CourseWork.tsx` |
+
+## CI and quality
+
+Pull requests run **build** (`tsc` + `vite build`) on Node 20 via GitHub Actions. E2E tests (`npm run test:e2e`) cover theme toggles, mobile drawer, project links, and route transitions; run them locally before larger UI changes.
+
+Deploy is manual: build, then rsync `dist/` to the VPS. Operational steps live in a local `deploy/README.md` (not in this repo).
+
+## Feedback
+
+Issues on this repo use templates for bugs, features, and tasks. The live site links to that flow for site-specific feedback; product bugs belong on the respective project repositories.
+
+## License
+
+[GNU GPL v3.0](LICENSE.md) (or later). Full license text: [gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html).
