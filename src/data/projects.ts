@@ -1,12 +1,10 @@
-import mahjongIcon from '../assets/photos/mahjong-icon.svg';
-import todateImage from '../assets/photos/todate-icon.svg';
 import type { ProjectMeta } from '../types/project';
 
 export const projects: ProjectMeta[] = [
   {
     id: 'mahjong',
     title: 'Mahjong with Friends',
-    imageSrc: mahjongIcon,
+    imageSrc: '/images/mahjong-icon.svg',
     imageAlt: 'Mahjong tile icon',
     description:
       'Real-time multiplayer Mahjong in the browser. Full-stack app with Firebase auth, Express API, and live game stats.',
@@ -27,7 +25,7 @@ export const projects: ProjectMeta[] = [
   {
     id: 'todate',
     title: 'todate',
-    imageSrc: todateImage,
+    imageSrc: '/images/todate-icon.svg',
     imageAlt: 'todate calendar and checklist icon',
     description:
       'Timeline app with tags, school-year dates, and theme support. Built with React, Vite, and Tailwind v4.',

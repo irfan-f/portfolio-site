@@ -3,6 +3,10 @@
 /node_modules
 /.pnp
 .pnp.js
+/deploy
+/public
+/scripts
+/src/assets
 
 # testing
 /coverage

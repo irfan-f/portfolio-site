@@ -46,7 +46,12 @@ function applyThemeWithTransition(theme: Theme): void {
     update();
     return;
   }
-  document.startViewTransition(update);
+  const root = document.documentElement;
+  root.classList.add('theme-transitioning');
+  const transition = document.startViewTransition(update);
+  void transition.finished.finally(() => {
+    root.classList.remove('theme-transitioning');
+  });
 }
 
 export function useTheme() {
