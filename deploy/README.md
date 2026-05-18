@@ -1,50 +1,138 @@
 # Deploy — Hostinger VPS (irfan-f.com)
 
-Static build output (`dist/`) is served by nginx at `/var/www/portfolio-site`. CI deploys on push to `main` via SSH/rsync.
+Static build output (`dist/`) is served by nginx at `/var/www/portfolio-site`. CI deploys on push to `main` via SSH/rsync as user **`deploy-portfolio`**.
 
-## One-time VPS setup
+Admin tasks (nginx, certbot, docker) use your normal VPS login (e.g. `irf`). Do not use `deploy-portfolio` for those.
 
-1. Create deploy directory:
-   ```bash
-   sudo mkdir -p /var/www/portfolio-site
-   sudo chown "$USER":"$USER" /var/www/portfolio-site
-   ```
+## First push / DNS cutover (checklist)
 
-2. Install nginx site config:
-   ```bash
-   sudo cp deploy/nginx/portfolio-site.conf /etc/nginx/sites-available/portfolio-site
-   sudo ln -sf /etc/nginx/sites-available/portfolio-site /etc/nginx/sites-enabled/
-   sudo nginx -t && sudo systemctl reload nginx
-   ```
+Do **not** install `deploy/nginx/portfolio-site.conf` until Let's Encrypt certs exist — that file references `/etc/letsencrypt/live/irfan-f.com/` and `nginx -t` will fail without them.
 
-3. TLS (after DNS points to this VPS):
-   ```bash
-   sudo certbot --nginx -d irfan-f.com -d www.irfan-f.com
-   ```
+### 1. VPS — deploy user and web root
 
-4. GitHub repository secrets:
-   - `HOSTINGER_SSH_HOST` — VPS hostname or IP
-   - `HOSTINGER_SSH_USER` — SSH user (e.g. `root` or deploy user)
-   - `HOSTINGER_SSH_KEY` — private key (full PEM)
-   - `HOSTINGER_DEPLOY_PATH` — `/var/www/portfolio-site`
-
-## DNS cutover
-
-| Record | Type | Value |
-|--------|------|--------|
-| `@` | A | VPS public IPv4 |
-| `www` | A or CNAME | same IP, or CNAME → `irfan-f.com` |
-
-Remove GitHub Pages `185.199.*` A records and any `gh-pages` CNAME. Disable GitHub Pages in repo settings after the first successful VPS deploy.
-
-## Manual deploy
+SSH as `irf` (or your admin user):
 
 ```bash
-npm run build
-rsync -avz --delete dist/ user@your-vps:/var/www/portfolio-site/
+sudo adduser --disabled-password --gecos "" deploy-portfolio
+sudo mkdir -p /home/deploy-portfolio/.ssh
+sudo chmod 700 /home/deploy-portfolio/.ssh
 ```
 
-## Verify
+On your Mac, create a deploy-only key:
+
+```bash
+ssh-keygen -t ed25519 -C "github-portfolio-deploy" -f ~/.ssh/id_ed25519_portfolio_deploy
+```
+
+On the VPS, add the public key:
+
+```bash
+sudo nano /home/deploy-portfolio/.ssh/authorized_keys
+sudo chmod 600 /home/deploy-portfolio/.ssh/authorized_keys
+sudo chown -R deploy-portfolio:deploy-portfolio /home/deploy-portfolio/.ssh
+```
+
+Create the web root:
+
+```bash
+sudo mkdir -p /var/www/portfolio-site
+sudo chown deploy-portfolio:www-data /var/www/portfolio-site
+sudo chmod 2775 /var/www/portfolio-site
+```
+
+Test SSH + write from your Mac:
+
+```bash
+ssh -i ~/.ssh/id_ed25519_portfolio_deploy deploy-portfolio@YOUR_VPS_IP \
+  'touch /var/www/portfolio-site/.write-test && rm /var/www/portfolio-site/.write-test && echo ok'
+```
+
+### 2. VPS — temporary HTTP nginx
+
+Create `/etc/nginx/sites-available/portfolio-site` (HTTP only until TLS exists):
+
+```nginx
+server {
+    listen 80;
+    listen [::]:80;
+    server_name irfan-f.com www.irfan-f.com;
+
+    root /var/www/portfolio-site;
+    index index.html;
+
+    location /assets/ {
+        try_files $uri =404;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+    }
+
+    location /images/ {
+        try_files $uri =404;
+        add_header Cache-Control "public, max-age=604800";
+    }
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+```
+
+Enable and reload:
+
+```bash
+sudo ln -sf /etc/nginx/sites-available/portfolio-site /etc/nginx/sites-enabled/
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+Confirm Mahjong is unchanged (`irfquake.tech` vhost is separate).
+
+### 3. GitHub repository secrets
+
+| Secret | Value |
+|--------|--------|
+| `HOSTINGER_SSH_HOST` | VPS IP or hostname |
+| `HOSTINGER_SSH_USER` | `deploy-portfolio` |
+| `HOSTINGER_SSH_KEY` | full private PEM for `id_ed25519_portfolio_deploy` |
+| `HOSTINGER_DEPLOY_PATH` | `/var/www/portfolio-site` |
+
+### 4. Merge to `main` and watch Actions
+
+Merge the deploy PR. The workflow builds and rsyncs `dist/` to the VPS.
+
+On the VPS after a green run:
+
+```bash
+ls -la /var/www/portfolio-site/
+curl -I -H "Host: irfan-f.com" http://127.0.0.1/
+```
+
+### 5. Cloudflare DNS
+
+1. Remove GitHub Pages `185.199.*` A records and any `www` CNAME to `*.github.io`.
+2. Add `@` → **A** → VPS IPv4, and `www` → **A** (same IP) or **CNAME** → `irfan-f.com`.
+3. For the first certificate, set both to **DNS only** (grey cloud).
+4. Confirm propagation:
+
+   ```bash
+   dig +short irfan-f.com
+   dig +short www.irfan-f.com
+   ```
+
+### 6. TLS on the VPS
+
+```bash
+sudo certbot --nginx -d irfan-f.com -d www.irfan-f.com
+```
+
+### 7. Install full nginx config
+
+```bash
+sudo cp deploy/nginx/portfolio-site.conf /etc/nginx/sites-available/portfolio-site
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+(Optional) Re-enable Cloudflare proxy (orange cloud) and set SSL/TLS to **Full (strict)**.
+
+### 8. Verify and retire GitHub Pages
 
 ```bash
 curl -I https://irfan-f.com
@@ -52,4 +140,25 @@ curl -I https://irfan-f.com/me
 curl -I https://irfan-f.com/projects
 ```
 
-Deep links must return `200` with `index.html` (SPA fallback), not `404`.
+Deep links must return `200` with SPA fallback, not `404`.
+
+Disable GitHub Pages in repo settings after HTTPS works. Purge Cloudflare cache if the old site still appears.
+
+## Manual deploy
+
+```bash
+npm run build
+rsync -avz --delete \
+  -e "ssh -i ~/.ssh/id_ed25519_portfolio_deploy" \
+  dist/ deploy-portfolio@YOUR_VPS_IP:/var/www/portfolio-site/
+```
+
+## Troubleshooting
+
+| Symptom | Likely fix |
+|---------|------------|
+| Actions SSH fails | `deploy-portfolio` key in `authorized_keys`, path ownership |
+| `nginx -t` fails on repo config | Run certbot first; use HTTP-only config until certs exist |
+| certbot fails | DNS not on VPS yet, or Cloudflare proxied (orange cloud) during HTTP-01 |
+| Old GitHub Pages content | DNS/cache; purge Cloudflare, check `dig` |
+| `/me` returns 404 | Missing SPA `try_files`; reload nginx config |

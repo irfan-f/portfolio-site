@@ -28,6 +28,8 @@ jobs:
           SSH_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
           DEPLOY_PATH: ${{ secrets.HOSTINGER_DEPLOY_PATH }}
         run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
           install -m 600 /dev/stdin ~/.ssh/deploy_key <<< "$SSH_KEY"
           rsync -avz --delete \
             -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new" \
