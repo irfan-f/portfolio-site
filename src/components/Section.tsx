@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import ContentCard from './ContentCard';
 import ImageGallery from './Image';
 import { Image } from '../utils/images';
 
@@ -11,6 +12,7 @@ export interface SectionProps {
   imageFirst?: boolean;
   style?: 'secondary' | 'tertiary' | 'bonus' | 'basic';
   placeholder?: boolean;
+  imageLoading?: 'lazy' | 'eager';
 }
 
 const Section: FC<SectionProps> = ({
@@ -19,26 +21,14 @@ const Section: FC<SectionProps> = ({
   content,
   images,
   orientation: _orientation = 'left',
-  imageFirst = true,
+  imageFirst: _imageFirst = true,
   style: _style = 'basic',
   placeholder = false,
+  imageLoading = 'lazy',
 }) => {
-  const Content = (
-    <div className="section-content">
-      {title && (
-        <h2 className="font-dosis text-teal text-3xl font-bold antialiased">
-          {title}
-        </h2>
-      )}
-      {content && (
-        <p className="font-libre text-on-surface text-start leading-relaxed antialiased">
-          {content}
-        </p>
-      )}
-    </div>
-  );
+  const useContain = placeholder;
 
-  const ImageEl =
+  const media =
     images && images.length > 0 ? (
       <div
         className="section-image"
@@ -46,22 +36,24 @@ const Section: FC<SectionProps> = ({
       >
         <ImageGallery
           images={images}
-          objectFit={placeholder ? 'contain' : 'cover'}
+          objectFit={useContain ? 'contain' : 'cover'}
+          loading={imageLoading}
         />
       </div>
     ) : null;
 
-  const children = imageFirst ? [ImageEl, Content] : [Content, ImageEl];
-
   return (
-    <div
+    <ContentCard
       id={id}
-      className="bg-opaque rounded-inherit w-auto py-4 sm:w-1/2 md:w-1/3 lg:w-1/4"
+      className="layout-shift-smooth [content-visibility:auto]"
+      media={media}
+      mediaClassName={
+        useContain ? 'content-card__media--contain' : 'content-card__media--intrinsic'
+      }
     >
-      <div className="depth bg-surface-panel relative mx-8 flex flex-col gap-y-4 overflow-hidden rounded-xl text-center">
-        {children}
-      </div>
-    </div>
+      {title && <h2 className="content-card__title layout-shift-typography">{title}</h2>}
+      {content && <p className="content-card__text layout-shift-typography">{content}</p>}
+    </ContentCard>
   );
 };
 

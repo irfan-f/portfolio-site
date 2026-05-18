@@ -1,6 +1,8 @@
 import { FC } from 'react';
+import { motion } from 'motion/react';
 import { Helmet } from 'react-helmet-async';
 import Section, { SectionProps } from '../components/Section';
+import { useListEntranceVariants } from '../motion/useListEntranceVariants';
 import {
   rootImages,
   outdoorImages,
@@ -9,6 +11,7 @@ import {
   bikingImages,
   placeHolderImages,
 } from '../utils/images';
+import { SITE_URL } from '../data/site';
 
 const sectionsData: SectionProps[] = [
   {
@@ -70,13 +73,14 @@ const placeHolderSectionData: SectionProps = {
   placeholder: true,
 };
 
-const SITE_URL = 'https://irfan-f.com';
-
 const Me: FC = () => {
+  const { container, item } = useListEntranceVariants();
+
   return (
     <>
       <Helmet>
         <title>About — Irfan Filipovic</title>
+        <link rel="canonical" href={`${SITE_URL}/me`} />
         <meta
           name="description"
           content="Learn about Irfan Filipovic — roots, outdoors, cooking, biking, gardening, and more."
@@ -86,24 +90,48 @@ const Me: FC = () => {
           property="og:description"
           content="Learn about Irfan Filipovic — roots, outdoors, cooking, biking, gardening, and more."
         />
-        <meta property="og:url" content={`${SITE_URL}/#/me`} />
-        <meta property="og:image" content={`${SITE_URL}/images/irfan.png`} />
+        <meta property="og:url" content={`${SITE_URL}/me`} />
+        <meta property="og:image" content={`${SITE_URL}/images/irfan.webp`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="About — Irfan Filipovic" />
         <meta
           name="twitter:description"
           content="Learn about Irfan Filipovic — roots, outdoors, cooking, biking, gardening, and more."
         />
-        <meta name="twitter:image" content={`${SITE_URL}/images/irfan.png`} />
+        <meta name="twitter:image" content={`${SITE_URL}/images/irfan.webp`} />
       </Helmet>
-      <div className="flex flex-row flex-wrap">
-        {sectionsData.map((section) => (
-          <Section {...section} key={section.id} />
+      <h1 className="sr-only">About</h1>
+      <motion.section
+        aria-label="About topics"
+        className="layout-shift-smooth mx-auto grid w-full max-w-7xl grid-cols-1 gap-6 px-4 py-8 md:grid-cols-2 2xl:grid-cols-3"
+        variants={container}
+        initial="hidden"
+        animate="show"
+      >
+        {sectionsData.map((section, index) => (
+          <motion.div
+            key={section.id}
+            layout
+            variants={item}
+            className="layout-shift-smooth min-h-0 h-full"
+          >
+            <Section
+              {...section}
+              imageLoading={index === 0 ? 'eager' : 'lazy'}
+            />
+          </motion.div>
         ))}
         {sectionsData.length % 2 === 1 && (
-          <Section {...placeHolderSectionData} />
+          <motion.div
+            key={placeHolderSectionData.id}
+            layout
+            variants={item}
+            className="layout-shift-smooth min-h-0 h-full"
+          >
+            <Section {...placeHolderSectionData} />
+          </motion.div>
         )}
-      </div>
+      </motion.section>
     </>
   );
 };

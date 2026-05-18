@@ -6,29 +6,27 @@ export const projects: ProjectMeta[] = [
   {
     id: 'mahjong',
     title: 'Mahjong with Friends',
-    subtitle: 'A web and mobile game',
     imageSrc: mahjongIcon,
     imageAlt: 'Mahjong tile icon',
     description:
       'Real-time multiplayer Mahjong in the browser. Full-stack app with Firebase auth, Express API, and live game stats.',
     url: 'https://irfan-f.github.io/mahjong-frontend/',
-    statsUrl: 'https://irfquake.tech/api/stats',
+    // statsUrl: 'https://irfquake.tech/api/stats', Stats aren't valuable at this point in time
     githubUrl: 'https://github.com/irfan-f/mahjong-frontend',
   },
   {
     id: 'hammerspoon',
-    title: 'Hammerspoon',
-    subtitle: 'macOS automation',
+    title: 'Mac Scripts',
     imageSrc: '/images/automationFigure.png',
+    imageNoDarkFilter: true,
     imageAlt: 'Stick figure pushing a gear',
     description:
-      'Lua Hammerspoon config and Spoons: windows, keybinds, displays, menubar helpers, OCR, and a light filter.',
+      'Hammerspoon config and Spoons: windows, keybinds, displays, menubar helpers, OCR, and a light filter.',
     githubUrl: 'https://github.com/irfan-f/Hammerspoon',
   },
   {
     id: 'todate',
     title: 'todate',
-    subtitle: 'React timeline app',
     imageSrc: todateImage,
     imageAlt: 'todate calendar and checklist icon',
     description:

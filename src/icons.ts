@@ -3,6 +3,7 @@ import sunIcon from './assets/icons/sun.svg?raw';
 import moonIcon from './assets/icons/moon.svg?raw';
 import defaultModeIcon from './assets/icons/default_mode.svg?raw';
 import menuIcon from './assets/icons/menu.svg?raw';
+import closeIcon from './assets/icons/close.svg?raw';
 import homeIcon from './assets/icons/home.svg?raw';
 import forwardArrowIcon from './assets/icons/forwardArrow.svg?raw';
 import bracketsIcon from './assets/icons/courses/brackets.svg?raw';
@@ -25,6 +26,7 @@ export const icons = {
   moon: moonIcon,
   defaultMode: defaultModeIcon,
   menu: menuIcon,
+  close: closeIcon,
   home: homeIcon,
   forwardArrow: forwardArrowIcon,
   courses: {

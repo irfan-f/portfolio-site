@@ -1,0 +1,34 @@
+{
+  "1dahlia_bike": {
+    "width": 1280,
+    "height": 960
+  },
+  "1family": {
+    "width": 1280,
+    "height": 960
+  },
+  "1redwoods": {
+    "width": 1280,
+    "height": 960
+  },
+  "automationFigure": {
+    "width": 1024,
+    "height": 1024
+  },
+  "backpacking": {
+    "width": 1280,
+    "height": 960
+  },
+  "embroidery": {
+    "width": 1280,
+    "height": 1707
+  },
+  "irfan": {
+    "width": 1280,
+    "height": 1707
+  },
+  "irfancartoon": {
+    "width": 1024,
+    "height": 1536
+  }
+}

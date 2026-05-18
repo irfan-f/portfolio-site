@@ -2,10 +2,10 @@ name: Deploy
 on:
   push:
     branches:
-      main
+      - main
 jobs:
-  build:
-    name: Build
+  build-and-deploy:
+    name: Build and deploy to Hostinger VPS
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -21,22 +21,14 @@ jobs:
         run: npm audit --audit-level=critical
       - name: Build
         run: npm run build
-      - name: Upload static files as artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          path: ./dist
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Deploy to VPS
+        env:
+          SSH_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
+          SSH_USER: ${{ secrets.HOSTINGER_SSH_USER }}
+          SSH_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
+          DEPLOY_PATH: ${{ secrets.HOSTINGER_DEPLOY_PATH }}
+        run: |
+          install -m 600 /dev/stdin ~/.ssh/deploy_key <<< "$SSH_KEY"
+          rsync -avz --delete \
+            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new" \
+            dist/ "${SSH_USER}@${SSH_HOST}:${DEPLOY_PATH}/"
