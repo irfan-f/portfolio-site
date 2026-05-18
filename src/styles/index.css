@@ -251,35 +251,55 @@
 }
 
 @layer base {
-  html,
-  body {
-    transition: background-color var(--theme-transition), color var(--theme-transition);
-  }
+  /* View Transitions: one crossfade for the whole page (see useTheme.ts). */
+  @supports (view-transition-name: none) {
+    html {
+      view-transition-name: root;
+    }
 
-  @media (prefers-reduced-motion: reduce) {
-    html,
-    body {
-      transition: none;
+    @media (prefers-reduced-motion: no-preference) {
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation-duration: var(--theme-transition-duration);
+        animation-timing-function: var(--theme-transition-timing);
+      }
     }
   }
 
-  /* Crossfade theme toggle (View Transitions API). */
+  /*
+   * While the root snapshot crossfades, disable per-element color transitions so
+   * navbar, main, and icons do not drift out of sync with the overlay.
+   */
   @media (prefers-reduced-motion: no-preference) {
-    ::view-transition-old(root),
-    ::view-transition-new(root) {
-      animation-duration: var(--theme-transition-duration);
-      animation-timing-function: var(--theme-transition-timing);
+    html.theme-transitioning,
+    html.theme-transitioning * {
+      transition-duration: 0s !important;
     }
   }
 
   /* Fallback: per-property transitions when View Transitions are unavailable. */
-  @supports not (view-transition-name: root) {
+  @supports not (view-transition-name: none) {
     @media (prefers-reduced-motion: no-preference) {
+      html,
+      body {
+        transition:
+          background-color var(--theme-transition),
+          color var(--theme-transition);
+      }
+
       #root :where(*) {
         transition-property: background-color, border-color, color, fill, stroke;
         transition-duration: var(--theme-transition-duration);
         transition-timing-function: var(--theme-transition-timing);
       }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html,
+    body,
+    #root :where(*) {
+      transition: none;
     }
   }
 }
@@ -299,14 +319,31 @@
     width: 100%;
     height: 100%;
     fill: var(--color-icon-fill, currentColor);
-    transition: fill var(--theme-transition), stroke var(--theme-transition), color var(--theme-transition);
     flex-shrink: 0;
     vertical-align: middle;
   }
 
+  @supports not (view-transition-name: none) {
+    @media (prefers-reduced-motion: no-preference) {
+      .icon-svg {
+        transition:
+          fill var(--theme-transition),
+          stroke var(--theme-transition),
+          color var(--theme-transition);
+      }
+    }
+  }
+
   .svg-primary svg {
     stroke: var(--text-on-surface);
-    transition: stroke var(--theme-transition), fill var(--theme-transition);
+  }
+
+  @supports not (view-transition-name: none) {
+    @media (prefers-reduced-motion: no-preference) {
+      .svg-primary svg {
+        transition: stroke var(--theme-transition), fill var(--theme-transition);
+      }
+    }
   }
 
   .svg-stroke-only svg,
@@ -335,7 +372,14 @@
   .menu-hamburger svg {
     stroke: var(--text-on-surface);
     fill: var(--text-on-surface);
-    transition: stroke var(--theme-transition), fill var(--theme-transition);
+  }
+
+  @supports not (view-transition-name: none) {
+    @media (prefers-reduced-motion: no-preference) {
+      .menu-hamburger svg {
+        transition: stroke var(--theme-transition), fill var(--theme-transition);
+      }
+    }
   }
 
   .pathI {
@@ -688,10 +732,19 @@
     border-radius: 0.375rem;
     background-color: transparent;
     color: var(--text-on-surface);
-    transition: background-color var(--theme-transition), color var(--theme-transition);
     touch-action: manipulation;
     cursor: pointer;
     outline: none;
+  }
+
+  @supports not (view-transition-name: none) {
+    @media (prefers-reduced-motion: no-preference) {
+      .btn-nav-header {
+        transition:
+          background-color var(--theme-transition),
+          color var(--theme-transition);
+      }
+    }
   }
 
   .btn-nav-header:hover {

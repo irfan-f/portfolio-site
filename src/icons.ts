@@ -1,47 +1,26 @@
-import ifIcon from './assets/icons/if.svg?raw';
-import sunIcon from './assets/icons/sun.svg?raw';
-import moonIcon from './assets/icons/moon.svg?raw';
-import defaultModeIcon from './assets/icons/default_mode.svg?raw';
-import menuIcon from './assets/icons/menu.svg?raw';
-import closeIcon from './assets/icons/close.svg?raw';
-import homeIcon from './assets/icons/home.svg?raw';
-import forwardArrowIcon from './assets/icons/forwardArrow.svg?raw';
-import bracketsIcon from './assets/icons/courses/brackets.svg?raw';
-import graphMazeIcon from './assets/icons/courses/graph-maze.svg?raw';
-import databaseIcon from './assets/icons/courses/database.svg?raw';
-import binaryIcon from './assets/icons/courses/binary.svg?raw';
-import chartIcon from './assets/icons/courses/chart.svg?raw';
-import lambdaIcon from './assets/icons/courses/lambda.svg?raw';
-import memoryIcon from './assets/icons/courses/memory.svg?raw';
-import stacksIcon from './assets/icons/courses/stacks.svg?raw';
-import brainIcon from './assets/icons/courses/brain.svg?raw';
-import automationIcon from './assets/icons/courses/automation.svg?raw';
-import codeBlocksIcon from './assets/icons/courses/code-blocks.svg?raw';
-import controllerIcon from './assets/icons/courses/controller.svg?raw';
-import sigmaIcon from './assets/icons/courses/sigma.svg?raw';
-
+/** Static asset paths under `public/icons/` (see `public.example/README.md`). */
 export const icons = {
-  if: ifIcon,
-  sun: sunIcon,
-  moon: moonIcon,
-  defaultMode: defaultModeIcon,
-  menu: menuIcon,
-  close: closeIcon,
-  home: homeIcon,
-  forwardArrow: forwardArrowIcon,
+  if: '/icons/if.svg',
+  sun: '/icons/sun.svg',
+  moon: '/icons/moon.svg',
+  defaultMode: '/icons/default_mode.svg',
+  menu: '/icons/menu.svg',
+  close: '/icons/close.svg',
+  home: '/icons/home.svg',
+  forwardArrow: '/icons/forwardArrow.svg',
   courses: {
-    brackets: bracketsIcon,
-    graphMaze: graphMazeIcon,
-    database: databaseIcon,
-    binary: binaryIcon,
-    chart: chartIcon,
-    lambda: lambdaIcon,
-    memory: memoryIcon,
-    stacks: stacksIcon,
-    brain: brainIcon,
-    automation: automationIcon,
-    codeBlocks: codeBlocksIcon,
-    controller: controllerIcon,
-    sigma: sigmaIcon,
+    brackets: '/icons/courses/brackets.svg',
+    graphMaze: '/icons/courses/graph-maze.svg',
+    database: '/icons/courses/database.svg',
+    binary: '/icons/courses/binary.svg',
+    chart: '/icons/courses/chart.svg',
+    lambda: '/icons/courses/lambda.svg',
+    memory: '/icons/courses/memory.svg',
+    stacks: '/icons/courses/stacks.svg',
+    brain: '/icons/courses/brain.svg',
+    automation: '/icons/courses/automation.svg',
+    codeBlocks: '/icons/courses/code-blocks.svg',
+    controller: '/icons/courses/controller.svg',
+    sigma: '/icons/courses/sigma.svg',
   },
 } as const;

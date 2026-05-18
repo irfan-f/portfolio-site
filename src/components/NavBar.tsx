@@ -51,7 +51,7 @@ const NavBar = ({ navs }: { navs: Nav[] }) => {
   return (
     <header
       ref={headerShellRef}
-      className="navbar relative z-[100] shrink-0 bg-surface px-4vw w-full items-center py-2 md:py-4 lg:py-5"
+      className="navbar relative z-[100] shrink-0 px-4vw w-full items-center py-2 md:py-4 lg:py-5"
     >
       <motion.div
         className="mx-auto grid w-full max-w-7xl grid-cols-[1fr_auto] items-center gap-2 sm:gap-4 lg:grid-cols-[1fr_auto_1fr]"

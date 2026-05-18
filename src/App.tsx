@@ -22,7 +22,7 @@ const App: FC = () => {
   const reduceMotion = reducedMotionPreference === true;
 
   return (
-    <div className="flex h-[100svh] max-h-[100dvh] w-full flex-col overflow-hidden select-text">
+    <div className="bg-surface text-on-surface flex h-[100svh] max-h-[100dvh] w-full flex-col overflow-hidden select-text">
       <NavBar navs={navs} />
       <motion.main
         id="main-content"

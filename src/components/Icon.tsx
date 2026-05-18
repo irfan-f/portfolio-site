@@ -1,8 +1,12 @@
+import { getIconMarkup } from '../iconCache';
+
 interface IconProps {
+  /** Path under `public/icons/`, e.g. `/icons/sun.svg`. */
   src: string;
   className?: string;
   'aria-hidden'?: boolean;
 }
+
 const Icon = ({
   src,
   className,
@@ -11,7 +15,7 @@ const Icon = ({
   <span
     className={className}
     aria-hidden={ariaHidden}
-    dangerouslySetInnerHTML={{ __html: src }}
+    dangerouslySetInnerHTML={{ __html: getIconMarkup(src) }}
   />
 );
 
