@@ -17,7 +17,21 @@ test.describe('Projects', () => {
     }
   });
 
-  test('Try it and GitHub links on grid card have expected href and rel', async ({
+  test('project cards show description copy', async ({ page }) => {
+    await page.goto('/projects');
+
+    await expect(
+      page.getByText('Real-time multiplayer Hong Kong Mahjong in the browser'),
+    ).toBeVisible();
+    await expect(
+      page.getByText('Hammerspoon config and Spoons: windows, keybinds, displays'),
+    ).toBeVisible();
+    await expect(
+      page.getByText('Timeline app with tags, school-year dates, and theme support'),
+    ).toBeVisible();
+  });
+
+  test('Try it and GitHub links on grid cards have expected href and rel', async ({
     page,
   }) => {
     await page.goto('/projects');
@@ -27,7 +41,7 @@ test.describe('Projects', () => {
     });
     await expect(tryIt).toHaveAttribute(
       'href',
-      'https://irfan-f.github.io/mahjong-frontend/',
+      'https://mahjong.irfan-f.com',
     );
     await expect(tryIt).toHaveAttribute('target', '_blank');
     await expect(tryIt).toHaveAttribute('rel', 'noopener noreferrer');

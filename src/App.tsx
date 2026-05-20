@@ -11,9 +11,7 @@ import { useFontsReady } from './hooks/useFontsReady';
 
 const Me = lazy(() => import('./routes/Me'));
 const Projects = lazy(() => import('./routes/Projects'));
-const CardVariantsPreview = import.meta.env.DEV
-  ? lazy(() => import('./routes/CardVariantsPreview'))
-  : null;
+const UpdateDetail = lazy(() => import('./routes/UpdateDetail'));
 
 const App: FC = () => {
   useSkipLink();
@@ -37,9 +35,7 @@ const App: FC = () => {
               <Route path="/" element={<Home />} />
               <Route path="me" element={<Me />} />
               <Route path="projects" element={<Projects />} />
-              {CardVariantsPreview ? (
-                <Route path="dev/cards" element={<CardVariantsPreview />} />
-              ) : null}
+              <Route path="updates/:postId" element={<UpdateDetail />} />
             </Route>
           </Routes>
         </Suspense>

@@ -1,6 +1,6 @@
 import { FC, HTMLAttributes, ReactNode } from 'react';
 
-export type ContentCardVariant = 'bordered' | 'shadow' | 'lifted' | 'glass';
+export type ContentCardVariant = 'glass' | 'lifted';
 
 export interface ContentCardProps extends HTMLAttributes<HTMLElement> {
   as?: 'article' | 'div' | 'section';

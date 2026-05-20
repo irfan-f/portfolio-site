@@ -18,6 +18,8 @@ interface ImageWithLoaderProps extends ImgHTMLAttributes<HTMLImageElement> {
   objectFit?: 'cover' | 'contain';
 }
 
+const isSvgSrc = (path: string) => path.toLowerCase().endsWith('.svg');
+
 const ImageWithLoader: FC<ImageWithLoaderProps> = ({
   src,
   alt,
@@ -34,6 +36,7 @@ const ImageWithLoader: FC<ImageWithLoaderProps> = ({
   const imgRef = useRef<HTMLImageElement>(null);
   const fitClass =
     objectFit === 'cover' ? 'object-cover' : 'object-contain object-center';
+  const opacityClass = `transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`;
 
   const avifSrcSet = useMemo(() => {
     if (!responsiveBase || !responsiveWidths?.length) return null;
@@ -45,19 +48,42 @@ const ImageWithLoader: FC<ImageWithLoaderProps> = ({
     return buildWidthSrcSet(responsiveBase, 'webp', responsiveWidths);
   }, [responsiveBase, responsiveWidths]);
 
+  const useSvgObject =
+    isSvgSrc(src) && !avifSrcSet && !webp && !avif;
+
   useEffect(() => {
+    setLoaded(false);
+  }, [src, useSvgObject]);
+
+  useEffect(() => {
+    if (useSvgObject) return;
     const el = imgRef.current;
     if (el?.complete && el.naturalWidth > 0) {
       setLoaded(true);
     }
-  }, [src, avifSrcSet, webpSrcSet]);
+  }, [src, avifSrcSet, webpSrcSet, useSvgObject]);
+
+  if (useSvgObject) {
+    return (
+      <div className={`relative overflow-hidden ${containerClassName}`}>
+        {!loaded && <div className="image-loader" aria-hidden />}
+        <object
+          data={src}
+          type="image/svg+xml"
+          className={`pointer-events-none block h-full w-full antialiased ${fitClass} ${opacityClass} ${imgClassName}`}
+          aria-label={alt}
+          onLoad={() => setLoaded(true)}
+        />
+      </div>
+    );
+  }
 
   const img = (
     <img
       ref={imgRef}
       src={src}
       alt={alt}
-      className={`h-full w-full antialiased transition-opacity duration-300 ${fitClass} ${loaded ? 'opacity-100' : 'opacity-0'} ${imgClassName}`}
+      className={`h-full w-full antialiased ${opacityClass} ${fitClass} ${imgClassName}`}
       onLoad={() => setLoaded(true)}
       {...imgProps}
     />

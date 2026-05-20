@@ -23,7 +23,7 @@ A single-page React app with client-side routing: **Home**, **Projects**, and **
 
 **Theme before paint.** An inline script in `index.html` reads `localStorage.theme` (and legacy `darkMode`) and toggles the `dark` class on `<html>` before React mounts, with matching `theme-color` and background colors so light/dark does not flash.
 
-**Route-level code splitting.** `Me` and `Projects` load via `React.lazy`; `Home` stays in the main bundle. A dev-only `/dev/cards` preview route exists for card layout experiments.
+**Route-level code splitting.** `Me`, `Projects`, and update detail pages load via `React.lazy`; `Home` stays in the main bundle.
 
 **Page transitions.** `PageTransition` wraps routes and coordinates enter/exit motion; list sections use shared entrance variants from `src/motion/`.
 
@@ -37,7 +37,7 @@ A single-page React app with client-side routing: **Home**, **Projects**, and **
 
 ```
 src/
-  routes/          Home, Me, Projects (+ dev preview)
+  routes/          Home, Me, Projects, UpdateDetail
   components/      NavBar, cards, images, theme controls
   data/            projects.ts, courses.ts, site.ts, image-meta.json
   hooks/           theme, fonts-ready, skip-link, breakpoints

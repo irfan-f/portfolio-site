@@ -6,6 +6,70 @@ const routePageDuration = 0.28;
 const tabSwapDuration = 0.22;
 const layoutResizeDuration = 0.34;
 
+/** Latest posts grid — enter/exit when filters change (`AnimatePresence` + `layout`). */
+export function latestPostsItemPresenceMotion(
+  reduceMotion: boolean,
+): Pick<HTMLMotionProps<'div'>, 'initial' | 'animate' | 'exit' | 'transition'> {
+  if (reduceMotion) {
+    return {
+      initial: { opacity: 1 },
+      animate: { opacity: 1 },
+      exit: { opacity: 1 },
+      transition: { duration: 0, ...layoutResizeTransition(true) },
+    };
+  }
+  return {
+    initial: { opacity: 0, y: 14 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -10 },
+    transition: {
+      opacity: { duration: 0.26, ease: easeOutSoft },
+      y: { duration: 0.28, ease: easeOutSoft },
+      ...layoutResizeTransition(false),
+    },
+  };
+}
+
+/** Empty filter state swap. */
+export function latestFilterPanelPresenceMotion(
+  reduceMotion: boolean,
+): Pick<HTMLMotionProps<'div'>, 'initial' | 'animate' | 'exit' | 'transition'> {
+  if (reduceMotion) {
+    return {
+      initial: { opacity: 1 },
+      animate: { opacity: 1 },
+      exit: { opacity: 1 },
+      transition: { duration: 0 },
+    };
+  }
+  return {
+    initial: { opacity: 0, y: 6 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -4 },
+    transition: { duration: 0.24, ease: easeOutSoft },
+  };
+}
+
+/** Section blocks revealed on scroll (opacity only — no `y` on layout nodes). */
+export function inViewRevealMotion(
+  reduceMotion: boolean,
+): Pick<HTMLMotionProps<'div'>, 'initial' | 'whileInView' | 'viewport' | 'transition'> {
+  if (reduceMotion) {
+    return {
+      initial: false,
+      whileInView: undefined,
+      viewport: { once: true, margin: '-40px' },
+      transition: { duration: 0 },
+    };
+  }
+  return {
+    initial: { opacity: 0 },
+    whileInView: { opacity: 1 },
+    viewport: { once: true, margin: '-40px' },
+    transition: { duration: 0.4, ease: easeOutSoft },
+  };
+}
+
 /** `useReducedMotion() === true` — skip spatial motion and duration. */
 export function listStaggerVariants(reduceMotion: boolean): {
   container: Variants;

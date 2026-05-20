@@ -1,45 +1,6 @@
 import { FC, HTMLAttributes } from 'react';
-
-const IMG = '/images';
-
-function SocialIcon({
-  lightSrc,
-  darkSrc,
-}: {
-  lightSrc: string;
-  darkSrc: string;
-}) {
-  const lightWebp = lightSrc.replace(/\.png$/, '.webp');
-  const lightAvif = lightSrc.replace(/\.png$/, '.avif');
-  const darkWebp = darkSrc.replace(/\.png$/, '.webp');
-  const darkAvif = darkSrc.replace(/\.png$/, '.avif');
-  return (
-    <>
-      <picture className="absolute top-0 left-0 h-full w-full object-contain opacity-0 dark:opacity-100">
-        <source type="image/avif" srcSet={lightAvif} />
-        <source type="image/webp" srcSet={lightWebp} />
-        <img
-          src={lightSrc}
-          sizes="36px"
-          loading="lazy"
-          alt=""
-          className="h-full w-full object-contain"
-        />
-      </picture>
-      <picture className="absolute top-0 left-0 h-full w-full object-contain opacity-100 dark:opacity-0">
-        <source type="image/avif" srcSet={darkAvif} />
-        <source type="image/webp" srcSet={darkWebp} />
-        <img
-          src={darkSrc}
-          sizes="36px"
-          loading="lazy"
-          alt=""
-          className="h-full w-full object-contain"
-        />
-      </picture>
-    </>
-  );
-}
+import { ThemeRasterPair } from './ThemeRasterPicture';
+import { rasterImageSet } from '../utils/rasterImage';
 
 const SocialLinks: FC<HTMLAttributes<HTMLElement>> = ({ className }) => {
   return (
@@ -54,9 +15,9 @@ const SocialLinks: FC<HTMLAttributes<HTMLElement>> = ({ className }) => {
         aria-label="GitHub"
         title="GitHub"
       >
-        <SocialIcon
-          lightSrc={`${IMG}/GitHub_Invertocat_Light.png`}
-          darkSrc={`${IMG}/GitHub_Invertocat_Dark.png`}
+        <ThemeRasterPair
+          light={rasterImageSet('GitHub_Invertocat_Light')}
+          dark={rasterImageSet('GitHub_Invertocat_Dark')}
         />
       </a>
       <a
@@ -67,9 +28,9 @@ const SocialLinks: FC<HTMLAttributes<HTMLElement>> = ({ className }) => {
         aria-label="LinkedIn"
         title="LinkedIn"
       >
-        <SocialIcon
-          lightSrc={`${IMG}/InBug-White.png`}
-          darkSrc={`${IMG}/InBug-Black.png`}
+        <ThemeRasterPair
+          light={rasterImageSet('InBug-White')}
+          dark={rasterImageSet('InBug-Black')}
         />
       </a>
     </div>
