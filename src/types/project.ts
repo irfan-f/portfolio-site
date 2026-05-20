@@ -9,7 +9,6 @@ export type ProjectImageSrc = string | ProjectImageRaster;
 export interface ProjectMeta {
   id: string;
   title: string;
-  subtitle?: string;
   imageSrc: ProjectImageSrc;
   imageAlt: string;
   /** Keep raster/SVG art as authored in dark mode (skip global invert). */

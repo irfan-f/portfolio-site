@@ -1,21 +1,22 @@
 import type { ProjectMeta } from '../types/project';
+import { rasterImageSet } from '../utils/rasterImage';
 
 export const projects: ProjectMeta[] = [
   {
     id: 'mahjong',
     title: 'Mahjong with Friends',
-    imageSrc: '/images/mahjong-icon.svg',
-    imageAlt: 'Mahjong tile icon',
+    imageSrc: '/images/mahjong-og.svg',
+    imageAlt: 'Mahjong with Friends — play Mahjong online with friends',
+    imageNoDarkFilter: true,
     description:
-      'Real-time multiplayer Mahjong in the browser. Full-stack app with Firebase auth, Express API, and live game stats.',
-    url: 'https://irfan-f.github.io/mahjong-frontend/',
-    // statsUrl: 'https://irfquake.tech/api/stats', Stats aren't valuable at this point in time
+      'Real-time multiplayer Hong Kong Mahjong in the browser. Firebase auth, Express API, and live game sync.',
+    url: 'https://mahjong.irfan-f.com',
     githubUrl: 'https://github.com/irfan-f/mahjong-frontend',
   },
   {
     id: 'hammerspoon',
     title: 'Mac Scripts',
-    imageSrc: '/images/automationFigure.png',
+    imageSrc: rasterImageSet('automationFigure'),
     imageNoDarkFilter: true,
     imageAlt: 'Stick figure pushing a gear',
     description:
@@ -25,11 +26,12 @@ export const projects: ProjectMeta[] = [
   {
     id: 'todate',
     title: 'todate',
-    imageSrc: '/images/todate-icon.svg',
-    imageAlt: 'todate calendar and checklist icon',
+    imageSrc: '/images/todate-og.svg',
+    imageAlt: 'Todate — timeline for dates, tags, and school years',
+    imageNoDarkFilter: true,
     description:
-      'Timeline app with tags, school-year dates, and theme support. Built with React, Vite, and Tailwind v4.',
-    url: 'https://irfan-f.github.io/todate/',
+      'Timeline app with tags, school-year dates, and theme support. React, Vite, and Tailwind v4.',
+    url: 'https://todate.irfan-f.com',
     githubUrl: 'https://github.com/irfan-f/todate',
   },
 ];

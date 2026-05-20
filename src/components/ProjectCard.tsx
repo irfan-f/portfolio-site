@@ -1,33 +1,32 @@
 import { FC, useEffect, useState } from 'react';
+import imageMeta from '../data/image-meta.json';
 import { icons } from '../icons';
 import ContentCard from './ContentCard';
 import ImageWithLoader from './ImageWithLoader';
 import Icon from './Icon';
-import type { ProjectMeta, ProjectStats } from '../types/project';
-
-const IMG = '/images';
+import { ThemeRasterPair } from './ThemeRasterPicture';
+import type { ProjectImageSrc, ProjectMeta, ProjectStats } from '../types/project';
+import { rasterImageSet } from '../utils/rasterImage';
 
 function GitHubMark({ className }: { className?: string }) {
-  const lightSrc = `${IMG}/GitHub_Invertocat_Light.png`;
-  const darkSrc = `${IMG}/GitHub_Invertocat_Dark.png`;
-  const lightWebp = lightSrc.replace(/\.png$/, '.webp');
-  const lightAvif = lightSrc.replace(/\.png$/, '.avif');
-  const darkWebp = darkSrc.replace(/\.png$/, '.webp');
-  const darkAvif = darkSrc.replace(/\.png$/, '.avif');
   return (
     <span className={`relative block ${className ?? 'h-7 w-7'}`}>
-      <picture className="absolute inset-0 opacity-0 dark:opacity-100">
-        <source type="image/avif" srcSet={lightAvif} />
-        <source type="image/webp" srcSet={lightWebp} />
-        <img src={lightSrc} alt="" className="h-full w-full object-contain" loading="lazy" />
-      </picture>
-      <picture className="absolute inset-0 opacity-100 dark:opacity-0">
-        <source type="image/avif" srcSet={darkAvif} />
-        <source type="image/webp" srcSet={darkWebp} />
-        <img src={darkSrc} alt="" className="h-full w-full object-contain" loading="lazy" />
-      </picture>
+      <ThemeRasterPair
+        light={rasterImageSet('GitHub_Invertocat_Light')}
+        dark={rasterImageSet('GitHub_Invertocat_Dark')}
+        sizes="20px"
+      />
     </span>
   );
+}
+
+function rasterDimensions(imageSrc: Extract<ProjectImageSrc, { png: string }>): {
+  width: number;
+  height: number;
+} {
+  const base = imageSrc.png.replace(/^\/images\//, '').replace(/\.png$/i, '');
+  const entry = (imageMeta as Record<string, { width: number; height: number }>)[base];
+  return entry ?? { width: 16, height: 9 };
 }
 
 const projectCardLinkClass =
@@ -60,6 +59,7 @@ function ProjectImage({
       />
     );
   }
+  const { width, height } = rasterDimensions(imageSrc);
   return (
     <ImageWithLoader
       src={imageSrc.png}
@@ -70,8 +70,8 @@ function ProjectImage({
       imgClassName={className}
       objectFit="contain"
       loading="lazy"
-      width={16}
-      height={9}
+      width={width}
+      height={height}
     />
   );
 }
