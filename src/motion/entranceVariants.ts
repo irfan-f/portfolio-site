@@ -3,7 +3,6 @@ import type { HTMLMotionProps, Transition, Variants } from 'motion/react';
 const easeOutSoft = [0.22, 1, 0.36, 1] as const;
 
 const routePageDuration = 0.28;
-const tabSwapDuration = 0.22;
 const layoutResizeDuration = 0.34;
 
 /** Latest posts grid — enter/exit when filters change (`AnimatePresence` + `layout`). */
@@ -186,30 +185,6 @@ export function routePagePresenceMotion(
     transition: {
       duration: routePageDuration,
       ease: easeOutSoft,
-      ...layoutResizeTransition(false),
-    },
-  };
-}
-
-/** In-page tab / panel content swaps (e.g. coursework topic) with `layout` + `popLayout`. */
-export function tabPanelPresenceMotion(
-  reduceMotion: boolean,
-): Pick<HTMLMotionProps<'div'>, 'initial' | 'animate' | 'exit' | 'transition'> {
-  if (reduceMotion) {
-    return {
-      initial: { opacity: 1, x: 0 },
-      animate: { opacity: 1, x: 0 },
-      exit: { opacity: 1, x: 0 },
-      transition: { duration: 0, ...layoutResizeTransition(true) },
-    };
-  }
-  return {
-    initial: { opacity: 0, x: 16 },
-    animate: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: -16 },
-    transition: {
-      opacity: { duration: tabSwapDuration, ease: easeOutSoft },
-      x: { duration: tabSwapDuration, ease: easeOutSoft },
       ...layoutResizeTransition(false),
     },
   };

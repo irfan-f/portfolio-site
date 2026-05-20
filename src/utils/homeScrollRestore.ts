@@ -1,4 +1,12 @@
 const HOME_SCROLL_STORAGE_KEY = 'portfolio-home-main-scroll';
+const MAIN_CONTENT_ID = 'main-content';
+
+/** Reset `#main-content` scroll to the top (e.g. opening an update detail page). */
+export function scrollMainContentToTop(): void {
+  const main = document.getElementById(MAIN_CONTENT_ID);
+  if (!main) return;
+  main.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+}
 
 export function saveHomeMainScrollPosition(): void {
   const main = document.getElementById('main-content');

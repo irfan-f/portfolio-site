@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo, useRef } from 'react';
+import { FC, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { motion, useReducedMotion } from 'motion/react';
@@ -7,8 +7,10 @@ import {
   getLatestPostById,
   updateDetailPath,
 } from '../data/latestPosts';
+import ExternalReferenceLink from '../components/ExternalReferenceLink';
 import { SITE_URL } from '../data/site';
 import { routePagePresenceMotion } from '../motion/entranceVariants';
+import { scrollMainContentToTop } from '../utils/homeScrollRestore';
 
 const UpdateDetail: FC = () => {
   const { postId } = useParams<{ postId: string }>();
@@ -16,6 +18,10 @@ const UpdateDetail: FC = () => {
   const reduceMotion = useReducedMotion() === true;
   const pageMotion = useMemo(() => routePagePresenceMotion(reduceMotion), [reduceMotion]);
   const titleRef = useRef<HTMLHeadingElement>(null);
+
+  useLayoutEffect(() => {
+    scrollMainContentToTop();
+  }, [postId]);
 
   useEffect(() => {
     titleRef.current?.focus({ preventScroll: true });
@@ -26,8 +32,6 @@ const UpdateDetail: FC = () => {
   }
 
   const canonical = `${SITE_URL}${updateDetailPath(post.id)}`;
-  const isExternal = post.externalLink?.href.startsWith('http') ?? false;
-
   return (
     <>
       <Helmet>
@@ -74,29 +78,6 @@ const UpdateDetail: FC = () => {
           >
             {post.title}
           </h1>
-          <p className="update-detail__lede font-mulish">{post.excerpt}</p>
-          {post.externalLink ? (
-            <div className="update-detail__actions">
-              {isExternal ? (
-                <a
-                  href={post.externalLink.href}
-                  className="update-detail__action update-detail__action--primary"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {post.externalLink.label}
-                  <span className="sr-only"> (opens in a new tab)</span>
-                </a>
-              ) : (
-                <Link
-                  to={post.externalLink.href}
-                  className="update-detail__action update-detail__action--primary"
-                >
-                  {post.externalLink.label}
-                </Link>
-              )}
-            </div>
-          ) : null}
         </header>
 
         {post.imageSrc ? (
@@ -120,6 +101,15 @@ const UpdateDetail: FC = () => {
             </p>
           ))}
         </div>
+
+        {post.externalLink ? (
+          <div className="update-detail__actions">
+            <ExternalReferenceLink
+              href={post.externalLink.href}
+              label={post.externalLink.label}
+            />
+          </div>
+        ) : null}
       </motion.article>
     </>
   );
