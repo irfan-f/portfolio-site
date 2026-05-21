@@ -1,8 +1,4 @@
 {
-  "1dahlia_bike": {
-    "width": 1280,
-    "height": 960
-  },
   "1family": {
     "width": 1280,
     "height": 960
@@ -11,11 +7,7 @@
     "width": 1280,
     "height": 960
   },
-  "automationFigure": {
-    "width": 1024,
-    "height": 1024
-  },
-  "backpacking": {
+  "1dahlia_bike": {
     "width": 1280,
     "height": 960
   },
@@ -23,12 +15,36 @@
     "width": 1280,
     "height": 1707
   },
+  "backpacking": {
+    "width": 1280,
+    "height": 960
+  },
+  "irfancartoon": {
+    "width": 960,
+    "height": 1440
+  },
   "irfan": {
     "width": 1280,
     "height": 1707
   },
-  "irfancartoon": {
+  "automationFigure": {
     "width": 1024,
-    "height": 1536
+    "height": 1024
+  },
+  "garden1": {
+    "width": 1280,
+    "height": 960
+  },
+  "garden2": {
+    "width": 1280,
+    "height": 1707
+  },
+  "garden3": {
+    "width": 1280,
+    "height": 1707
+  },
+  "garden4": {
+    "width": 1280,
+    "height": 1707
   }
 }

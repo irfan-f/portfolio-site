@@ -13,6 +13,8 @@ export interface SectionProps {
   style?: 'secondary' | 'tertiary' | 'bonus' | 'basic';
   placeholder?: boolean;
   imageLoading?: 'lazy' | 'eager';
+  /** When true, title and copy render above the gallery (better deep-link scroll). */
+  textFirst?: boolean;
 }
 
 const Section: FC<SectionProps> = ({
@@ -23,20 +25,26 @@ const Section: FC<SectionProps> = ({
   orientation: _orientation = 'left',
   imageFirst: _imageFirst = true,
   style: _style = 'basic',
-  placeholder = false,
+  placeholder: _placeholder = false,
   imageLoading = 'lazy',
+  textFirst = false,
 }) => {
-  const useContain = placeholder;
+  const hasImages = (images?.length ?? 0) > 0;
+  const isCarousel = (images?.length ?? 0) > 1;
 
   const media =
-    images && images.length > 0 ? (
+    hasImages && images ? (
       <div
-        className="section-image"
-        style={{ aspectRatio: `${images[0].width} / ${images[0].height}` }}
+        className={`section-image section-image--contain${isCarousel ? ' section-image--carousel' : ''}`}
+        style={
+          !isCarousel
+            ? { aspectRatio: `${images[0].width} / ${images[0].height}` }
+            : undefined
+        }
       >
         <ImageGallery
           images={images}
-          objectFit={useContain ? 'contain' : 'cover'}
+          objectFit="contain"
           loading={imageLoading}
         />
       </div>
@@ -44,14 +52,16 @@ const Section: FC<SectionProps> = ({
 
   return (
     <ContentCard
-      id={id}
-      className="layout-shift-smooth [content-visibility:auto]"
+      className="layout-shift-smooth"
+      textFirst={textFirst}
       media={media}
-      mediaClassName={
-        useContain ? 'content-card__media--contain' : 'content-card__media--intrinsic'
-      }
+      mediaClassName={hasImages ? 'content-card__media--contain' : undefined}
     >
-      {title && <h2 className="content-card__title layout-shift-typography">{title}</h2>}
+      {title && (
+        <h2 id={id} className="content-card__title layout-shift-typography">
+          {title}
+        </h2>
+      )}
       {content && <p className="content-card__text layout-shift-typography">{content}</p>}
     </ContentCard>
   );

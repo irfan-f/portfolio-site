@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import ImageWithLoader from './ImageWithLoader';
+import ImageCarousel from './ImageCarousel';
 import { Image } from '../utils/images';
 
 export interface ImageGalleryProps {
@@ -10,15 +11,25 @@ export interface ImageGalleryProps {
 
 const ImageGallery: FC<ImageGalleryProps> = ({
   images,
-  objectFit = 'cover',
+  objectFit = 'contain',
   loading = 'lazy',
 }) => {
   if (images.length === 0) return null;
 
+  if (images.length > 1) {
+    return (
+      <ImageCarousel
+        images={images}
+        objectFit={objectFit}
+        loading={loading}
+      />
+    );
+  }
+
   const img = images[0];
 
   return (
-    <div className="flex h-full w-full items-center justify-center overflow-hidden">
+    <div className="section-image__gallery h-full w-full">
       <ImageWithLoader
         src={img.src}
         alt={img.alt ?? 'Section image'}

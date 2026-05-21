@@ -4,19 +4,24 @@ import { Helmet } from 'react-helmet-async';
 import ImageWithLoader from '../components/ImageWithLoader';
 import IntroText from '../components/IntroText';
 import SocialLinks from '../components/SocialLinks';
-import ScrollToLatestCta from '../components/latest/ScrollToLatestCta';
+import HomeHeroScrollCta from '../components/latest/HomeHeroScrollCta';
 import LatestThingsSection from '../components/latest/LatestThingsSection';
 import { listStaggerOpacityOnlyForLayoutCells } from '../motion/entranceVariants';
 import { useFontsReady } from '../hooks/useFontsReady';
 import { SITE_URL } from '../data/site';
-import { restoreHomeMainScrollPosition } from '../utils/homeScrollRestore';
+import {
+  notifyMainContentScrollSync,
+  restoreHomeMainScrollPosition,
+} from '../utils/homeScrollRestore';
 
 const Home: FC = () => {
   const fontsReady = useFontsReady();
   const reduceMotion = useReducedMotion() === true;
 
   useLayoutEffect(() => {
-    restoreHomeMainScrollPosition();
+    if (restoreHomeMainScrollPosition()) {
+      notifyMainContentScrollSync();
+    }
   }, []);
   const { container, item } = useMemo(
     () => listStaggerOpacityOnlyForLayoutCells(reduceMotion),
@@ -56,23 +61,23 @@ const Home: FC = () => {
         initial="hidden"
         animate={fontsReady ? 'show' : 'hidden'}
       >
-        <div className="home-hero__main layout-shift-smooth flex min-h-0 w-full flex-1 flex-col items-center justify-start gap-3 md:flex-row md:items-center md:justify-between md:gap-6 [@media(max-height:560px)]:gap-y-4">
+        <div className="home-hero__main layout-shift-smooth flex min-h-0 w-full flex-1 flex-col items-center justify-start gap-3 max-md:gap-5 md:flex-row md:items-center md:justify-between md:gap-6 [@media(max-height:560px)]:gap-y-4">
           <motion.div
             layout
             variants={item}
-            className="layout-shift-smooth relative z-20 flex min-h-0 w-full flex-none shrink-0 flex-col items-center justify-center md:min-w-0 md:flex-1 md:shrink md:self-stretch"
+            className="layout-shift-smooth relative z-20 flex min-h-0 w-full flex-none shrink-0 flex-col items-center justify-center max-md:z-auto md:min-w-0 md:flex-1 md:shrink md:self-stretch"
           >
             <IntroText />
           </motion.div>
           <motion.div
             layout
             variants={item}
-            className="layout-shift-smooth relative z-1 mt-0 flex min-h-0 min-w-0 shrink flex-row items-center justify-between gap-2 sm:gap-4 md:mt-0 md:justify-between [@media(max-height:560px)]:mt-2"
+            className="layout-shift-smooth relative z-1 mt-0 flex min-h-0 min-w-0 shrink flex-row items-center justify-between gap-2 sm:gap-4 max-md:w-full max-md:shrink-0 max-md:flex-col max-md:items-center max-md:gap-4 md:mt-0 md:justify-between [@media(max-height:560px)]:mt-2"
           >
-            <div className="w-8 shrink-0 sm:w-9" aria-hidden />
-            <div className="flex min-h-0 min-w-0 flex-1 justify-center md:items-center">
+            <div className="w-8 shrink-0 max-md:hidden sm:w-9" aria-hidden />
+            <div className="flex min-h-0 min-w-0 flex-1 justify-center max-md:w-full md:items-center">
               <div className="flex min-h-0 w-full items-center justify-center md:w-auto">
-                <div className="layout-shift-smooth inline-block max-w-[min(100%,16rem)] overflow-hidden rounded-xl ring-1 ring-border sm:max-w-[min(100%,17.5rem)] md:max-w-[min(28rem,40vw)]">
+                <div className="layout-shift-smooth inline-block max-w-[min(92vw,20rem)] overflow-hidden rounded-xl ring-1 ring-border sm:max-w-[min(92vw,21rem)] md:max-w-[min(28rem,40vw)]">
                   <ImageWithLoader
                     src="/images/irfan.webp"
                     alt="Irfan Filipović"
@@ -82,7 +87,7 @@ const Home: FC = () => {
                     responsiveWidths={[480, 720, 960, 1280]}
                     containerClassName="block leading-none"
                     imgClassName="hero-photo-img !h-auto !w-auto block max-w-full object-contain"
-                    sizes="(max-width: 768px) min(90vw, 16rem), min(40vw, 28rem)"
+                    sizes="(max-width: 768px) min(92vw, 20rem), min(40vw, 28rem)"
                     objectFit="contain"
                     fetchPriority="high"
                     loading="eager"
@@ -92,16 +97,10 @@ const Home: FC = () => {
                 </div>
               </div>
             </div>
-            <SocialLinks className="flex flex-col" />
+            <SocialLinks className="max-md:flex-row max-md:gap-8" />
           </motion.div>
         </div>
-        <motion.div
-          layout
-          variants={item}
-          className="home-hero__scroll-cta layout-shift-smooth flex w-full shrink-0 justify-center pt-1 pb-1 sm:pt-2"
-        >
-          <ScrollToLatestCta />
-        </motion.div>
+        <HomeHeroScrollCta variants={item} />
       </motion.section>
 
       <LatestThingsSection className="px-4vw mx-auto w-full max-w-7xl pb-12 pt-4 sm:pb-16" />

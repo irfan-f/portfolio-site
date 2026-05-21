@@ -32,10 +32,17 @@ const ImageWithLoader: FC<ImageWithLoaderProps> = ({
   objectFit = 'cover',
   ...imgProps
 }) => {
+  const { fetchPriority, ...restImgProps } = imgProps as ImgHTMLAttributes<HTMLImageElement> & {
+    fetchPriority?: 'high' | 'low' | 'auto';
+  };
   const [loaded, setLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
   const fitClass =
     objectFit === 'cover' ? 'object-cover' : 'object-contain object-center';
+  const sizeClass =
+    objectFit === 'cover'
+      ? 'h-full w-full'
+      : 'mx-auto block h-auto w-auto max-h-full max-w-full';
   const opacityClass = `transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`;
 
   const avifSrcSet = useMemo(() => {
@@ -63,14 +70,21 @@ const ImageWithLoader: FC<ImageWithLoaderProps> = ({
     }
   }, [src, avifSrcSet, webpSrcSet, useSvgObject]);
 
+  const svgLoaderLayout =
+    objectFit === 'contain'
+      ? 'flex items-center justify-center'
+      : '';
+
   if (useSvgObject) {
     return (
-      <div className={`relative overflow-hidden ${containerClassName}`}>
+      <div
+        className={`relative overflow-hidden ${svgLoaderLayout} ${containerClassName}`.trim()}
+      >
         {!loaded && <div className="image-loader" aria-hidden />}
         <object
           data={src}
           type="image/svg+xml"
-          className={`pointer-events-none block h-full w-full antialiased ${fitClass} ${opacityClass} ${imgClassName}`}
+          className={`pointer-events-none antialiased ${sizeClass} ${fitClass} ${opacityClass} ${imgClassName}`}
           aria-label={alt}
           onLoad={() => setLoaded(true)}
         />
@@ -83,17 +97,19 @@ const ImageWithLoader: FC<ImageWithLoaderProps> = ({
       ref={imgRef}
       src={src}
       alt={alt}
-      className={`h-full w-full antialiased ${opacityClass} ${fitClass} ${imgClassName}`}
+      className={`antialiased ${sizeClass} ${opacityClass} ${fitClass} ${imgClassName}`}
       onLoad={() => setLoaded(true)}
-      {...imgProps}
+      onError={() => setLoaded(true)}
+      {...restImgProps}
+      {...(fetchPriority ? { fetchpriority: fetchPriority } : {})}
     />
   );
 
   const picture =
     avifSrcSet && webpSrcSet ? (
       <picture>
-        <source type="image/avif" srcSet={avifSrcSet} sizes={imgProps.sizes} />
-        <source type="image/webp" srcSet={webpSrcSet} sizes={imgProps.sizes} />
+        <source type="image/avif" srcSet={avifSrcSet} sizes={restImgProps.sizes} />
+        <source type="image/webp" srcSet={webpSrcSet} sizes={restImgProps.sizes} />
         {img}
       </picture>
     ) : webp && avif ? (
@@ -106,8 +122,15 @@ const ImageWithLoader: FC<ImageWithLoaderProps> = ({
       img
     );
 
+  const loaderLayout =
+    objectFit === 'contain'
+      ? 'flex items-center justify-center'
+      : '';
+
   return (
-    <div className={`relative overflow-hidden ${containerClassName}`}>
+    <div
+      className={`relative overflow-hidden ${loaderLayout} ${containerClassName}`.trim()}
+    >
       {!loaded && <div className="image-loader" aria-hidden />}
       {picture}
     </div>

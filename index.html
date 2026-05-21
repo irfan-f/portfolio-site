@@ -19,8 +19,23 @@
     <meta name="twitter:image" content="https://irfan-f.com/images/irfan.png" />
     <link rel="icon" type="image/svg+xml" href="/icon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="preload" as="image" href="/images/irfan-720.avif" type="image/avif" />
     <title>Irfan Filipovic</title>
+    <script>
+      (function () {
+        var p = location.pathname.replace(/\/+$/, '') || '/';
+        if (p !== '/') return;
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.as = 'image';
+        l.setAttribute('data-hero-preload', '');
+        l.setAttribute(
+          'imagesrcset',
+          '/images/irfan-480.avif 480w, /images/irfan-720.avif 720w, /images/irfan-960.avif 960w, /images/irfan-1280.avif 1280w',
+        );
+        l.setAttribute('imagesizes', '(max-width: 768px) min(92vw, 20rem), min(40vw, 28rem)');
+        document.head.appendChild(l);
+      })();
+    </script>
     <script>
       (function(){var t=localStorage.theme,d=localStorage.darkMode;var dark=(t==="dark")||(t!=="light"&&!(t||d)&&window.matchMedia("(prefers-color-scheme: dark)").matches)||(d==="true");document.documentElement.classList.toggle("dark",dark);var m=document.getElementById("theme-color-meta");if(m)m.setAttribute("content",dark?"#18181b":"#ffffff");})();
     </script>
