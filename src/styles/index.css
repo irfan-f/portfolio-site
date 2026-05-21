@@ -489,7 +489,7 @@
 
   .content-card__media--contain {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     max-height: min(55vh, 480px);
   }
@@ -948,13 +948,18 @@
   }
 
   .section-image--contain:not(.section-image--carousel) {
-    width: auto;
+    width: 100%;
     max-width: 100%;
-    margin-inline: auto;
+    flex: 1 1 auto;
+    min-height: 0;
   }
 
   .section-image--contain .section-image__gallery {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
+    min-height: 12rem;
     max-height: 100%;
   }
 

@@ -130,7 +130,7 @@ const Me: FC = () => {
         animate="show"
         onAnimationComplete={onSectionReady}
       >
-        {sectionsData.map((section, index) => (
+        {sectionsData.map((section) => (
           <motion.div
             key={section.id}
             layout
@@ -139,7 +139,7 @@ const Me: FC = () => {
           >
             <Section
               {...section}
-              imageLoading={index === 0 ? 'eager' : 'lazy'}
+              imageLoading="eager"
             />
           </motion.div>
         ))}

@@ -62,12 +62,39 @@ const ImageWithLoader: FC<ImageWithLoaderProps> = ({
     setLoaded(false);
   }, [src, useSvgObject]);
 
+  /** Picture/srcset + scrollport layouts may not fire `load` on mobile; decode + complete check. */
   useEffect(() => {
     if (useSvgObject) return;
     const el = imgRef.current;
-    if (el?.complete && el.naturalWidth > 0) {
-      setLoaded(true);
-    }
+    if (!el) return;
+
+    let cancelled = false;
+    const revealIfReady = () => {
+      if (cancelled) return;
+      if (el.complete && el.naturalWidth > 0) setLoaded(true);
+    };
+
+    revealIfReady();
+    el.addEventListener('load', revealIfReady);
+    el.addEventListener('error', revealIfReady);
+
+    void (async () => {
+      try {
+        if (typeof el.decode === 'function') await el.decode();
+      } catch {
+        /* decode can reject for broken URLs; error handler covers it */
+      }
+      revealIfReady();
+    })();
+
+    const raf = requestAnimationFrame(revealIfReady);
+
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(raf);
+      el.removeEventListener('load', revealIfReady);
+      el.removeEventListener('error', revealIfReady);
+    };
   }, [src, avifSrcSet, webpSrcSet, useSvgObject]);
 
   const svgLoaderLayout =
@@ -99,7 +126,9 @@ const ImageWithLoader: FC<ImageWithLoaderProps> = ({
       alt={alt}
       className={`antialiased ${sizeClass} ${opacityClass} ${fitClass} ${imgClassName}`}
       onLoad={() => setLoaded(true)}
-      onError={() => setLoaded(true)}
+      onError={() => {
+        if (imgRef.current?.naturalWidth === 0) setLoaded(true);
+      }}
       {...restImgProps}
       {...(fetchPriority ? { fetchpriority: fetchPriority } : {})}
     />
