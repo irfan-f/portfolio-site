@@ -14,6 +14,7 @@ import {
   placeHolderImages,
 } from '../utils/images';
 import { SITE_URL } from '../data/site';
+import { HERO_IMAGE_FALLBACK_SRC } from '../utils/heroImagePreload';
 
 const sectionsData: SectionProps[] = [
   {
@@ -111,14 +112,14 @@ const Me: FC = () => {
           content="Learn about Irfan Filipovic — roots, outdoors, cooking, biking, gardening, and more."
         />
         <meta property="og:url" content={`${SITE_URL}/me`} />
-        <meta property="og:image" content={`${SITE_URL}/images/irfan.webp`} />
+        <meta property="og:image" content={`${SITE_URL}${HERO_IMAGE_FALLBACK_SRC}`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="About — Irfan Filipovic" />
         <meta
           name="twitter:description"
           content="Learn about Irfan Filipovic — roots, outdoors, cooking, biking, gardening, and more."
         />
-        <meta name="twitter:image" content={`${SITE_URL}/images/irfan.webp`} />
+        <meta name="twitter:image" content={`${SITE_URL}${HERO_IMAGE_FALLBACK_SRC}`} />
       </Helmet>
       <h1 className="sr-only">About</h1>
       <motion.section

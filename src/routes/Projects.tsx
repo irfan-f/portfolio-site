@@ -9,6 +9,7 @@ import {
   projectGridLayoutTransition,
 } from '../motion/entranceVariants';
 import { SITE_URL } from '../data/site';
+import { HERO_IMAGE_FALLBACK_SRC } from '../utils/heroImagePreload';
 
 const Projects: FC = () => {
   const reducedMotionPreference = useReducedMotion();
@@ -35,14 +36,14 @@ const Projects: FC = () => {
           content="Software development projects by Irfan Filipovic, including Mahjong with Friends, Hammerspoon automations, and todate."
         />
         <meta property="og:url" content={`${SITE_URL}/projects`} />
-        <meta property="og:image" content={`${SITE_URL}/images/irfan.webp`} />
+        <meta property="og:image" content={`${SITE_URL}${HERO_IMAGE_FALLBACK_SRC}`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Projects — Irfan Filipovic" />
         <meta
           name="twitter:description"
           content="Software development projects by Irfan Filipovic."
         />
-        <meta name="twitter:image" content={`${SITE_URL}/images/irfan.webp`} />
+        <meta name="twitter:image" content={`${SITE_URL}${HERO_IMAGE_FALLBACK_SRC}`} />
       </Helmet>
       <h1 className="sr-only">Projects</h1>
       {/* CSS Grid (not flex-wrap): 1 col default, 2 from `md`, 3 from `lg` — see useProjectGridColumnCount breakpoints */}
