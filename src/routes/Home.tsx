@@ -13,6 +13,12 @@ import {
   notifyMainContentScrollSync,
   restoreHomeMainScrollPosition,
 } from '../utils/homeScrollRestore';
+import {
+  HERO_IMAGE_BASE,
+  HERO_IMAGE_FALLBACK_SRC,
+  HERO_IMAGE_SIZES,
+  HERO_IMAGE_WIDTHS,
+} from '../utils/heroImagePreload';
 
 const Home: FC = () => {
   const fontsReady = useFontsReady();
@@ -43,14 +49,14 @@ const Home: FC = () => {
           content="Site for Irfan Filipovic, detailing software development projects and various other interests."
         />
         <meta property="og:url" content={`${SITE_URL}/`} />
-        <meta property="og:image" content={`${SITE_URL}/images/irfan.webp`} />
+        <meta property="og:image" content={`${SITE_URL}${HERO_IMAGE_FALLBACK_SRC}`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Irfan Filipovic" />
         <meta
           name="twitter:description"
           content="Site for Irfan Filipovic, detailing software development projects and various other interests."
         />
-        <meta name="twitter:image" content={`${SITE_URL}/images/irfan.webp`} />
+        <meta name="twitter:image" content={`${SITE_URL}${HERO_IMAGE_FALLBACK_SRC}`} />
       </Helmet>
       <div className="flex w-full flex-col">
       <motion.section
@@ -79,15 +85,13 @@ const Home: FC = () => {
               <div className="flex min-h-0 w-full items-center justify-center md:w-auto">
                 <div className="layout-shift-smooth inline-block max-w-[min(92vw,20rem)] overflow-hidden rounded-xl ring-1 ring-border sm:max-w-[min(92vw,21rem)] md:max-w-[min(28rem,40vw)]">
                   <ImageWithLoader
-                    src="/images/irfan.webp"
+                    src={HERO_IMAGE_FALLBACK_SRC}
                     alt="Irfan Filipović"
-                    webp="/images/irfan.webp"
-                    avif="/images/irfan.avif"
-                    responsiveBase="/images/irfan"
-                    responsiveWidths={[480, 720, 960, 1280]}
+                    responsiveBase={HERO_IMAGE_BASE}
+                    responsiveWidths={[...HERO_IMAGE_WIDTHS]}
                     containerClassName="block leading-none"
                     imgClassName="hero-photo-img !h-auto !w-auto block max-w-full object-contain"
-                    sizes="(max-width: 768px) min(92vw, 20rem), min(40vw, 28rem)"
+                    sizes={HERO_IMAGE_SIZES}
                     objectFit="contain"
                     fetchPriority="high"
                     loading="eager"

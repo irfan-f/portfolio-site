@@ -9,6 +9,7 @@ import {
 } from '../data/latestPosts';
 import ExternalReferenceLink from '../components/ExternalReferenceLink';
 import { SITE_URL } from '../data/site';
+import { HERO_IMAGE_FALLBACK_SRC } from '../utils/heroImagePreload';
 import { routePagePresenceMotion } from '../motion/entranceVariants';
 import { scrollMainContentToTop } from '../utils/homeScrollRestore';
 
@@ -44,7 +45,7 @@ const UpdateDetail: FC = () => {
         {post.imageSrc && !post.imageSrc.endsWith('.svg') ? (
           <meta property="og:image" content={`${SITE_URL}${post.imageSrc}`} />
         ) : (
-          <meta property="og:image" content={`${SITE_URL}/images/irfan.webp`} />
+          <meta property="og:image" content={`${SITE_URL}${HERO_IMAGE_FALLBACK_SRC}`} />
         )}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${post.title} — Irfan Filipovic`} />

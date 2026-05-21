@@ -19,6 +19,7 @@ import {
   tabIndicatorTransition,
 } from '../motion/entranceVariants';
 import { SITE_URL } from '../data/site';
+import { HERO_IMAGE_FALLBACK_SRC } from '../utils/heroImagePreload';
 
 const TAB_INDICATOR_LAYOUT_ID = 'course-active-tab';
 const TABLIST_COLS = 7;
@@ -291,7 +292,7 @@ const CourseWork: FC = () => {
           content={`Course work: ${topic.title}`}
         />
         <meta property="og:url" content={`${SITE_URL}/courses`} />
-        <meta property="og:image" content={`${SITE_URL}/images/irfan.webp`} />
+        <meta property="og:image" content={`${SITE_URL}${HERO_IMAGE_FALLBACK_SRC}`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
@@ -301,7 +302,7 @@ const CourseWork: FC = () => {
           name="twitter:description"
           content={`Course work: ${topic.title}`}
         />
-        <meta name="twitter:image" content={`${SITE_URL}/images/irfan.webp`} />
+        <meta name="twitter:image" content={`${SITE_URL}${HERO_IMAGE_FALLBACK_SRC}`} />
       </Helmet>
       <section id="courses" className="flex min-h-0 flex-1 flex-col px-4 py-8">
         <div className="mx-auto flex min-h-0 w-full max-w-3xl flex-1 flex-col">
