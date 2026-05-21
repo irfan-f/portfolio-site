@@ -5,6 +5,26 @@ const easeOutSoft = [0.22, 1, 0.36, 1] as const;
 const routePageDuration = 0.28;
 const layoutResizeDuration = 0.34;
 
+/** About gallery carousel slide swap (`AnimatePresence` mode="wait"). */
+export function gallerySlidePresenceMotion(
+  reduceMotion: boolean,
+): Pick<HTMLMotionProps<'div'>, 'initial' | 'animate' | 'exit' | 'transition'> {
+  if (reduceMotion) {
+    return {
+      initial: { opacity: 1 },
+      animate: { opacity: 1 },
+      exit: { opacity: 1 },
+      transition: { duration: 0 },
+    };
+  }
+  return {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+    transition: { duration: 0.22, ease: easeOutSoft },
+  };
+}
+
 /** Latest posts grid — enter/exit when filters change (`AnimatePresence` + `layout`). */
 export function latestPostsItemPresenceMotion(
   reduceMotion: boolean,

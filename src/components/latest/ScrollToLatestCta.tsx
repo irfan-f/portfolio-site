@@ -1,4 +1,10 @@
 import { FC, useCallback } from 'react';
+import { useReducedMotion } from 'motion/react';
+import {
+  animateMainContentScrollTo,
+  MAIN_CONTENT_ID,
+  notifyMainContentScrollSync,
+} from '../../utils/homeScrollRestore';
 
 const LABEL = 'Catch up on the latest things';
 export const LATEST_SECTION_ID = 'latest-things';
@@ -6,11 +12,28 @@ export const LATEST_SECTION_ID = 'latest-things';
 type ScrollToLatestCtaProps = {
   /** Scroll target; defaults to home section id. */
   targetId?: string;
+  /** Beacon only (no caption); used for the portaled thumb-zone pin. */
+  compact?: boolean;
   className?: string;
 };
 
-function scrollToTarget(targetId: string) {
-  document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+function scrollToTarget(targetId: string, reduceMotion: boolean) {
+  const main = document.getElementById(MAIN_CONTENT_ID);
+  const target = document.getElementById(targetId);
+  if (!main || !target) return;
+
+  const top =
+    main.scrollTop +
+    target.getBoundingClientRect().top -
+    main.getBoundingClientRect().top;
+
+  if (reduceMotion) {
+    main.scrollTo({ top: Math.max(0, top), behavior: 'instant' });
+    notifyMainContentScrollSync();
+    return;
+  }
+
+  animateMainContentScrollTo(Math.max(0, top));
 }
 
 const ChevronDown: FC<{ className?: string }> = ({ className = '' }) => (
@@ -32,15 +55,20 @@ const ChevronDown: FC<{ className?: string }> = ({ className = '' }) => (
 
 const ScrollToLatestCta: FC<ScrollToLatestCtaProps> = ({
   targetId = LATEST_SECTION_ID,
+  compact = false,
   className = '',
 }) => {
-  const onClick = useCallback(() => scrollToTarget(targetId), [targetId]);
+  const reduceMotion = useReducedMotion() === true;
+  const onClick = useCallback(
+    () => scrollToTarget(targetId, reduceMotion),
+    [targetId, reduceMotion],
+  );
 
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`scroll-cta scroll-cta--beacon group ${className}`.trim()}
+      className={`scroll-cta scroll-cta--beacon group ${compact ? 'scroll-cta--compact' : ''} ${className}`.trim()}
       aria-label={LABEL}
       title={LABEL}
     >

@@ -1,10 +1,9 @@
 import { FC, lazy, Suspense } from 'react';
-import { motion, useReducedMotion } from 'motion/react';
+import { motion } from 'motion/react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './routes/Home';
 import NavBar from './components/NavBar';
 import PageTransition from './components/PageTransition';
-import { layoutResizeTransition } from './motion/entranceVariants';
 import { navs } from './types/nav';
 import { useSkipLink } from './hooks/useSkipLink';
 import { useFontsReady } from './hooks/useFontsReady';
@@ -16,18 +15,14 @@ const UpdateDetail = lazy(() => import('./routes/UpdateDetail'));
 const App: FC = () => {
   useSkipLink();
   useFontsReady();
-  const reducedMotionPreference = useReducedMotion();
-  const reduceMotion = reducedMotionPreference === true;
 
   return (
     <div className="bg-surface text-on-surface flex h-[100svh] max-h-[100dvh] w-full flex-col overflow-hidden select-text">
       <NavBar navs={navs} />
       <motion.main
         id="main-content"
-        layout
         layoutScroll
-        transition={layoutResizeTransition(reduceMotion)}
-        className="flex min-h-0 flex-1 flex-col overflow-y-auto"
+        className="relative flex min-h-0 flex-1 flex-col overflow-y-auto"
       >
         <Suspense fallback={null}>
           <Routes>

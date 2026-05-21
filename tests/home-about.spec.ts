@@ -1,6 +1,28 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('About and home smoke', () => {
+  test('hash link scrolls Gardening into the main scrollport', async ({
+    page,
+  }) => {
+    await page.goto('/me#gardening');
+    const main = page.locator('#main-content');
+    const heading = page.getByRole('heading', { name: 'Gardening', level: 2 });
+    await expect(heading).toBeVisible();
+
+    await expect
+      .poll(
+        async () => {
+          const mainBox = await main.boundingBox();
+          const headingBox = await heading.boundingBox();
+          if (!mainBox || !headingBox) return false;
+          const topInMain = headingBox.y - mainBox.y;
+          return topInMain >= -8 && topInMain <= 32;
+        },
+        { timeout: 6000 },
+      )
+      .toBe(true);
+  });
+
   test('About Me sections are reachable inside main content', async ({
     page,
   }) => {

@@ -88,13 +88,13 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
   }, [project.statsUrl]);
 
   const cardImageClass = project.imageNoDarkFilter
-    ? 'block h-full w-full object-contain object-center'
-    : 'block h-full w-full object-contain object-center dark:[filter:invert(1)_brightness(0.7)]';
+    ? ''
+    : 'dark:[filter:invert(1)_brightness(0.7)]';
 
   return (
     <ContentCard
       className="layout-shift-smooth h-full w-full"
-      mediaClassName="content-card__media--cover"
+      mediaClassName="content-card__media--frame"
       media={
         <ProjectImage
           imageSrc={project.imageSrc}

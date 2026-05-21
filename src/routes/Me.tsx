@@ -1,8 +1,10 @@
-import { FC } from 'react';
-import { motion } from 'motion/react';
+import { FC, useCallback, useEffect, useMemo } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
 import Section, { SectionProps } from '../components/Section';
-import { useListEntranceVariants } from '../motion/useListEntranceVariants';
+import { listStaggerOpacityOnlyForLayoutCells } from '../motion/entranceVariants';
+import { scrollMainContentToTarget } from '../utils/homeScrollRestore';
 import {
   rootImages,
   outdoorImages,
@@ -55,10 +57,11 @@ const sectionsData: SectionProps[] = [
     id: 'gardening',
     title: 'Gardening',
     content:
-      'I’ve enjoyed bringing new life to my backyard, turning an overgrown patch into a space for growing fresh vegetables. This summer, the highlight was harvesting my own kale.',
+      'I’ve enjoyed bringing new life to my backyard, turning an overgrown patch into a space for growing fresh vegetables. Last summer, the highlight was harvesting my own kale.',
     orientation: 'left',
     style: 'secondary',
     images: gardenImages,
+    textFirst: true,
   },
 ];
 
@@ -74,7 +77,24 @@ const placeHolderSectionData: SectionProps = {
 };
 
 const Me: FC = () => {
-  const { container, item } = useListEntranceVariants();
+  const reduceMotion = useReducedMotion() === true;
+  const { container, item } = useMemo(
+    () => listStaggerOpacityOnlyForLayoutCells(reduceMotion),
+    [reduceMotion],
+  );
+  const { hash } = useLocation();
+
+  const scrollToHash = useCallback(() => {
+    const id = hash.replace(/^#/, '');
+    if (!id) return;
+    scrollMainContentToTarget(id, { reduceMotion });
+  }, [hash, reduceMotion]);
+
+  useEffect(() => scrollToHash(), [scrollToHash]);
+
+  const onSectionReady = useCallback(() => {
+    scrollToHash();
+  }, [scrollToHash]);
 
   return (
     <>
@@ -103,10 +123,11 @@ const Me: FC = () => {
       <h1 className="sr-only">About</h1>
       <motion.section
         aria-label="About topics"
-        className="layout-shift-smooth mx-auto grid w-full max-w-7xl grid-cols-1 gap-6 px-4 py-8 md:grid-cols-2 2xl:grid-cols-3"
+        className="layout-shift-smooth mx-auto grid w-full max-w-7xl grid-cols-1 gap-6 px-4 pt-8 pb-24 md:grid-cols-2 2xl:grid-cols-3"
         variants={container}
         initial="hidden"
         animate="show"
+        onAnimationComplete={onSectionReady}
       >
         {sectionsData.map((section, index) => (
           <motion.div

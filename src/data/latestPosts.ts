@@ -56,6 +56,22 @@ export function getLatestPostById(postId: string): LatestPost | undefined {
 /** Updates grounded in shipped work and recent portfolio-site changes. */
 export const latestPosts: LatestPost[] = [
   {
+    id: 'garden-portland-summer-2026',
+    title: 'Garden photos and a Portland restart',
+    date: 'May 2026',
+    excerpt:
+      'I added new garden photos on About. My San Francisco beds were producing well until city rats got to the harvest first; this summer in Portland I started three tomatoes and two shishito peppers.',
+    projectTag: 'misc',
+    showReadMore: false,
+    externalLink: {
+      label: 'Gardening on About',
+      href: '/me#gardening',
+    },
+    body: [
+      'I added new garden photos to the site. My San Francisco beds were producing well until city rats got to the harvest first and wiped most of it out—more of that story is in About’s gardening section. This summer in Portland I started three tomato plants and two shishito peppers; I’m looking forward to a real harvest and roasting shishitos in a hot pan.',
+    ],
+  },
+  {
     id: 'portfolio-latest-section',
     title: 'Home updates section with filters',
     date: 'May 2026',
