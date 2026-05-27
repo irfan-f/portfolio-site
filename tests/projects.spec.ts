@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test';
 
 /** Mirrors `src/data/projects.ts` display order for stable grid assertions */
 const EXPECTED_PROJECT_TITLES = [
+  'CyclePDX',
   'Mahjong with Friends',
   'Mac Scripts',
   'todate',
@@ -21,6 +22,9 @@ test.describe('Projects', () => {
     await page.goto('/projects');
 
     await expect(
+      page.getByText('Bike navigation for Portland with route planning, GPS turn-by-turn'),
+    ).toBeVisible();
+    await expect(
       page.getByText('Real-time multiplayer Hong Kong Mahjong in the browser'),
     ).toBeVisible();
     await expect(
@@ -35,6 +39,14 @@ test.describe('Projects', () => {
     page,
   }) => {
     await page.goto('/projects');
+
+    const cyclepdxTryIt = page.getByRole('link', { name: 'Try it: CyclePDX' });
+    await expect(cyclepdxTryIt).toHaveAttribute(
+      'href',
+      'https://cyclepdx.irfan-f.com',
+    );
+    await expect(cyclepdxTryIt).toHaveAttribute('target', '_blank');
+    await expect(cyclepdxTryIt).toHaveAttribute('rel', 'noopener noreferrer');
 
     const tryIt = page.getByRole('link', {
       name: 'Try it: Mahjong with Friends',

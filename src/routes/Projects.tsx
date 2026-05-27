@@ -28,12 +28,12 @@ const Projects: FC = () => {
         <link rel="canonical" href={`${SITE_URL}/projects`} />
         <meta
           name="description"
-          content="Software development projects by Irfan Filipovic, including Mahjong with Friends, Hammerspoon automations, and todate."
+          content="Software development projects by Irfan Filipovic, including CyclePDX, Mahjong with Friends, Hammerspoon automations, and todate."
         />
         <meta property="og:title" content="Projects — Irfan Filipovic" />
         <meta
           property="og:description"
-          content="Software development projects by Irfan Filipovic, including Mahjong with Friends, Hammerspoon automations, and todate."
+          content="Software development projects by Irfan Filipovic, including CyclePDX, Mahjong with Friends, Hammerspoon automations, and todate."
         />
         <meta property="og:url" content={`${SITE_URL}/projects`} />
         <meta property="og:image" content={`${SITE_URL}${HERO_IMAGE_FALLBACK_SRC}`} />
