@@ -3,6 +3,16 @@ import { rasterImageSet } from '../utils/rasterImage';
 
 export const projects: ProjectMeta[] = [
   {
+    id: 'cyclepdx',
+    title: 'CyclePDX',
+    imageSrc: '/images/cyclepdx-og.svg',
+    imageAlt: 'CyclePDX — Portland bike navigation with GPS turn-by-turn',
+    imageNoDarkFilter: true,
+    description:
+      'Bike navigation for Portland with route planning, GPS turn-by-turn, GPX overlays, and route sharing. React, TypeScript, MapLibre.',
+    url: 'https://cyclepdx.irfan-f.com',
+  },
+  {
     id: 'mahjong',
     title: 'Mahjong with Friends',
     imageSrc: '/images/mahjong-og.svg',

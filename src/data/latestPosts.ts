@@ -1,6 +1,7 @@
-export type ProjectTag = 'mahjong' | 'portfolio' | 'todate' | 'hammerspoon' | 'misc';
+export type ProjectTag = 'cyclepdx' | 'mahjong' | 'portfolio' | 'todate' | 'hammerspoon' | 'misc';
 
 export const PROJECT_TAG_LABELS: Record<ProjectTag, string> = {
+  cyclepdx: 'CyclePDX',
   mahjong: 'Mahjong',
   portfolio: 'Portfolio',
   todate: 'todate',
@@ -55,6 +56,24 @@ export function getLatestPostById(postId: string): LatestPost | undefined {
 
 /** Updates grounded in shipped work and recent portfolio-site changes. */
 export const latestPosts: LatestPost[] = [
+  {
+    id: 'cyclepdx-navigation-and-sharing',
+    title: 'CyclePDX is live: Portland bike navigation in the browser',
+    date: 'May 2026',
+    excerpt:
+      'I released CyclePDX at cyclepdx.irfan-f.com—a bike routing app for Portland with TriMet plans, GPS turn-by-turn, GPX import, route sharing, and PBOT infrastructure on the map.',
+    projectTag: 'cyclepdx',
+    showReadMore: false,
+    externalLink: {
+      label: 'Open CyclePDX',
+      href: 'https://cyclepdx.irfan-f.com',
+    },
+    body: [
+      'My goal was a link I could open on my phone before a ride—not another localhost tab. CyclePDX is live at cyclepdx.irfan-f.com: plan a route, start navigation, and ride with step-by-step guidance (follow camera or step camera) plus recenter when you pan away from the route.',
+      'You can import a GPX track as an overlay for saved rides, share a planned trip as a link, and toggle PBOT infrastructure layers with popups on the map.',
+      'It is a static SPA (React 18.3 + TypeScript 5.3 + Vite 6) on my VPS—build locally and rsync `dist/`, with nginx serving files. Routing uses TriMet’s endpoint (`appID` via `VITE_TRIMET_APP_ID`), place search uses Photon, and the map is MapLibre + OpenFreeMap.',
+    ],
+  },
   {
     id: 'garden-portland-summer-2026',
     title: 'Garden photos and a Portland restart',
